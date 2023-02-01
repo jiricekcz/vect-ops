@@ -1,7 +1,7 @@
 {
-	"name": "typescript-npm-module",
-	"version": "1.0.0",
-	"description": "A generic typescript npm package",
+	"name": "vect-ops",
+	"version": "0.0.0",
+	"description": "High performance vector operations in JavaScipt",
 	"main": "./lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
@@ -11,18 +11,19 @@
 		"lint-fix": "npx eslint . --ext .ts --fix",
 		"format": "npx prettier --write \"src/**/*.ts\"",
 		"prepare": "npm run format && npm run lint-fix && npm run build && npm test",
-		"preversion": "npm run lint"
+		"preversion": "npm run lint",
+		"prepublish": "npm run build"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/jiricekcz/typescript-npm-module.git"
+		"url": "git+https://github.com/jiricekcz/vect-ops.git"
 	},
 	"author": "jiricekcz",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/jiricekcz/typescript-npm-module/issues"
+		"url": "https://github.com/jiricekcz/vect-ops/issues"
 	},
-	"homepage": "https://github.com/jiricekcz/typescript-npm-module#readme",
+	"homepage": "https://github.com/jiricekcz/vect-ops#readme",
 	"devDependencies": {
 		"@types/node": "^17.0.10",
 		"@typescript-eslint/eslint-plugin": "^5.10.0",
@@ -37,6 +38,12 @@
 		"typescript": "^4.5.4"
 	},
 	"files": [
-		"lib/**/*"
+		"lib/**/*",
+		"!lib/**/*.test.js",
+		"./README.md",
+		"./LICENSE",
+		"./package.json",
+		"./package-lock.json",
+		"./tsconfig.json"
 	]
 }
