@@ -4,6 +4,7 @@
 	"description": "High performance vector operations in JavaScipt",
 	"main": "./lib/index.js",
 	"types": "lib/index.d.ts",
+	"keywords": ["vector", "linear", "algebra", "performance", "dot product", "cross product"],
 	"scripts": {
 		"test": "npx jest",
 		"build": "tsc",
