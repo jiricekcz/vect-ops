@@ -2,6 +2,8 @@ namespace VectOps {
     export type Scalar = number;
     export type Vector = Array<Scalar>;
     export type Matrix = Array<Vector>;
+    export type ReadonlyVector = Readonly<Vector>;
+    export type ReadonlyMatrix = Readonly<Matrix>;
 
     export const COMPARE_MODES = {
         STRICT_EQUALITY: (a: Scalar, b: Scalar) => a === b,
@@ -56,7 +58,7 @@ namespace VectOps {
      * @param onLength Length of the vectors to compare. Defaults to the length of the first vector.
      * @returns If the two vectors are equal on the first `onLength` numbers.
      */
-    export function areTwoVectorsEqual(a: Vector, b: Vector, onLength: number = a.length): boolean {
+    export function areTwoVectorsEqual(a: ReadonlyVector, b: ReadonlyVector, onLength: number = a.length): boolean {
         for (let i = 0; i < onLength; i++) {
             if (!areTwoScalarsEqual(a[i] as Scalar, b[i] as Scalar)) return false;
         }
@@ -69,7 +71,7 @@ namespace VectOps {
      * @param onLength Length of the vectors to compare. Defaults to the length of the first vector.
      * @returns If the vectors are equal on the first `onLength` numbers.
      */
-    export function areVectorsEqual(vectors: Array<Vector>, onLength: number = vectors[0]?.length as number): boolean {
+    export function areVectorsEqual(vectors: Array<ReadonlyVector>, onLength: number = vectors[0]?.length as number): boolean {
         for (let i = 1; i < vectors.length; i++) {
             for (let j = 0; j < onLength; j++) {
                 if (!areTwoScalarsEqual((vectors[i] as Vector)[j] as Scalar, (vectors[i - 1] as Vector)[j] as Scalar)) return false;
@@ -88,7 +90,7 @@ namespace VectOps {
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
      */
-    export function addToUnchecked(original: Vector, add: Vector, length: number = original.length): Vector {
+    export function addToUnchecked(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] as Scalar;
         }
@@ -105,7 +107,7 @@ namespace VectOps {
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
      */
-    export function addTo(original: Vector, add: Vector, length: number = original.length): Vector {
+    export function addTo(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] ?? 0;
         }
