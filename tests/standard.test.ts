@@ -83,3 +83,26 @@ test("In place vector addition", () => {
     expect(VectOps.areTwoVectorsEqual(vectors[1] as VectOps.Vector, vectors[8] as VectOps.Vector)).toBe(true);
 
 });
+
+test("In place vector addition many", () => {
+    const vectors: VectOps.Vector[] = [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 3],
+        [3, 3, 4],
+        [3, 3, 5],  
+        [1, 1],
+        [1, 1],
+        [2, 2]
+    ]
+
+    VectOps.addToManyUnchecked(vectors[0] as VectOps.Vector, [vectors[1] as VectOps.Vector, vectors[2] as VectOps.Vector]);
+    expect(VectOps.areTwoVectorsEqual(vectors[0] as VectOps.Vector, vectors[4] as VectOps.Vector)).toBe(true);
+
+    VectOps.addToManyUnchecked(vectors[5] as VectOps.Vector, [vectors[2] as VectOps.Vector]);
+    expect(VectOps.areTwoVectorsEqual(vectors[5] as VectOps.Vector, vectors[7] as VectOps.Vector)).toBe(true);
+
+    VectOps.addToMany(vectors[1] as VectOps.Vector, [vectors[6] as VectOps.Vector, vectors[2] as VectOps.Vector]);
+    expect(VectOps.areTwoVectorsEqual(vectors[1] as VectOps.Vector, vectors[3] as VectOps.Vector)).toBe(true);
+
+});

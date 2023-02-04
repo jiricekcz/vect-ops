@@ -83,7 +83,7 @@ namespace VectOps {
     /**
      * Adds one vector to another.
      * This method ***modifies*** the *original* (first parameter) vector.
-     * Requires the second vector to be at least as long as the first or `length` to be set to a number smaller than the length of both vecotrs. Numbers after will be ignored. If second vector is shorter, it is undefined behavior.
+     * Requires the second vector to be at least as long as the first or `length` to be set to a number smaller than the length of both vectors. Numbers after will be ignored. If second vector is shorter, it is undefined behavior.
      * Is faster than `addTo` because it doesn't have to check for undefined values.
      * @param original The original vector
      * @param add The vector to add to the original
@@ -110,6 +110,43 @@ namespace VectOps {
     export function addTo(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] ?? 0;
+        }
+        return original;
+    }
+
+    /**
+     * Adds multiple vectors to one.
+     * This method ***modifies*** the *original* (first parameter) vector.
+     * Requires the second vectors to be at least as long as the first or `length` to be set to a number smaller than the length of all vectors. Numbers after will be ignored. If second vectors are shorter, it is undefined behavior.
+     * Is faster than `addTo` because it doesn't have to check for undefined values.
+     * @param original The original vector
+     * @param adds The vectors to add to the original
+     * @param length The length of the vectors. Defaults to the length of the original vector.
+     * @returns The original vector
+     */
+    export function addToManyUnchecked(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
+        for (let i = 0; i < length; i++) {
+            for (let j = 0; j < adds.length; j++) {
+                original[i] += (adds[j] as ReadonlyVector)[i] as Scalar;
+            }
+        }
+        return original;
+    }
+
+    /**
+     * Adds multiple vectors to one.
+     * This method ***modifies*** the *original* (first parameter) vector.
+     * If the second vectors are shorter, they will be padded with zeros.
+     * @param original The original vector
+     * @param adds The vectors to add to the original
+     * @param length The length of the vectors. Defaults to the length of the original vector.
+     * @returns The original vector
+     */
+    export function addToMany(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
+        for (let i = 0; i < length; i++) {
+            for (let j = 0; j < adds.length; j++) {
+                original[i] += (adds[j] as ReadonlyVector)[i] ?? 0;
+            }
         }
         return original;
     }
