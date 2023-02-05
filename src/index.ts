@@ -152,14 +152,14 @@ namespace VectOps {
     }
 
     /**
-     * Adds multiple vectors together.  
+     * Adds multiple vectors together.
      * Requires the vectors to be at least as long as the first. If vectors are shorter, it is undefined behavior.
      * @param vectors The vectors to add
      * @returns The sum of the vectors as a new vector of the same length as the first vector
      */
     export function addUnchecked(...vectors: Array<ReadonlyVector>): Vector {
         if (vectors.length === 0) return [];
-        const vectLength = (vectors[0]as ReadonlyVector).length;
+        const vectLength = (vectors[0] as ReadonlyVector).length;
         const result = new Array(vectLength);
         for (let i = 0; i < vectLength; i++) {
             result[i] = 0;
@@ -170,7 +170,6 @@ namespace VectOps {
         return result;
     }
 
-
     /**
      * Adds multiple vectors together, padding shorter vectors with zeros, when needed.
      * @param vectors The vectors to add
@@ -180,7 +179,7 @@ namespace VectOps {
         const result: Vector = [];
         for (let i = 0; i < vectors.length; i++) {
             for (let j = 0; j < (vectors[i] as ReadonlyVector).length; j++) {
-                result[j] = (result[j] ?? 0) + ((vectors[i]as ReadonlyVector)[j] ?? 0);
+                result[j] = (result[j] ?? 0) + ((vectors[i] as ReadonlyVector)[j] ?? 0);
             }
         }
         return result;
