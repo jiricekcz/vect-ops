@@ -1,23 +1,82 @@
 namespace VectOps {
+    /**
+     * Scalar type, used instead of `number`.
+     */
     export type Scalar = number;
+    /**
+     * Vector type, used instead of `Array<Scalar>`.
+     */
     export type Vector = Array<Scalar>;
+    /**
+     * Matrix type, used instead of `Array<Vector>`.
+     */
     export type Matrix = Array<Vector>;
+    /**
+     * Readonly version of `Vector`.
+     */
     export type ReadonlyVector = Readonly<Vector>;
+    /**
+     * Readonly version of `Matrix`.
+     */
     export type ReadonlyMatrix = Readonly<Matrix>;
 
+    /**
+     * Compare modes, used to compare Scalars.
+     * Necessary because of floating point errors.
+     */
     export const COMPARE_MODES = {
+        /**
+         * Strict equality, `===`.
+         */
         STRICT_EQUALITY: (a: Scalar, b: Scalar) => a === b,
+        /**
+         * Loose equality, `==`.
+         * NOTE: There should never be a reason to use this. This can change the result as opposed to `STRICT_EQUALITY` only if the operands are of different types, which is never done by the library by design, as it significantly reduces performance.
+         */
         EQUALITY: (a: Scalar, b: Scalar) => a == b,
+        /**
+         * Floating point equality, with 15 significant digits.
+         */
         FLOAT_EQUALITY_15_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-15,
+        /**
+         * Floating point equality, with 14 significant digits.
+         */
         FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-14,
+        /**
+         * Floating point equality, with 12 significant digits.
+         */
         FLOAT_EQUALITY_12_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-12,
+        /**
+         * Floating point equality, with 10 significant digits.
+         */
         FLOAT_EQUALITY_10_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-10,
+        /**
+         * Floating point equality, with 9 significant digits.
+         */
         FLOAT_EQUALITY_9_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-9,
+        /**
+         * Floating point equality, with 6 significant digits.
+         */
         FLOAT_EQUALITY_6_SIGNIFICANT_DIGITS: (a: Scalar, b: Scalar) => Math.abs(a - b) <= Math.min(Math.abs(a), Math.abs(b)) * 1e-6,
+        /**
+         * Floating point equality, with 15 decimal places.
+         */
         FLOAT_EQUALITY_15_DECIMAL_PLACES: (a: Scalar, b: Scalar) => Math.abs(a - b) <= 1e-15,
+        /**
+         * Floating point equality, with 12 decimal places.
+         */
         FLOAT_EQUALITY_12_DECIMAL_PLACES: (a: Scalar, b: Scalar) => Math.abs(a - b) <= 1e-12,
+        /**
+         * Floating point equality, with 10 decimal places.
+         */
         FLOAT_EQUALITY_10_DECIMAL_PLACES: (a: Scalar, b: Scalar) => Math.abs(a - b) <= 1e-10,
+        /**
+         * Floating point equality, with 9 decimal places.
+         */
         FLOAT_EQUALITY_9_DECIMAL_PLACES: (a: Scalar, b: Scalar) => Math.abs(a - b) <= 1e-9,
+        /**
+         * Floating point equality, with 6 decimal places.
+         */
         FLOAT_EQUALITY_6_DECIMAL_PLACES: (a: Scalar, b: Scalar) => Math.abs(a - b) <= 1e-6,
     } as const;
 
