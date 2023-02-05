@@ -219,7 +219,7 @@ namespace VectOps {
     export function addUnchecked(...vectors: Array<ReadonlyVector>): Vector {
         if (vectors.length === 0) return [];
         const vectLength = (vectors[0] as ReadonlyVector).length;
-        const result = new Array(vectLength);
+        const result = [];
         for (let i = 0; i < vectLength; i++) {
             result[i] = 0;
             for (let j = 0; j < vectors.length; j++) {
