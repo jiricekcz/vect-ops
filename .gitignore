@@ -104,3 +104,7 @@ dist
 .tern-port
 
 /lib
+
+# Temporary files
+
+*.temp.*
