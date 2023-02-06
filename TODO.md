@@ -2,7 +2,6 @@
 
 ## General function
 
-- size - A function to get the size of a vector
 - Copy - A function to create a copy of a vector
 
 ## Additions
