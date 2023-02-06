@@ -1,6 +1,15 @@
 # Vect-ops
 
-Library for vecotr operations written in JavaScript. 
+Library for vecotr operations written in JavaScript.
+
+## Usage
+
+```typescript
+import VectOps from 'vect-ops';
+
+console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
+console.log(VectOps.add([1, 2, 3], [-4, -5, -6])); // [-3, -3, -3]
+```
 
 ## Requirements
 
