@@ -2,6 +2,7 @@
 
 ## General function
 
+- Are two vectors equivalent - A function to check if two vectors are equivalent
 
 ## Additions
 
