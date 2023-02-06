@@ -243,6 +243,19 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Computes the magnitude of a vector.
+     * @param vector The vector to get the magnitude of
+     * @returns Magnitude of the vector
+     */
+    export function magnitude(vector: ReadonlyVector): Scalar {
+        let sum = 0;
+        for (let i = 0; i < vector.length; i++) {
+            sum += (vector[i] as Scalar) ** 2;
+        }
+        return Math.sqrt(sum);
+    }
 }
 
 export default VectOps;
