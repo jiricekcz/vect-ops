@@ -26,6 +26,17 @@ console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
 console.log(VectOps.areVectorsEqual([1, 2, 3], [1, 2, 3], [1, 2, 3])); // true
 ```
 
+### Copy
+VectOps provides functions to copy vectors.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+
+console.log(VectOps.copyVector(a)); // [1, 2, 3]
+console.log(VectOps.copyVectorMany(a), 3); // [[1, 2, 3], [1, 2, 3], [1, 2, 3]]
+```
+
 ### In place addition
 
 VectOps provides functions to add vectors to another without creating a new vector.  
@@ -63,6 +74,28 @@ VectOps provides functions to compute the magnitude of a vector.
 import VectOps from 'vect-ops';
 
 console.log(VectOps.magnitude([3, 4])); // 5
+```
+
+### Multiplication by scalar in place
+
+VectOps provides functions to multiply a vector by a scalar in place.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = -1;
+
+VectOps.multiplyByScalarInPlace(a, b);
+console.log(a); // [-1, -2, -3]
+```
+
+### Multiplication by scalar
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+
+console.log(VectOps.multiplyByScalar(a, -1)); // [-1, -2, -3]
 ```
 ## Requirements
 
