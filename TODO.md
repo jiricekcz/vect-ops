@@ -2,7 +2,6 @@
 
 ## General function
 
-- Vector normalization - A function to normalize a vector 
 
 ## Additions
 
