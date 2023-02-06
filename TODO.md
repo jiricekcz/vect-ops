@@ -2,7 +2,6 @@
 
 ## General function
 
-- Copy - A function to create a copy of a vector
 
 ## Additions
 
