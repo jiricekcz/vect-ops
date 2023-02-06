@@ -10,7 +10,6 @@
 
 ## Multiplications
 
-- Multiply vector with scalar - A function to multiply a vector with a scalar
 - Hadamard product - A function to multiply two vectors element-wise
 - Scalar product - A function to compute the scalar product of two vectors
 - Cross product in 3D - A function to compute the cross product of two vectors
