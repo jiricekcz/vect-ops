@@ -56,6 +56,14 @@ console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
 console.log(VectOps.add([1, 2, 3], [-4, -5, -6], [3, 3, 3])); // [0, 0, 0]
 ```
 
+### Magnitude
+
+VectOps provides functions to compute the magnitude of a vector.
+```typescript
+import VectOps from 'vect-ops';
+
+console.log(VectOps.magnitude([3, 4])); // 5
+```
 ## Requirements
 
 - ES6 compatible environment
