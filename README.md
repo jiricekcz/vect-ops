@@ -11,6 +11,51 @@ console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
 console.log(VectOps.add([1, 2, 3], [-4, -5, -6])); // [-3, -3, -3]
 ```
 
+### Equality
+
+VectOps provides functions to check mathematical equality of vectors.  
+Two vectors are equal, if they have the same size and the same elements.  
+Two elements are compared using a float compare function, that you can customize.
+```typescript
+import VectOps from 'vect-ops';
+
+VectOps.compareMode = VectOps.COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS; // 14 significant digits is the default, so this line is necessary only if you want to change the compare mode or be extra explicit about the compare mode.
+
+console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
+
+console.log(VectOps.areVectorsEqual([1, 2, 3], [1, 2, 3], [1, 2, 3])); // true
+```
+
+### In place addition
+
+VectOps provides functions to add vectors to another without creating a new vector.  
+An *uncheck* variant is provided, that does not check the size of the vectors. It is not recommended to use the *uncheck* variant, because it can lead to ***NaN*** values in the vector. You can use the unchecked variant, if you are sure that the vectors have the same size.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+const c = [1, 1, 1];
+const d = [1, 1, 2];
+
+
+VectOps.addTo(a, b);
+console.log(a); // [5, 7, 9]
+
+VectOps.addToMany(b, [c, d]);
+console.log(b); // [6, 7, 9]
+```
+
+### Addition
+
+VectOps provides functions to add vectors creating another vector.
+```typescript
+import VectOps from 'vect-ops';
+
+console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
+console.log(VectOps.add([1, 2, 3], [-4, -5, -6], [3, 3, 3])); // [0, 0, 0]
+```
+
 ## Requirements
 
 - ES6 compatible environment
