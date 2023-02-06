@@ -295,6 +295,35 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Multiplies a vector by a scalar in place.
+     * @param vector The vector to multiply
+     * @param scalar The scalar to multiply by
+     * @returns The original vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function multiplyByScalarInPlace(vector: Vector, scalar: Scalar): Vector {
+        for (let i = 0; i < vector.length; i++) {
+            vector[i] *= scalar;
+        }
+        return vector;
+    }
+
+    /**
+     * Multiplies a vector by a scalar into a new vector.
+     * @param vector The vector to multiply
+     * @param scalar The scalar to multiply by
+     * @returns The multiplied vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function multiplyByScalar(vector: ReadonlyVector, scalar: Scalar): Vector {
+        const result = [];
+        for (let i = 0; i < vector.length; i++) {
+            result[i] = (vector[i] as Scalar) * scalar;
+        }
+        return result;
+    }
 }
 
 export default VectOps;
