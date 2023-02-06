@@ -97,6 +97,30 @@ const a = [1, 2, 3];
 
 console.log(VectOps.multiplyByScalar(a, -1)); // [-1, -2, -3]
 ```
+
+### Normalize in place
+
+VectOps provides functions to normalize a vector in place.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [3, 4];
+
+VectOps.normalizeInPlace(a);
+console.log(a); // [0.6, 0.8]
+```
+
+### Normalize
+
+VectOps provides functions to normalize a vector.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [3, 4];
+
+console.log(VectOps.normalize(a)); // [0.6, 0.8]
+```
+
 ## Requirements
 
 - ES6 compatible environment
