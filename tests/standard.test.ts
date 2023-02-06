@@ -126,3 +126,94 @@ test("Vector addition", () => {
 
     expect(VectOps.areTwoVectorsEqual(VectOps.add(vectors[0], vectors[0], vectors[1]), vectors[8])).toBe(true);
 });
+
+test("magnitude", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[0]), Math.sqrt(3))).toBe(true);
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[1]), Math.sqrt(12))).toBe(true);
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[2]), Math.sqrt(27))).toBe(true);
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[3]), Math.sqrt(2))).toBe(true);
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[4]), Math.sqrt(8))).toBe(true);
+    expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(vectors[5]), Math.sqrt(18))).toBe(true);
+});
+
+test("copy", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const copy = VectOps.copyVector(vector);
+        expect(VectOps.areTwoVectorsEqual(vector, copy)).toBe(true);
+    }
+
+    for (const vector of vectors) {
+        const copy = VectOps.copyVectorMany(vector, 4);
+        for (const copyVector of copy) {
+            expect(VectOps.areTwoVectorsEqual(vector, copyVector)).toBe(true);
+        }
+    }
+});
+
+test("scalar multiplication in place", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const copy = VectOps.copyVector(vector);
+        VectOps.multiplyByScalarInPlace(copy, 2);
+        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => 2*v))).toBe(true);
+    }   
+});
+
+test("scalar multiplication", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const multiplied = VectOps.multiplyByScalar(vector, 2);
+        expect(VectOps.areTwoVectorsEqual(multiplied, vector.map(v => 2*v))).toBe(true);
+    }
+});
+
+test("normalization in place", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const copy = VectOps.copyVector(vector);
+        VectOps.normalizeInPlace(copy);
+        expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(copy), 1)).toBe(true);
+    }
+});
