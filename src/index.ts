@@ -324,6 +324,26 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Normalizes a vector in place.
+     * @param vector Vector to normalize
+     * @returns The original vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function normalizeInPlace(vector: Vector): Vector {
+        return multiplyByScalarInPlace(vector, 1 / magnitude(vector));
+    }
+
+    /**
+     * Normalizes a vector into a new vector.
+     * @param vector Vector to normalize
+     * @returns The normalized vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function normalize(vector: ReadonlyVector): Vector {
+        return multiplyByScalar(vector, 1 / magnitude(vector));
+    }
 }
 
 export default VectOps;
