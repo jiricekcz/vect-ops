@@ -280,6 +280,21 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Copies a vector multiple times.
+     * @param vector The vector to copy
+     * @param count Amount of copies to create
+     * @returns The copies of a vector in an array
+     * @time O(n * m) - n is the length of the vector, m is the count
+     */
+    export function copyVectorMany(vector: ReadonlyVector, count: number): Array<Vector> {
+        const result = [];
+        for (let i = 0; i < count; i++) {
+            result[i] = copyVector(vector);
+        }
+        return result;
+    }
 }
 
 export default VectOps;
