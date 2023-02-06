@@ -93,6 +93,7 @@ namespace VectOps {
      * @param a Scalar to compare
      * @param b Scalar to compare
      * @returns Whether the two scalars meet the requirements of the compare mode to be considered equal.
+     * @time O(1) - is expected to be, but depends on the compare mode.
      */
     export function areTwoScalarsEqual(a: Scalar, b: Scalar): boolean {
         return compareMode(a, b);
@@ -116,6 +117,7 @@ namespace VectOps {
      * @param b Second vector
      * @param onLength Length of the vectors to compare. Defaults to the length of the first vector.
      * @returns If the two vectors are equal on the first `onLength` numbers.
+     * @time O(n) - n is the length of the vectors
      */
     export function areTwoVectorsEqual(a: ReadonlyVector, b: ReadonlyVector, onLength: number = a.length): boolean {
         for (let i = 0; i < onLength; i++) {
@@ -129,6 +131,7 @@ namespace VectOps {
      * @param vectors Array of vectors to compare
      * @param onLength Length of the vectors to compare. Defaults to the length of the first vector.
      * @returns If the vectors are equal on the first `onLength` numbers.
+     * @time O(n * m) - n is the number of vectors, m is the length of the vectors
      */
     export function areVectorsEqual(vectors: Array<ReadonlyVector>, onLength: number = vectors[0]?.length as number): boolean {
         for (let i = 1; i < vectors.length; i++) {
@@ -148,6 +151,7 @@ namespace VectOps {
      * @param add The vector to add to the original
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
+     * @time O(n) - n is the length provided
      */
     export function addToUnchecked(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
@@ -165,6 +169,7 @@ namespace VectOps {
      * @param add The vector to add to the original
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
+     * @time O(n) - n is the length provided
      */
     export function addTo(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
@@ -182,6 +187,7 @@ namespace VectOps {
      * @param adds The vectors to add to the original
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
+     * @time O(n * m) - n is the length provided, m is the number of vectors
      */
     export function addToManyUnchecked(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
@@ -200,6 +206,7 @@ namespace VectOps {
      * @param adds The vectors to add to the original
      * @param length The length of the vectors. Defaults to the length of the original vector.
      * @returns The original vector
+     * @time O(n * m) - n is the length provided, m is the number of vectors
      */
     export function addToMany(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
         for (let i = 0; i < length; i++) {
@@ -215,6 +222,7 @@ namespace VectOps {
      * Requires the vectors to be at least as long as the first. If vectors are shorter, it is undefined behavior.
      * @param vectors The vectors to add
      * @returns The sum of the vectors as a new vector of the same length as the first vector
+     * @time O(n * m) - n is the length of the first vector, m is the number of vectors
      */
     export function addUnchecked(...vectors: Array<ReadonlyVector>): Vector {
         if (vectors.length === 0) return [];
@@ -233,6 +241,7 @@ namespace VectOps {
      * Adds multiple vectors together, padding shorter vectors with zeros, when needed.
      * @param vectors The vectors to add
      * @returns The sum of the vectors as a new vector of the same length as the longest vector
+     * @time O(n * m) - n is the length of the longest vector, m is the number of vectors
      */
     export function add(...vectors: Array<ReadonlyVector>): Vector {
         const result: Vector = [];
@@ -248,6 +257,7 @@ namespace VectOps {
      * Computes the magnitude of a vector.
      * @param vector The vector to get the magnitude of
      * @returns Magnitude of the vector
+     * @time O(n) - n is the length of the vector
      */
     export function magnitude(vector: ReadonlyVector): Scalar {
         let sum = 0;
@@ -255,6 +265,20 @@ namespace VectOps {
             sum += (vector[i] as Scalar) ** 2;
         }
         return Math.sqrt(sum);
+    }
+
+    /**
+     * Creates a copy of a vector.
+     * @param vector The vector to copy
+     * @returns The copy of a vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function copyVector(vector: ReadonlyVector): Vector {
+        const result = [];
+        for (let i = 0; i < vector.length; i++) {
+            result[i] = vector[i] as Scalar;
+        }
+        return result;
     }
 }
 
