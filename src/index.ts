@@ -400,7 +400,7 @@ namespace VectOps {
     export function hadamardProduct(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
         const result = [];
         for (let i = 0; i < length; i++) {
-            result[i] = vector1[i] ?? 1 * (vector2[i] ?? 1);
+            result[i] = (vector1[i] ?? 1) * (vector2[i] ?? 1);
         }
         return result;
     }
