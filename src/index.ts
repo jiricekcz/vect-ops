@@ -379,7 +379,7 @@ namespace VectOps {
 
     /**
      * Computes the Hadamard product (element-wise product) of two vectors in place.  
-     * If the second vector is shorter than the first vector, the missing values are assumed to be 1.
+     * If the second vector is shorter than the first vector, the missing values are assumed to be 0.
      * @param vector1 The first vector
      * @param vector2 The second vector
      * @returns The first vector
@@ -387,13 +387,14 @@ namespace VectOps {
      */
     export function hadamardProductInPlace(vector1: Vector, vector2: ReadonlyVector): Vector {
         for (let i = 0; i < vector1.length; i++) {
-            vector1[i] *= vector2[i] ?? 1;
+            vector1[i] *= vector2[i] ?? 0;
         }
         return vector1;
     }
 
     /**
-     * 
+     * Computes the Hadamard product (element-wise product) of two vector. 
+     * If the second vector is shorter than the first vector, the missing values are assumed to be 0.
      * @param vector1 The first vector
      * @param vector2 The second vector
      * @param length Length of the result vector
@@ -403,7 +404,7 @@ namespace VectOps {
     export function hadamardProduct(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
         const result = [];
         for (let i = 0; i < length; i++) {
-            result[i] = (vector1[i] ?? 1) * (vector2[i] ?? 1);
+            result[i] = (vector1[i] ?? 0) * (vector2[i] ?? 0);
         }
         return result;
     }
