@@ -153,7 +153,7 @@ console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2, 3])); // true
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [-1, -2, -3])); // true
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2, 4])); // false
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2])); // false
-console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [2, 4, 6])); // false
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [2, 4, 6])); // true
 ```
 
 ## Requirements
