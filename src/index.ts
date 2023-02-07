@@ -427,7 +427,7 @@ namespace VectOps {
         }
         if (coefficient === undefined) return true; // If no coefficient was found and the function didn't return earlier, the vectors are both zero vectors and are equivalent
         for (; i < vector1.length; i++) {
-            if (coefficient * (vector2[i] as Scalar) !== (vector1[i] as Scalar)) return false; // If the coefficient is not correct, the vectors are not equivalent
+            if (!areTwoScalarsEqual(coefficient * (vector2[i] as Scalar), (vector1[i] as Scalar))) return false; // If the coefficient is not correct, the vectors are not equivalent
         }
         return true; // If all values are correct, the vectors are equivalent
     }
