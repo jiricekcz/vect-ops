@@ -19,7 +19,8 @@ Two elements are compared using a float compare function, that you can customize
 ```typescript
 import VectOps from 'vect-ops';
 // 14 significant digits is the default.
-// This line is necessary only if you want to change the compare mode or be extra explicit about the compare mode.
+// This line is necessary only if you want to change the compare mode 
+// or be extra explicit about the compare mode.
 VectOps.compareMode = VectOps.COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS;
 
 console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
