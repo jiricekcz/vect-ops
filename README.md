@@ -168,6 +168,23 @@ console.log(VectOps.scalarProduct([1, 2, 3], [4, 5, 6])); // 32
 console.log(VectOps.scalarProduct([1, 2, 3], [-4, -5, -6])); // -32
 console.log(VectOps.scalarProduct([1, 2], [1, 2, 3])); // throws an error
 ```
+
+### Magnitude squared
+
+VectOps provides functions to compute the magnitude squared of a vector.   
+This method is faster than computing the magnitude, because it does not need to compute the square root.  
+It can be used to compare the magnitude of two vectors, without the need to compute the square root of the magnitude of both vectors.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [3, 4];
+const b = [1, 2];
+
+console.log(VectOps.magnitudeSquared(a)); // 25
+console.log(VectOps.magnitudeSquared(b)); // 5
+// because 25 > 5, the magnitude of a is greater than the magnitude of b
+```
+
 ## Requirements
 
 - ES6 compatible environment
