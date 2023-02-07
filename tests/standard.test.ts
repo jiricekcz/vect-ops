@@ -304,3 +304,18 @@ test("scalar product (dot product)", () => {
 
     expect(() => VectOps.scalarProduct([1, 2], [1, 2, 3])).toThrow();
 });
+
+test("magnitude squared", () => {
+    const vectors = [
+        [[1, 1, 1], 3],
+        [[0, 0, 0], 0],
+        [[-1, -1, -1], 3],
+        [[1, 2, 3], 14],
+        [[0, 1, 2], 5],
+        [[1, 2, 3], 14],
+    ] as const;
+
+    for (const [v, expected] of vectors) {
+        expect(VectOps.areTwoScalarsEqual(VectOps.magnitudeSquared(v), expected)).toBe(true);
+    }
+});
