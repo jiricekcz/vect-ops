@@ -143,6 +143,19 @@ import VectOps from 'vect-ops';
 console.log(VectOps.hadamardProduct([1, 2, 3], [4, 5, 6])); // [4, 10, 18]
 ```
 
+### Vector equivalency
+
+VectOps provides functions to check if two vectors are equivalent. Two vectors are equivalent, if they have the same dimension and the same direciton.
+```typescript
+import VectOps from 'vect-ops';
+
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2, 3])); // true
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [-1, -2, -3])); // true
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2, 4])); // false
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2])); // false
+console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [2, 4, 6])); // false
+```
+
 ## Requirements
 
 - ES6 compatible environment
