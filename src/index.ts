@@ -367,6 +367,7 @@ namespace VectOps {
      * @param vector2 Vector two
      * @param length Length of th result vector
      * @returns A new vector with the Hadamard product of the two vectors
+     * @time O(n) - n is the length provided
      */
     export function hadamardProductUnchecked(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
         const result = [];
@@ -382,6 +383,7 @@ namespace VectOps {
      * @param vector1 The first vector
      * @param vector2 The second vector
      * @returns The first vector
+     * @time O(n) - n is the length of the first vector
      */
     export function hadamardProductInPlace(vector1: Vector, vector2: ReadonlyVector): Vector {
         for (let i = 0; i < vector1.length; i++) {
@@ -396,6 +398,7 @@ namespace VectOps {
      * @param vector2 The second vector
      * @param length Length of the result vector
      * @returns A new vector with the Hadamard product of the two vectors and the given length
+     * @time O(n) - n is the length of the result vector
      */
     export function hadamardProduct(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
         const result = [];
