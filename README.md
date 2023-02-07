@@ -156,6 +156,16 @@ console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2])); // false
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [2, 4, 6])); // true
 ```
 
+### Scalar product (dot product)
+
+VectOps provides functions to compute the scalar product of two vectors. Scalar product is also known as the dot product.
+```typescript
+import VectOps from 'vect-ops';
+
+console.log(VectOps.scalarProduct([1, 2, 3], [4, 5, 6])); // 32
+console.log(VectOps.scalarProduct([1, 2, 3], [-4, -5, -6])); // -32
+console.log(VectOps.scalarProduct([1, 2], [1, 2, 3])); // throws an error
+```
 ## Requirements
 
 - ES6 compatible environment
