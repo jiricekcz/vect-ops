@@ -344,6 +344,66 @@ namespace VectOps {
     export function normalize(vector: ReadonlyVector): Vector {
         return multiplyByScalar(vector, 1 / magnitude(vector));
     }
+
+    /**
+     * Computes the Hadamard product (element-wise product) of two vectors in place.  
+     * The second vector is assumed to be at least as long as the first vector.
+     * @param vector1 The first vector
+     * @param vector2 The second vector
+     * @returns The original first vector
+     * @time O(n) - n is the length of the first vector
+     */
+    export function hadamardProductInPlaceUnchecked(vector1: Vector, vector2: ReadonlyVector): Vector {
+        for (let i = 0; i < vector1.length; i++) {
+            vector1[i] *= (vector2[i] as Scalar);
+        }
+        return vector1;
+    }
+
+    /**
+     * Computes the Hadamard product (element-wise product) of two vectors into a new vector.
+     * Both vectors are assumed to be at least as long as the length parameter, which defaults to the length of the first vector.
+     * @param vector1 Vector one
+     * @param vector2 Vector two
+     * @param length Length of th result vector
+     * @returns A new vector with the Hadamard product of the two vectors
+     */
+    export function hadamardProductUnchecked(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
+        const result = [];
+        for (let i = 0; i < length; i++) {
+            result[i] = (vector1[i] as Scalar) * (vector2[i] as Scalar);
+        }
+        return result;
+    }
+
+    /**
+     * Computes the Hadamard product (element-wise product) of two vectors in place.  
+     * If the second vector is shorter than the first vector, the missing values are assumed to be 1.
+     * @param vector1 The first vector
+     * @param vector2 The second vector
+     * @returns The first vector
+     */
+    export function hadamardProductInPlace(vector1: Vector, vector2: ReadonlyVector): Vector {
+        for (let i = 0; i < vector1.length; i++) {
+            vector1[i] *= vector2[i] ?? 1;
+        }
+        return vector1;
+    }
+
+    /**
+     * 
+     * @param vector1 The first vector
+     * @param vector2 The second vector
+     * @param length Length of the result vector
+     * @returns A new vector with the Hadamard product of the two vectors and the given length
+     */
+    export function hadamardProduct(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
+        const result = [];
+        for (let i = 0; i < length; i++) {
+            result[i] = vector1[i] ?? 1 * (vector2[i] ?? 1);
+        }
+        return result;
+    }
 }
 
 export default VectOps;
