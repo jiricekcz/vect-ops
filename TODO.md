@@ -2,7 +2,6 @@
 
 ## General function
 
-- Square magnitude - A function to compute the square magnitude of a vector 
 
 ## Additions
 
