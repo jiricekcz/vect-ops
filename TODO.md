@@ -2,7 +2,6 @@
 
 ## General function
 
-- Are two vectors equivalent - A function to check if two vectors are equivalent
 - Square magnitude - A function to compute the square magnitude of a vector 
 
 ## Additions
