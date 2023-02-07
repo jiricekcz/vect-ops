@@ -287,3 +287,21 @@ test("vector equvalence", () => {
         expect(VectOps.areTwoVectorsEquivalent(v1, v2)).toBe(false);
     }
 });
+
+test("scalar product (dot product)", () => {
+    const vectors = [
+        [[1, 1, 1], [1, 1, 1], 3],
+        [[0, 0, 0], [0, 0, 0], 0],
+        [[-1, -1, -1], [-1, -1, -1], 3],
+        [[1, 2, 3], [2, 4, 6], 28],
+        [[0, 1, 2], [1, 2, 4], 8],
+        [[1, 2, 3], [-2, -4, -6], -28],
+    ] as const;
+
+    for (const [v1, v2, expected] of vectors) {
+        expect(VectOps.scalarProduct(v1, v2)).toBe(expected);
+    };
+
+    expect(() => VectOps.scalarProduct([1, 2], [1, 2, 3])).toThrow();
+    
+});
