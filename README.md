@@ -18,8 +18,9 @@ Two vectors are equal, if they have the same size and the same elements.
 Two elements are compared using a float compare function, that you can customize.
 ```typescript
 import VectOps from 'vect-ops';
-
-VectOps.compareMode = VectOps.COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS; // 14 significant digits is the default, so this line is necessary only if you want to change the compare mode or be extra explicit about the compare mode.
+// 14 significant digits is the default.
+// This line is necessary only if you want to change the compare mode or be extra explicit about the compare mode.
+VectOps.compareMode = VectOps.COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS;
 
 console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
 
