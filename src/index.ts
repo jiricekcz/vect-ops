@@ -449,6 +449,21 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Computes the squared magnitude of a vector.  
+     * This is faster than computing the magnitude. Good for comparing magnitudes.
+     * @param vector The vector
+     * @returns The squared magnitude of the vector
+     * @time O(n) - n is the length of the vector
+     */
+    export function magnitudeSquared(vector: ReadonlyVector): Scalar {
+        let result = 0;
+        for (let i = 0; i < vector.length; i++) {
+            result += (vector[i] as Scalar) ** 2;
+        }
+        return result;
+    }
 }
 
 export default VectOps;
