@@ -181,8 +181,8 @@ test("scalar multiplication in place", () => {
     for (const vector of vectors) {
         const copy = VectOps.copyVector(vector);
         VectOps.multiplyByScalarInPlace(copy, 2);
-        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => 2*v))).toBe(true);
-    }   
+        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => 2 * v))).toBe(true);
+    }
 });
 
 test("scalar multiplication", () => {
@@ -197,7 +197,7 @@ test("scalar multiplication", () => {
 
     for (const vector of vectors) {
         const multiplied = VectOps.multiplyByScalar(vector, 2);
-        expect(VectOps.areTwoVectorsEqual(multiplied, vector.map(v => 2*v))).toBe(true);
+        expect(VectOps.areTwoVectorsEqual(multiplied, vector.map(v => 2 * v))).toBe(true);
     }
 });
 
@@ -231,7 +231,7 @@ test("hadamard product in place", () => {
     for (const vector of vectors) {
         const copy = VectOps.copyVector(vector);
         VectOps.hadamardProductInPlace(copy, vector);
-        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => v*v))).toBe(true);
+        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => v * v))).toBe(true);
     }
 });
 
@@ -247,7 +247,7 @@ test("hadamard product", () => {
 
     for (const vector of vectors) {
         const hadamardProduct = VectOps.hadamardProduct(vector, vector);
-        expect(VectOps.areTwoVectorsEqual(hadamardProduct, vector.map(v => v*v))).toBe(true);
+        expect(VectOps.areTwoVectorsEqual(hadamardProduct, vector.map(v => v * v))).toBe(true);
     }
 });
 
@@ -259,7 +259,7 @@ test("vector equvalence", () => {
         [[1, 2, 3], [2, 4, 6]],
         [[0, 1, 2], [0, 2, 4]],
         [[1, 2, 3], [-2, -4, -6]],
-        [[],[]],
+        [[], []],
         [[1], [2]],
         [[1, 2], [2, 4]],
         [[0, 0, 3], [0, 0, 6]],
@@ -294,14 +294,13 @@ test("scalar product (dot product)", () => {
         [[0, 0, 0], [0, 0, 0], 0],
         [[-1, -1, -1], [-1, -1, -1], 3],
         [[1, 2, 3], [2, 4, 6], 28],
-        [[0, 1, 2], [1, 2, 4], 8],
+        [[0, 1, 2], [1, 2, 4], 10],
         [[1, 2, 3], [-2, -4, -6], -28],
     ] as const;
 
     for (const [v1, v2, expected] of vectors) {
-        expect(VectOps.scalarProduct(v1, v2)).toBe(expected);
+        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(v1, v2), expected)).toBe(true);
     };
 
     expect(() => VectOps.scalarProduct([1, 2], [1, 2, 3])).toThrow();
-    
 });
