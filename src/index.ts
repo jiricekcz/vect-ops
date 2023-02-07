@@ -19,7 +19,22 @@ namespace VectOps {
      * Readonly version of `Matrix`.
      */
     export type ReadonlyMatrix = Readonly<Matrix>;
-
+    /**
+     * Vector with two elements.
+     */
+    export type Vector2D = [Scalar, Scalar];
+    /**
+     * Vector with three elements.
+     */
+    export type Vector3D = [Scalar, Scalar, Scalar];
+    /**
+     * Readonly version of `Vector2D`.
+     */
+    export type ReadonlyVector2D = Readonly<Vector2D>;
+    /**
+     * Readonly version of `Vector3D`.
+     */
+    export type ReadonlyVector3D = Readonly<Vector3D>;
     /**
      * Compare modes, used to compare Scalars.
      * Necessary because of floating point errors.
