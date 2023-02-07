@@ -217,3 +217,36 @@ test("normalization in place", () => {
         expect(VectOps.areTwoScalarsEqual(VectOps.magnitude(copy), 1)).toBe(true);
     }
 });
+
+test("hadamard product in place", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const copy = VectOps.copyVector(vector);
+        VectOps.hadamardProductInPlace(copy, vector);
+        expect(VectOps.areTwoVectorsEqual(copy, vector.map(v => v*v))).toBe(true);
+    }
+});
+
+test("hadamard product", () => {
+    const vectors = [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [1, 1],
+        [2, 2],
+        [3, 3],
+    ] as const;
+
+    for (const vector of vectors) {
+        const hadamardProduct = VectOps.hadamardProduct(vector, vector);
+        expect(VectOps.areTwoVectorsEqual(hadamardProduct, vector.map(v => v*v))).toBe(true);
+    }
+});
