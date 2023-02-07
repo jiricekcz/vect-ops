@@ -250,3 +250,40 @@ test("hadamard product", () => {
         expect(VectOps.areTwoVectorsEqual(hadamardProduct, vector.map(v => v*v))).toBe(true);
     }
 });
+
+test("vector equvalence", () => {
+    const equivalentVectors = [
+        [[1, 1, 1], [1, 1, 1]],
+        [[0, 0, 0], [0, 0, 0]],
+        [[-1, -1, -1], [-1, -1, -1]],
+        [[1, 2, 3], [2, 4, 6]],
+        [[0, 1, 2], [0, 2, 4]],
+        [[1, 2, 3], [-2, -4, -6]],
+        [[],[]],
+        [[1], [2]],
+        [[1, 2], [2, 4]],
+        [[0, 0, 3], [0, 0, 6]],
+    ] as const;
+
+    const nonEquivalentVectors = [
+        [[1, 1, 1], [1, 1, 2]],
+        [[0, 0, 0], [0, 0, 1]],
+        [[-1, -1, -1], [-1, -1, -2]],
+        [[1, 2, 3], [2, 4, 7]],
+        [[0, 1, 2], [0, 2, 5]],
+        [[1, 2, 3], [-2, -4, -7]],
+        [[], [1]],
+        [[1], []],
+        [[1, 2], [2, 4, 6]],
+        [[0, 0, 3], [0, 0, 6, 9]],
+        [[0, 0, 0, 0], [0, 0, 0]]
+    ] as const;
+
+    for (const [v1, v2] of equivalentVectors) {
+        expect(VectOps.areTwoVectorsEquivalent(v1, v2)).toBe(true);
+    }
+
+    for (const [v1, v2] of nonEquivalentVectors) {
+        expect(VectOps.areTwoVectorsEquivalent(v1, v2)).toBe(false);
+    }
+});
