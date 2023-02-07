@@ -404,6 +404,30 @@ namespace VectOps {
         }
         return result;
     }
+
+    /**
+     * Checks, if two vectors have the same direction
+     * @param vector1 First vector
+     * @param vector2 Second vector
+     * @returns If the vectors are equivalent
+     * @time O(n) - n is the length of the vectors
+     */
+    export function areTwoVectorsEquivalent(vector1: ReadonlyVector, vector2: ReadonlyVector): boolean {
+        if (vector1.length !== vector2.length) return false; // If the vectors are not the same length, they are not equivalent
+        if (vector1.length === 0) return true; // If the vectors are empty, they are equivalent
+        let coefficient: number | undefined = undefined; // The coefficient that the second vector is multiplied by to get the first vector
+        for (var i = 0; i < vector1.length; i++) {
+            if (vector1[i] === 0 && vector2[i] === 0) continue; // If both values are 0, they cannot yield a coefficient
+            if (vector1[i] === 0 || vector2[i] === 0) return false; // If one value is 0 and the other is not, vectors are not equivalent
+            coefficient = (vector1[i] as Scalar) / (vector2[i] as Scalar); // If both values are not 0, they can yield a coefficient
+            break; // When a coefficient is found, stop looking
+        }
+        if (coefficient === undefined) return true; // If no coefficient was found and the function didn't return earlier, the vectors are both zero vectors and are equivalent
+        for (; i < vector1.length; i++) {
+            if (coefficient * (vector2[i] as Scalar) !== (vector1[i] as Scalar)) return false; // If the coefficient is not correct, the vectors are not equivalent
+        }
+        return true; // If all values are correct, the vectors are equivalent
+    }
 }
 
 export default VectOps;
