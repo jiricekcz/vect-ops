@@ -431,6 +431,23 @@ namespace VectOps {
         }
         return true; // If all values are correct, the vectors are equivalent
     }
+
+    /**
+     * Computes the scalar product of two vectors.
+     * @param vector1 First vector
+     * @param vector2 Second vector
+     * @returns The scalar product of the two vectors
+     * @time O(n) - n is the length of the vectors
+     * @throws If the vectors are not of the same length
+     */
+    export function scalarProduct(vector1: ReadonlyVector, vector2: ReadonlyVector): Scalar {
+        if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
+        let result = 0;
+        for (let i = 0; i < vector1.length; i++) {
+            result += (vector1[i] as Scalar) * (vector2[i] as Scalar);
+        }
+        return result;
+    }
 }
 
 export default VectOps;
