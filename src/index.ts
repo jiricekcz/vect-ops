@@ -449,14 +449,14 @@ namespace VectOps {
     }
 
     /**
-     * Computes the scalar product of two vectors.
+     * Computes the dot product of two vectors.
      * @param vector1 First vector
      * @param vector2 Second vector
-     * @returns The scalar product of the two vectors
+     * @returns The dot product of the two vectors
      * @time O(n) - n is the length of the vectors
      * @throws If the vectors are not of the same length
      */
-    export function scalarProduct(vector1: ReadonlyVector, vector2: ReadonlyVector): Scalar {
+    export function dotProduct(vector1: ReadonlyVector, vector2: ReadonlyVector): Scalar {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
         let result = 0;
         for (let i = 0; i < vector1.length; i++) {

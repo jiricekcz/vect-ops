@@ -299,10 +299,10 @@ test("scalar product (dot product)", () => {
     ] as const;
 
     for (const [v1, v2, expected] of vectors) {
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(v1, v2), expected)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(v1, v2), expected)).toBe(true);
     };
 
-    expect(() => VectOps.scalarProduct([1, 2], [1, 2, 3])).toThrow();
+    expect(() => VectOps.dotProduct([1, 2], [1, 2, 3])).toThrow();
 });
 
 test("magnitude squared", () => {
@@ -336,15 +336,15 @@ test("cross product", () => {
 
     for (const [v1, v2, v3] of vectors) {
         const vp = VectOps.crossProduct(v1, v2);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp, v1), 0)).toBe(true);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp, v2), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp, v1), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp, v2), 0)).toBe(true);
 
         const vp2 = VectOps.crossProduct(v2, v3);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp2, v2), 0)).toBe(true);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp2, v3), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp2, v2), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp2, v3), 0)).toBe(true);
 
         const vp3 = VectOps.crossProduct(v3, v1);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp3, v3), 0)).toBe(true);
-        expect(VectOps.areTwoScalarsEqual(VectOps.scalarProduct(vp3, v1), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp3, v3), 0)).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp3, v1), 0)).toBe(true);
     }
 });
