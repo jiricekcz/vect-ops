@@ -2,6 +2,7 @@
 
 ## General function
 
+- Two vectors angle
 
 ## Additions
 
