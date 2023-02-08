@@ -9,5 +9,4 @@
 
 ## Multiplications
 
-- Cross product in 3D - A function to compute the cross product of two vectors
 - Multiply matrix with vector - A function to multiply a matrix with a vector (needs to establish a matrix type first)
