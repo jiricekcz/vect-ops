@@ -487,7 +487,7 @@ namespace VectOps {
      * @returns A new vector with the cross product of the two vectors
      * @time O(1)
      */
-    export function crossProduct(vector1: Vector3D, vector2: Vector3D): Vector3D {
+    export function crossProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D): Vector3D {
         return [vector1[1] * vector2[2] - vector1[2] * vector2[1], vector1[2] * vector2[0] - vector1[0] * vector2[2], vector1[0] * vector2[1] - vector1[1] * vector2[0]]; // [Cross product formula](https://en.wikipedia.org/wiki/Cross_product)
     }
 }
