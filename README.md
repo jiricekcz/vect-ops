@@ -185,6 +185,21 @@ console.log(VectOps.magnitudeSquared(b)); // 5
 // because 25 > 5, the magnitude of a is greater than the magnitude of b
 ```
 
+### Cross product 3D
+
+VectOps provides functions to compute the cross product of two three dimensional vectors.  
+This function only works on three dimensional vectors, as the cross product is only defined for three dimensional vectors.  
+Providing a vector with a different dimension will result in undefined behavior.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+
+console.log(VectOps.crossProduct3D(a, b)); // [-3, 6, -3]
+console.log(VectOps.crossProduct3D(b, a)); // [3, -6, 3]
+```
+
 ## Requirements
 
 - ES6 compatible environment
