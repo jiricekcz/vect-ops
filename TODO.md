@@ -10,4 +10,5 @@
 
 ## Multiplications
 
+- Rename scalar product to dot product
 - Multiply matrix with vector - A function to multiply a matrix with a vector (needs to establish a matrix type first)
