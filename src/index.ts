@@ -490,6 +490,31 @@ namespace VectOps {
     export function crossProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D): Vector3D {
         return [vector1[1] * vector2[2] - vector1[2] * vector2[1], vector1[2] * vector2[0] - vector1[0] * vector2[2], vector1[0] * vector2[1] - vector1[1] * vector2[0]]; // [Cross product formula](https://en.wikipedia.org/wiki/Cross_product)
     }
+    /**
+     * Computes the scalar triple product of two vectors.  
+     * @param vector1 First vector
+     * @param vector2 Second vector
+     * @param vector3 Third vector
+     * @returns v1 • (v2 x v3)
+     * @time O(1)
+     */
+    export function scalarTripleProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D, vector3: ReadonlyVector3D): Scalar {
+        return (vector2[1] * vector3[2] - vector2[2] * vector3[1]) * vector1[0] +
+            (vector2[2] * vector3[0] - vector2[0] * vector3[2]) * vector1[1] +
+            (vector2[0] * vector3[1] - vector2[1] * vector3[0]) * vector1[2];
+    }
+
+    /**
+     * Computes the vector triple product of two vectors.
+     * @param vector1 First vector
+     * @param vector2 Second vector
+     * @param vector3 Third vector
+     * @returns v1 x (v2 x v3)
+     * @time O(1)
+     */
+    export function vectorTripleProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D, vector3: ReadonlyVector3D): Vector3D {
+        return crossProduct(vector1, crossProduct(vector2, vector3));
+    }
 }
 
 export default VectOps;
