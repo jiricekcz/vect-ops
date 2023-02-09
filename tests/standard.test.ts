@@ -348,3 +348,37 @@ test("cross product", () => {
         expect(VectOps.areTwoScalarsEqual(VectOps.dotProduct(vp3, v1), 0)).toBe(true);
     }
 });
+
+test("vector triple product", () => {
+    const vectors = [
+        [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
+        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]],
+        [[1, 2, 3], [2, 4, 6], [3, 6, 9]],
+        [[0, 1, 2], [1, 2, 4], [2, 4, 8]],
+        [[1, 2, 3], [-2, -4, -6], [3, 6, 9]],
+    ] as const;
+
+    for (const [v1, v2, v3] of vectors) {
+        expect(VectOps.areTwoScalarsEqual(VectOps.scalarTripleProduct(v1, v2, v3), VectOps.dotProduct(v1, VectOps.crossProduct(v2, v3)))).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.scalarTripleProduct(v2, v3, v1), VectOps.dotProduct(v2, VectOps.crossProduct(v3, v1)))).toBe(true);
+        expect(VectOps.areTwoScalarsEqual(VectOps.scalarTripleProduct(v3, v1, v2), VectOps.dotProduct(v3, VectOps.crossProduct(v1, v2)))).toBe(true);
+    }
+});
+
+test("scalar triple product", () => {
+    const vectors = [
+        [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
+        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]],
+        [[1, 2, 3], [2, 4, 6], [3, 6, 9]],
+        [[0, 1, 2], [1, 2, 4], [2, 4, 8]],
+        [[1, 2, 3], [-2, -4, -6], [3, 6, 9]],
+    ] as const;
+
+    for (const [v1, v2, v3] of vectors) {
+        expect(VectOps.areTwoVectorsEqual(VectOps.vectorTripleProduct(v1, v2, v3), VectOps.crossProduct(v1, VectOps.crossProduct(v2, v3)))).toBe(true);
+        expect(VectOps.areTwoVectorsEqual(VectOps.vectorTripleProduct(v2, v3, v1), VectOps.crossProduct(v2, VectOps.crossProduct(v3, v1)))).toBe(true);
+        expect(VectOps.areTwoVectorsEqual(VectOps.vectorTripleProduct(v3, v1, v2), VectOps.crossProduct(v3, VectOps.crossProduct(v1, v2)))).toBe(true);
+    }
+});
