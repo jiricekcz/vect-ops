@@ -361,7 +361,7 @@ namespace VectOps {
     }
 
     /**
-     * Computes the Hadamard product (element-wise product) of two vectors in place.  
+     * Computes the Hadamard product (element-wise product) of two vectors in place.
      * The second vector is assumed to be at least as long as the first vector.
      * @param vector1 The first vector
      * @param vector2 The second vector
@@ -370,7 +370,7 @@ namespace VectOps {
      */
     export function hadamardProductInPlaceUnchecked(vector1: Vector, vector2: ReadonlyVector): Vector {
         for (let i = 0; i < vector1.length; i++) {
-            vector1[i] *= (vector2[i] as Scalar);
+            vector1[i] *= vector2[i] as Scalar;
         }
         return vector1;
     }
@@ -393,7 +393,7 @@ namespace VectOps {
     }
 
     /**
-     * Computes the Hadamard product (element-wise product) of two vectors in place.  
+     * Computes the Hadamard product (element-wise product) of two vectors in place.
      * If the second vector is shorter than the first vector, the missing values are assumed to be 0.
      * @param vector1 The first vector
      * @param vector2 The second vector
@@ -408,7 +408,7 @@ namespace VectOps {
     }
 
     /**
-     * Computes the Hadamard product (element-wise product) of two vector. 
+     * Computes the Hadamard product (element-wise product) of two vector.
      * If the second vector is shorter than the first vector, the missing values are assumed to be 0.
      * @param vector1 The first vector
      * @param vector2 The second vector
@@ -443,7 +443,7 @@ namespace VectOps {
         }
         if (coefficient === undefined) return true; // If no coefficient was found and the function didn't return earlier, the vectors are both zero vectors and are equivalent
         for (; i < vector1.length; i++) {
-            if (!areTwoScalarsEqual(coefficient * (vector2[i] as Scalar), (vector1[i] as Scalar))) return false; // If the coefficient is not correct, the vectors are not equivalent
+            if (!areTwoScalarsEqual(coefficient * (vector2[i] as Scalar), vector1[i] as Scalar)) return false; // If the coefficient is not correct, the vectors are not equivalent
         }
         return true; // If all values are correct, the vectors are equivalent
     }
@@ -466,7 +466,7 @@ namespace VectOps {
     }
 
     /**
-     * Computes the squared magnitude of a vector.  
+     * Computes the squared magnitude of a vector.
      * This is faster than computing the magnitude. Good for comparing magnitudes.
      * @param vector The vector
      * @returns The squared magnitude of the vector
@@ -491,7 +491,7 @@ namespace VectOps {
         return [vector1[1] * vector2[2] - vector1[2] * vector2[1], vector1[2] * vector2[0] - vector1[0] * vector2[2], vector1[0] * vector2[1] - vector1[1] * vector2[0]]; // [Cross product formula](https://en.wikipedia.org/wiki/Cross_product)
     }
     /**
-     * Computes the scalar triple product of two vectors.  
+     * Computes the scalar triple product of two vectors.
      * @param vector1 First vector
      * @param vector2 Second vector
      * @param vector3 Third vector
@@ -499,9 +499,7 @@ namespace VectOps {
      * @time O(1)
      */
     export function scalarTripleProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D, vector3: ReadonlyVector3D): Scalar {
-        return (vector2[1] * vector3[2] - vector2[2] * vector3[1]) * vector1[0] +
-            (vector2[2] * vector3[0] - vector2[0] * vector3[2]) * vector1[1] +
-            (vector2[0] * vector3[1] - vector2[1] * vector3[0]) * vector1[2];
+        return (vector2[1] * vector3[2] - vector2[2] * vector3[1]) * vector1[0] + (vector2[2] * vector3[0] - vector2[0] * vector3[2]) * vector1[1] + (vector2[0] * vector3[1] - vector2[1] * vector3[0]) * vector1[2];
     }
 
     /**
