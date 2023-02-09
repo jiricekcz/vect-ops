@@ -1,6 +1,6 @@
 {
 	"name": "vect-ops",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"description": "High performance vector operations in JavaScipt",
 	"main": "./lib/index.js",
 	"types": "lib/index.d.ts",
@@ -10,7 +10,14 @@
 		"algebra",
 		"performance",
 		"dot product",
-		"cross product"
+		"cross product",
+		"typescript",
+		"math",
+		"mathematics",
+		"geometry",
+		"utils",
+		"vectors",
+		"numeric"
 	],
 	"scripts": {
 		"test": "npx jest",
