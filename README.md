@@ -196,8 +196,8 @@ import VectOps from 'vect-ops';
 const a = [1, 2, 3];
 const b = [4, 5, 6];
 
-console.log(VectOps.crossProduct3D(a, b)); // [-3, 6, -3]
-console.log(VectOps.crossProduct3D(b, a)); // [3, -6, 3]
+console.log(VectOps.crossProduct(a, b)); // [-3, 6, -3]
+console.log(VectOps.crossProduct(b, a)); // [3, -6, 3]
 ```
 
 ### Triple product 3D
