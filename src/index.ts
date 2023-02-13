@@ -1,4 +1,4 @@
-import { CanTwoTypesEqual, FixedLengthArray } from "./types";
+import { FixedLengthArray } from "./types";
 
 namespace VectOps {
     /**
