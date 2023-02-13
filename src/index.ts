@@ -513,6 +513,25 @@ namespace VectOps {
     export function vectorTripleProduct(vector1: ReadonlyVector3D, vector2: ReadonlyVector3D, vector3: ReadonlyVector3D): Vector3D {
         return crossProduct(vector1, crossProduct(vector2, vector3));
     }
+
+    /**
+     * Computes the average of a list of vectors.
+     * @param vectors The vectors
+     * @returns A new vector with the average of the vectors and the length of the first vector
+     * @time O(n) - n is the length of the vectors
+     */
+    export function vectorAverage(vectors: ReadonlyVector[]): Vector {
+        const rv: Vector = [];
+        if (vectors[0] === undefined) return rv;
+        for (let i = 0; i < vectors[0].length; i++) {
+            let sum = 0;
+            for (const vector of vectors) {
+                sum += vector[i] as Scalar;
+            }
+            rv[i] = sum / vectors.length;            
+        }
+        return rv;
+    }
 }
 
 export default VectOps;
