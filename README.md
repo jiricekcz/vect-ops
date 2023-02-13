@@ -2,14 +2,39 @@
 
 Library for vecotr operations written in JavaScript.
 
-## Usage
+
+## Installation
+
+```bash
+npm i vect-ops
+```
+
+## Types
+
+### Vectors
+
+VectOps provides a few types to represent vectors.  
+Providing a type parameter to the vector types, you can specify the length of the vector and achieve additional type safety.  
+If you use strongly typed vector lengths, you will be forced by TypeScript to manage the length of the vectors.
 
 ```typescript
 import VectOps from 'vect-ops';
 
-console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
-console.log(VectOps.add([1, 2, 3], [-4, -5, -6])); // [-3, -3, -3]
+const a: VectOps.Vector = []; // A generic mutable vector
+const b: VectOps.VectorReadonly = []; // A generic readonly vector
+
+const c: VectOps.Vector<2> = [1, 2]; // A fixed length mutable vectors
+const d: VectOps.VectorReadonly<2> = [1, 2]; // A fixed length readonly vector
+
+// VectOps also provides a few predefined types for vectors with 2 and 3 elements.
+const e: VectOps.Vector2D = [1, 2]; // A 2D mutable vector
+const f: VectOps.Vector2DReadonly = [1, 2]; // A 2D readonly vector
+
+const g: VectOps.Vector3D = [1, 2, 3]; // A 3D mutable vector
+const h: VectOps.Vector3DReadonly = [1, 2, 3]; // A 3D readonly vector
 ```
+
+## Functions
 
 ### Equality
 
