@@ -1,3 +1,5 @@
+import { CanTwoTypesEqual, FixedLengthArray } from "./types";
+
 namespace VectOps {
     /**
      * Scalar type, used instead of `number`.
@@ -6,27 +8,19 @@ namespace VectOps {
     /**
      * Vector type, used instead of `Array<Scalar>`.
      */
-    export type Vector = Array<Scalar>;
-    /**
-     * Matrix type, used instead of `Array<Vector>`.
-     */
-    export type Matrix = Array<Vector>;
+    export type Vector<L extends number = number> = FixedLengthArray<Scalar, L>;
     /**
      * Readonly version of `Vector`.
      */
-    export type ReadonlyVector = Readonly<Vector>;
-    /**
-     * Readonly version of `Matrix`.
-     */
-    export type ReadonlyMatrix = Readonly<Matrix>;
+    export type ReadonlyVector<L extends number = number> = Readonly<Vector<L>>;
     /**
      * Vector with two elements.
      */
-    export type Vector2D = [Scalar, Scalar];
+    export type Vector2D = Vector<2>;
     /**
      * Vector with three elements.
      */
-    export type Vector3D = [Scalar, Scalar, Scalar];
+    export type Vector3D = Vector<3>;
     /**
      * Readonly version of `Vector2D`.
      */
@@ -134,7 +128,7 @@ namespace VectOps {
      * @returns If the two vectors are equal on the first `onLength` numbers.
      * @time O(n) - n is the length of the vectors
      */
-    export function areTwoVectorsEqual(a: ReadonlyVector, b: ReadonlyVector, onLength: number = a.length): boolean {
+    export function areTwoVectorsEqual<L extends number>(a: ReadonlyVector<L>, b: ReadonlyVector<L>, onLength: number = a.length): boolean {
         for (let i = 0; i < onLength; i++) {
             if (!areTwoScalarsEqual(a[i] as Scalar, b[i] as Scalar)) return false;
         }
@@ -148,7 +142,7 @@ namespace VectOps {
      * @returns If the vectors are equal on the first `onLength` numbers.
      * @time O(n * m) - n is the number of vectors, m is the length of the vectors
      */
-    export function areVectorsEqual(vectors: Array<ReadonlyVector>, onLength: number = vectors[0]?.length as number): boolean {
+    export function areVectorsEqual<L extends number>(vectors: Array<ReadonlyVector<L>>, onLength: number = vectors[0]?.length as number): boolean {
         for (let i = 1; i < vectors.length; i++) {
             for (let j = 0; j < onLength; j++) {
                 if (!areTwoScalarsEqual((vectors[i] as Vector)[j] as Scalar, (vectors[i - 1] as Vector)[j] as Scalar)) return false;
@@ -168,7 +162,7 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    export function addToUnchecked(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
+    export function addToUnchecked<L extends number>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] as Scalar;
         }
@@ -186,7 +180,7 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    export function addTo(original: Vector, add: ReadonlyVector, length: number = original.length): Vector {
+    export function addTo<L extends number>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] ?? 0;
         }
@@ -204,7 +198,7 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n * m) - n is the length provided, m is the number of vectors
      */
-    export function addToManyUnchecked(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
+    export function addToManyUnchecked<L extends number>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
                 original[i] += (adds[j] as ReadonlyVector)[i] as Scalar;
@@ -223,7 +217,7 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n * m) - n is the length provided, m is the number of vectors
      */
-    export function addToMany(original: Vector, adds: Array<ReadonlyVector>, length: number = original.length): Vector {
+    export function addToMany<L extends number>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
                 original[i] += (adds[j] as ReadonlyVector)[i] ?? 0;
@@ -239,8 +233,8 @@ namespace VectOps {
      * @returns The sum of the vectors as a new vector of the same length as the first vector
      * @time O(n * m) - n is the length of the first vector, m is the number of vectors
      */
-    export function addUnchecked(...vectors: Array<ReadonlyVector>): Vector {
-        if (vectors.length === 0) return [];
+    export function addUnchecked<L extends number>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
+        if (vectors.length === 0) return [] as Vector<L>;
         const vectLength = (vectors[0] as ReadonlyVector).length;
         const result = [];
         for (let i = 0; i < vectLength; i++) {
@@ -249,7 +243,7 @@ namespace VectOps {
                 result[i] += (vectors[j] as ReadonlyVector)[i] as Scalar;
             }
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -258,14 +252,14 @@ namespace VectOps {
      * @returns The sum of the vectors as a new vector of the same length as the longest vector
      * @time O(n * m) - n is the length of the longest vector, m is the number of vectors
      */
-    export function add(...vectors: Array<ReadonlyVector>): Vector {
+    export function add<L extends number>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
         const result: Vector = [];
         for (let i = 0; i < vectors.length; i++) {
             for (let j = 0; j < (vectors[i] as ReadonlyVector).length; j++) {
                 result[j] = (result[j] ?? 0) + ((vectors[i] as ReadonlyVector)[j] ?? 0);
             }
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -288,12 +282,12 @@ namespace VectOps {
      * @returns The copy of a vector
      * @time O(n) - n is the length of the vector
      */
-    export function copyVector(vector: ReadonlyVector): Vector {
+    export function copyVector<L extends number>(vector: ReadonlyVector<L>): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
             result[i] = vector[i] as Scalar;
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -303,12 +297,12 @@ namespace VectOps {
      * @returns The copies of a vector in an array
      * @time O(n * m) - n is the length of the vector, m is the count
      */
-    export function copyVectorMany(vector: ReadonlyVector, count: number): Array<Vector> {
+    export function copyVectorMany<L extends number, C extends number>(vector: ReadonlyVector<L>, count: C): FixedLengthArray<Vector<L>, C> {
         const result = [];
         for (let i = 0; i < count; i++) {
             result[i] = copyVector(vector);
         }
-        return result;
+        return result as FixedLengthArray<Vector<L>, C>;
     }
 
     /**
@@ -318,11 +312,11 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n) - n is the length of the vector
      */
-    export function multiplyByScalarInPlace(vector: Vector, scalar: Scalar): Vector {
+    export function multiplyByScalarInPlace<L extends number>(vector: Vector, scalar: Scalar): Vector<L> {
         for (let i = 0; i < vector.length; i++) {
             vector[i] *= scalar;
         }
-        return vector;
+        return vector as Vector<L>;
     }
 
     /**
@@ -332,12 +326,12 @@ namespace VectOps {
      * @returns The multiplied vector
      * @time O(n) - n is the length of the vector
      */
-    export function multiplyByScalar(vector: ReadonlyVector, scalar: Scalar): Vector {
+    export function multiplyByScalar<L extends number>(vector: ReadonlyVector<L>, scalar: Scalar): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
             result[i] = (vector[i] as Scalar) * scalar;
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -346,7 +340,7 @@ namespace VectOps {
      * @returns The original vector
      * @time O(n) - n is the length of the vector
      */
-    export function normalizeInPlace(vector: Vector): Vector {
+    export function normalizeInPlace<L extends number>(vector: Vector<L>): Vector<L> {
         return multiplyByScalarInPlace(vector, 1 / magnitude(vector));
     }
 
@@ -356,7 +350,7 @@ namespace VectOps {
      * @returns The normalized vector
      * @time O(n) - n is the length of the vector
      */
-    export function normalize(vector: ReadonlyVector): Vector {
+    export function normalize<L extends number>(vector: ReadonlyVector<L>): Vector<L> {
         return multiplyByScalar(vector, 1 / magnitude(vector));
     }
 
@@ -368,7 +362,7 @@ namespace VectOps {
      * @returns The original first vector
      * @time O(n) - n is the length of the first vector
      */
-    export function hadamardProductInPlaceUnchecked(vector1: Vector, vector2: ReadonlyVector): Vector {
+    export function hadamardProductInPlaceUnchecked<L extends number>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
         for (let i = 0; i < vector1.length; i++) {
             vector1[i] *= vector2[i] as Scalar;
         }
@@ -384,12 +378,12 @@ namespace VectOps {
      * @returns A new vector with the Hadamard product of the two vectors
      * @time O(n) - n is the length provided
      */
-    export function hadamardProductUnchecked(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
+    export function hadamardProductUnchecked<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
             result[i] = (vector1[i] as Scalar) * (vector2[i] as Scalar);
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -400,7 +394,7 @@ namespace VectOps {
      * @returns The first vector
      * @time O(n) - n is the length of the first vector
      */
-    export function hadamardProductInPlace(vector1: Vector, vector2: ReadonlyVector): Vector {
+    export function hadamardProductInPlace<L extends number>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
         for (let i = 0; i < vector1.length; i++) {
             vector1[i] *= vector2[i] ?? 0;
         }
@@ -416,12 +410,12 @@ namespace VectOps {
      * @returns A new vector with the Hadamard product of the two vectors and the given length
      * @time O(n) - n is the length of the result vector
      */
-    export function hadamardProduct(vector1: ReadonlyVector, vector2: ReadonlyVector, length: number = vector1.length): Vector {
+    export function hadamardProduct<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
             result[i] = (vector1[i] ?? 0) * (vector2[i] ?? 0);
         }
-        return result;
+        return result as Vector<L>;
     }
 
     /**
@@ -456,7 +450,7 @@ namespace VectOps {
      * @time O(n) - n is the length of the vectors
      * @throws If the vectors are not of the same length
      */
-    export function dotProduct(vector1: ReadonlyVector, vector2: ReadonlyVector): Scalar {
+    export function dotProduct<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>): Scalar {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
         let result = 0;
         for (let i = 0; i < vector1.length; i++) {
@@ -520,9 +514,9 @@ namespace VectOps {
      * @returns A new vector with the average of the vectors and the length of the first vector
      * @time O(n) - n is the length of the vectors
      */
-    export function vectorAverage(vectors: Readonly<Array<ReadonlyVector>>): Vector {
+    export function vectorAverage<L extends number>(vectors: Readonly<Array<ReadonlyVector<L>>>): Vector<L> {
         const rv: Vector = [];
-        if (vectors[0] === undefined) return rv;
+        if (vectors[0] === undefined) return rv as Vector<L>;
         for (let i = 0; i < vectors[0].length; i++) {
             let sum = 0;
             for (const vector of vectors) {
@@ -530,7 +524,7 @@ namespace VectOps {
             }
             rv[i] = sum / vectors.length;
         }
-        return rv;
+        return rv as Vector<L>;
     }
 }
 
