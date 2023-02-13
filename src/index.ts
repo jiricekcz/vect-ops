@@ -520,7 +520,7 @@ namespace VectOps {
      * @returns A new vector with the average of the vectors and the length of the first vector
      * @time O(n) - n is the length of the vectors
      */
-    export function vectorAverage(vectors: ReadonlyVector[]): Vector {
+    export function vectorAverage(vectors: Readonly<ReadonlyVector[]>): Vector {
         const rv: Vector = [];
         if (vectors[0] === undefined) return rv;
         for (let i = 0; i < vectors[0].length; i++) {
