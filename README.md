@@ -21,17 +21,17 @@ If you use strongly typed vector lengths, you will be forced by TypeScript to ma
 import VectOps from 'vect-ops';
 
 const a: VectOps.Vector = []; // A generic mutable vector
-const b: VectOps.VectorReadonly = []; // A generic readonly vector
+const b: VectOps.ReadonlyVector = []; // A generic readonly vector
 
 const c: VectOps.Vector<2> = [1, 2]; // A fixed length mutable vectors
-const d: VectOps.VectorReadonly<2> = [1, 2]; // A fixed length readonly vector
+const d: VectOps.ReadonlyVector<2> = [1, 2]; // A fixed length readonly vector
 
 // VectOps also provides a few predefined types for vectors with 2 and 3 elements.
 const e: VectOps.Vector2D = [1, 2]; // A 2D mutable vector
-const f: VectOps.Vector2DReadonly = [1, 2]; // A 2D readonly vector
+const f: VectOps.ReadonlyVector2D = [1, 2]; // A 2D readonly vector
 
 const g: VectOps.Vector3D = [1, 2, 3]; // A 3D mutable vector
-const h: VectOps.Vector3DReadonly = [1, 2, 3]; // A 3D readonly vector
+const h: VectOps.ReadonlyVector3D = [1, 2, 3]; // A 3D readonly vector
 ```
 
 ## Functions
