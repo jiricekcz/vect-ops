@@ -36,6 +36,9 @@ const h: VectOps.Vector3DReadonly = [1, 2, 3]; // A 3D readonly vector
 
 ## Functions
 
+Many functions in VectOps are generics with a type parameter, that specifies the length of the vector.  
+Typescript can infer some information from your calls, but if you want all the type safety, you should provide the type parameter.
+
 ### Equality
 
 VectOps provides functions to check mathematical equality of vectors.  
