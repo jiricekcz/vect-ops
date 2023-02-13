@@ -385,25 +385,17 @@ test("scalar triple product", () => {
 
 test("vector average", () => {
     const vectors = [
-        [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
-        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-        [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]],
-        [[1, 2, 3], [2, 4, 6], [3, 6, 9]],
-        [[0, 1, 2], [1, 2, 4], [2, 4, 8]],
-        [[1, 2, 3], [-2, -4, -6], [3, 6, 9]],
+        [[[1, 1, 1], [1, 1, 1], [1, 1, 1]], [1, 1, 1]],
+        [[[0, 0, 0], [0, 0, 0], [0, 0, 0]], [0, 0, 0]],
+        [[[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]], [-1, -1, -1]],
+        [[[1, 2, 3], [2, 4, 6], [3, 6, 9]], [2, 4, 6]],
+        [[[0, 1, 2], [1, 2, 4], [2, 4, 8]],[1, 7/3, 14/3]],
+        [[[1, 2, 3], [-2, -4, -6], [3, 6, 9]], [2/3, 4/3, 2]]
     ] as const;
     
-    const averages = [
-        [1, 1, 1],
-        [0, 0, 0],
-        [-1, -1, -1],
-        [2, 4, 6],
-        [1.5, 7/3, 7],
-        [2/3, 2/3, 2]
-    ] as const;
 
-    for (let i = 0; i < vectors.length; i++) {
-        expect(VectOps.areTwoVectorsEqual(VectOps.vectorAverage(vectors[i]), averages[i])).toBe(true);
+    for (const [vects, average] of vectors) {
+        expect(VectOps.areTwoVectorsEqual(VectOps.vectorAverage(vects), average)).toBe(true);
     }
 
 });
