@@ -214,6 +214,19 @@ const c = [7, 8, 9];
 console.log(VectOps.scalarTripleProduct(a, b, c));
 console.log(VectOps.vectorTripleProduct(a, b, c));
 ```
+
+### Vector Average
+
+VectOps provides functions to compute the average of a list of vectors.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+const c = [7, 8, 9];
+
+console.log(VectOps.vectorAverage([a, b, c])); // [4, 5, 6]
+```
 ## Requirements
 
 - ES6 compatible environment
