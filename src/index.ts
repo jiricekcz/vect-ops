@@ -528,7 +528,7 @@ namespace VectOps {
             for (const vector of vectors) {
                 sum += vector[i] as Scalar;
             }
-            rv[i] = sum / vectors.length;            
+            rv[i] = sum / vectors.length;
         }
         return rv;
     }
