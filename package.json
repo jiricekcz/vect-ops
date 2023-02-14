@@ -2,7 +2,7 @@
 	"name": "vect-ops",
 	"version": "0.5.2",
 	"description": "High performance vector operations in JavaScipt",
-	"main": "./lib/index.js",
+	"main": "./lib/",
 	"types": "lib/index.d.ts",
 	"keywords": [
 		"vector",
