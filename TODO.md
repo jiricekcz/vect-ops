@@ -7,7 +7,6 @@
 
 ## Additions
 
-- Dedicated functions for subtraction - not a priority, can be done with `add` and `multiply`
 
 ## Multiplications
 
