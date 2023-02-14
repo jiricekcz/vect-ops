@@ -1,6 +1,5 @@
 # TODO
 
-- Document additional type safety with vector lengths
 
 ## General function
 
