@@ -255,6 +255,19 @@ const c = [7, 8, 9];
 
 console.log(VectOps.vectorAverage([a, b, c])); // [4, 5, 6]
 ```
+
+### Subtraction in place
+
+VectOps provides functions to subtract one vector from another vector in place.
+```typescript
+import VectOps from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+
+VectOps.subtractInPlace(a, b);
+console.log(a); // [-3, -3, -3]
+```
 ## Requirements
 
 - ES6 compatible environment
