@@ -399,3 +399,20 @@ test("vector average", () => {
     }
 
 });
+
+test("subtraction in place", () => {
+    const vectors = [
+        [[1, 1, 1], [1, 1, 1], [0, 0, 0]],
+        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        [[-1, -1, -1], [-1, -1, -1], [0, 0, 0]],
+        [[1, 2, 3], [2, 4, 6], [-3, -3, -3]],
+        [[0, 1, 2], [1, 2, 4], [-1, -1, -2]],
+        [[1, 2, 3], [-2, -4, -6], [3, 6, 9]],
+    ] as const;
+
+    for (const [v1, v2, expected] of vectors) {
+        const v1Copy = [...v1];
+        VectOps.subtractFrom(v1Copy, v2);
+        expect(VectOps.areTwoVectorsEqual(v1Copy, expected)).toBe(true);
+    }
+})
