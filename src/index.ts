@@ -263,6 +263,42 @@ namespace VectOps {
     }
 
     /**
+     * Subtracts one vector to another.
+     * This method ***modifies*** the *original* (first parameter) vector.
+     * Requires the second vector to be at least as long as the first or `length` to be set to a number smaller than the length of both vectors. Numbers after will be ignored. If second vector is shorter, it is undefined behavior.
+     * Is faster than `subtractFrom` because it doesn't have to check for undefined values.
+     * @param original The original vector
+     * @param subtract The vector to subtract from the original
+     * @param length The length of the vectors. Defaults to the length of the original vector.
+     * @returns The original vector
+     * @time O(n) - n is the length provided
+     */
+    export function subtractFromUnchecked<L extends number>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+        for (let i = 0; i < length; i++) {
+            original[i] -= subtract[i] as Scalar;
+        }
+        return original;
+    }
+
+    /**
+     * Subtracts one vector from another.
+     * This method ***modifies*** the *original* (first parameter) vector.
+     * If the second vector is shorter, it will be padded with zeros.
+     * Is slower than `subtractFromUnckecked` because it has to check for undefined values.
+     * @param original The original vector
+     * @param subtract The vector to subtract from the original
+     * @param length The length of the vectors. Defaults to the length of the original vector.
+     * @returns The original vector
+     * @time O(n) - n is the length provided
+     */
+    export function subtractFrom<L extends number>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+        for (let i = 0; i < length; i++) {
+            original[i] -= subtract[i] ?? 0;
+        }
+        return original;
+    }
+
+    /**
      * Computes the magnitude of a vector.
      * @param vector The vector to get the magnitude of
      * @returns Magnitude of the vector
