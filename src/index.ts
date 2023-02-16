@@ -176,7 +176,7 @@ export class LowLevel<S extends number> {
      * @returns If the two vectors are equal on the first `onLength` numbers.
      * @time O(n) - n is the length of the vectors
      */
-    public areTwoVectorsEqual<L extends number>(a: ReadonlyVector<L>, b: ReadonlyVector<L>, onLength: number = a.length): boolean {
+    public areTwoVectorsEqual<L extends S = S>(a: ReadonlyVector<L>, b: ReadonlyVector<L>, onLength: number = a.length): boolean {
         for (let i = 0; i < onLength; i++) {
             if (!this.areTwoScalarsEqual(a[i] as Scalar, b[i] as Scalar)) return false;
         }
@@ -206,7 +206,7 @@ export class LowLevel<S extends number> {
      * @returns If the vectors are equal on the first `onLength` numbers.
      * @time O(n * m) - n is the number of vectors, m is the length of the vectors
      */
-    public areVectorsEqual<L extends number>(vectors: Array<ReadonlyVector<L>>, onLength: number = vectors[0]?.length as number): boolean {
+    public areVectorsEqual<L extends S = S>(vectors: Array<ReadonlyVector<L>>, onLength: number = vectors[0]?.length as number): boolean {
         for (let i = 1; i < vectors.length; i++) {
             for (let j = 0; j < onLength; j++) {
                 if (!this.areTwoScalarsEqual((vectors[i] as Vector)[j] as Scalar, (vectors[i - 1] as Vector)[j] as Scalar)) return false;
@@ -244,7 +244,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    public addToUnchecked<L extends number>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+    public addToUnchecked<L extends S = S>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] as Scalar;
         }
@@ -280,7 +280,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    public addTo<L extends number>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+    public addTo<L extends S = S>(original: Vector<L>, add: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] += add[i] ?? 0;
         }
@@ -318,7 +318,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n * m) - n is the length provided, m is the number of vectors
      */
-    public addToManyUnchecked<L extends number>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
+    public addToManyUnchecked<L extends S = S>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
                 original[i] += (adds[j] as ReadonlyVector)[i] as Scalar;
@@ -355,7 +355,7 @@ export class LowLevel<S extends number> {
          * @returns The original vector
          * @time O(n * m) - n is the length provided, m is the number of vectors
          */
-    public addToMany<L extends number>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
+    public addToMany<L extends S = S>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
                 original[i] += (adds[j] as ReadonlyVector)[i] ?? 0;
@@ -390,7 +390,7 @@ export class LowLevel<S extends number> {
      * @returns The sum of the vectors as a new vector of the same length as the first vector
      * @time O(n * m) - n is the length of the first vector, m is the number of vectors
      */
-    public addUnchecked<L extends number>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
+    public addUnchecked<L extends S = S>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
         if (vectors.length === 0) return [] as Vector<L>;
         const vectLength = (vectors[0] as ReadonlyVector).length;
         const result = [];
@@ -425,7 +425,7 @@ export class LowLevel<S extends number> {
      * @returns The sum of the vectors as a new vector of the same length as the longest vector
      * @time O(n * m) - n is the length of the longest vector, m is the number of vectors
      */
-    public add<L extends number>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
+    public add<L extends S = S>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
         const result: Vector = [];
         for (let i = 0; i < vectors.length; i++) {
             for (let j = 0; j < (vectors[i] as ReadonlyVector).length; j++) {
@@ -463,7 +463,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    public subtractFromUnchecked<L extends number>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+    public subtractFromUnchecked<L extends S = S>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] -= subtract[i] as Scalar;
         }
@@ -499,7 +499,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length provided
      */
-    public subtractFrom<L extends number>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
+    public subtractFrom<L extends S = S>(original: Vector<L>, subtract: ReadonlyVector<L>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             original[i] -= subtract[i] ?? 0;
         }
@@ -554,7 +554,7 @@ export class LowLevel<S extends number> {
      * @returns The copy of a vector
      * @time O(n) - n is the length of the vector
      */
-    public copyVector<L extends number>(vector: ReadonlyVector<L>): Vector<L> {
+    public copyVector<L extends S = S>(vector: ReadonlyVector<L>): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
             result[i] = vector[i] as Scalar;
@@ -569,7 +569,7 @@ export class LowLevel<S extends number> {
      * @returns The copies of a vector in an array
      * @time O(n * m) - n is the length of the vector, m is the count
      */
-    static copyVectorMany<L extends number, C extends number>(vector: ReadonlyVector<L>, count: C): FixedLengthArray<Vector<L>, C> {
+    static copyVectorMany<C extends number, L extends number>(vector: ReadonlyVector<L>, count: C): FixedLengthArray<Vector<L>, C> {
         const result = [];
         for (let i = 0; i < count; i++) {
             result[i] = LowLevel.copyVector(vector);
@@ -583,7 +583,7 @@ export class LowLevel<S extends number> {
      * @returns The copies of a vector in an array
      * @time O(n * m) - n is the length of the vector, m is the count
      */
-    public copyVectorMany<L extends number, C extends number>(vector: ReadonlyVector<L>, count: C): FixedLengthArray<Vector<L>, C> {
+    public copyVectorMany<C extends number, L extends S = S>(vector: ReadonlyVector<L>, count: C): FixedLengthArray<Vector<L>, C> {
         const result = [];
         for (let i = 0; i < count; i++) {
             result[i] = this.copyVector(vector);
@@ -612,7 +612,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length of the vector
      */
-    public multiplyByScalarInPlace<L extends number>(vector: Vector, scalar: Scalar): Vector<L> {
+    public multiplyByScalarInPlace<L extends S = S>(vector: Vector, scalar: Scalar): Vector<L> {
         for (let i = 0; i < vector.length; i++) {
             vector[i] *= scalar;
         }
@@ -641,7 +641,7 @@ export class LowLevel<S extends number> {
      * @returns The multiplied vector
      * @time O(n) - n is the length of the vector
      */
-    public multiplyByScalar<L extends number>(vector: ReadonlyVector<L>, scalar: Scalar): Vector<L> {
+    public multiplyByScalar<L extends S = S>(vector: ReadonlyVector<L>, scalar: Scalar): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
             result[i] = (vector[i] as Scalar) * scalar;
@@ -665,7 +665,7 @@ export class LowLevel<S extends number> {
      * @returns The original vector
      * @time O(n) - n is the length of the vector
      */
-    public normalizeInPlace<L extends number>(vector: Vector<L>): Vector<L> {
+    public normalizeInPlace<L extends S = S>(vector: Vector<L>): Vector<L> {
         return this.multiplyByScalarInPlace(vector, 1 / this.magnitude(vector));
     }
 
@@ -685,7 +685,7 @@ export class LowLevel<S extends number> {
      * @returns The normalized vector
      * @time O(n) - n is the length of the vector
      */
-    public normalize<L extends number>(vector: ReadonlyVector<L>): Vector<L> {
+    public normalize<L extends S = S>(vector: ReadonlyVector<L>): Vector<L> {
         return this.multiplyByScalar(vector, 1 / this.magnitude(vector));
     }
 
@@ -712,7 +712,7 @@ export class LowLevel<S extends number> {
      * @returns The original first vector
      * @time O(n) - n is the length of the first vector
      */
-    public hadamardProductInPlaceUnchecked<L extends number>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
+    public hadamardProductInPlaceUnchecked<L extends S = S>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
         for (let i = 0; i < vector1.length; i++) {
             vector1[i] *= vector2[i] as Scalar;
         }
@@ -745,7 +745,7 @@ export class LowLevel<S extends number> {
      * @returns A new vector with the Hadamard product of the two vectors
      * @time O(n) - n is the length provided
      */
-    public hadamardProductUnchecked<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
+    public hadamardProductUnchecked<L extends S = S>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
             result[i] = (vector1[i] as Scalar) * (vector2[i] as Scalar);
@@ -776,7 +776,7 @@ export class LowLevel<S extends number> {
      * @returns The first vector
      * @time O(n) - n is the length of the first vector
      */
-    public hadamardProductInPlace<L extends number>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
+    public hadamardProductInPlace<L extends S = S>(vector1: Vector<L>, vector2: ReadonlyVector<L>): Vector<L> {
         for (let i = 0; i < vector1.length; i++) {
             vector1[i] *= vector2[i] ?? 0;
         }
@@ -809,7 +809,7 @@ export class LowLevel<S extends number> {
      * @returns A new vector with the Hadamard product of the two vectors and the given length
      * @time O(n) - n is the length of the result vector
      */
-    public hadamardProduct<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
+    public hadamardProduct<L extends S = S>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
             result[i] = (vector1[i] ?? 0) * (vector2[i] ?? 0);
@@ -889,7 +889,7 @@ export class LowLevel<S extends number> {
      * @time O(n) - n is the length of the vectors
      * @throws If the vectors are not of the same length
      */
-    public dotProduct<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>): Scalar {
+    public dotProduct<L extends S = S>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>): Scalar {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
         let result = 0;
         for (let i = 0; i < vector1.length; i++) {
@@ -1022,7 +1022,7 @@ export class LowLevel<S extends number> {
      * @returns A new vector with the average of the vectors and the length of the first vector
      * @time O(n) - n is the length of the vectors
      */
-    public vectorAverage<L extends number>(vectors: Readonly<Array<ReadonlyVector<L>>>): Vector<L> {
+    public vectorAverage<L extends S = S>(vectors: Readonly<Array<ReadonlyVector<L>>>): Vector<L> {
         const rv: Vector = [];
         if (vectors[0] === undefined) return rv as Vector<L>;
         for (let i = 0; i < vectors[0].length; i++) {
