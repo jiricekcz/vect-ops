@@ -1,5 +1,6 @@
 # TODO
 
+- Redo documentation
 
 ## General function
 
