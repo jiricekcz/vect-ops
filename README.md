@@ -1,6 +1,6 @@
 # Vect-ops
 
-Library for vecotr operations written in JavaScript.
+VectOps is a pure javascript library for performant vector operations. VectOps provides functions with minimal runtime overhead.s
 
 
 ## Installation
