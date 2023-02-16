@@ -1,5 +1,5 @@
+export { FixedLengthArray } from "./types";
 import { FixedLengthArray } from "./types";
-
 
 /**
  * Scalar type, used instead of `number`.
