@@ -1,4 +1,4 @@
-import { LowLevel } from "../src/index";
+import { LowLevel, Vector } from "../src/index";
 
 test("Scalar comparison", () => {
     expect(LowLevel.areTwoScalarsEqual(0, 0)).toBe(true);
@@ -20,7 +20,7 @@ test("Scalar comparison", () => {
     expect(LowLevel.areScalarsEqual(1, 1, 1, 1.00000000000000001)).toBe(true);
 });
 test("Vector comparison", () => {
-    const vectors: LowLevel.Vector[] = [
+    const vectors: Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -31,32 +31,32 @@ test("Vector comparison", () => {
         [2, 1],
     ];
 
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[0] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[2] as LowLevel.Vector)).toBe(false);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(false);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[5] as LowLevel.Vector)).toBe(false);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[6] as LowLevel.Vector)).toBe(false);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[0] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[1] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[2] as Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[3] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[4] as Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[5] as Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[6] as Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[7] as Vector)).toBe(false);
 
-    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[0] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[1] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[2] as LowLevel.Vector)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as Vector, vectors[0] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as Vector, vectors[1] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as Vector, vectors[2] as Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as Vector, vectors[3] as Vector)).toBe(true);
 
-    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[2] as LowLevel.Vector, 2)).toBe(true);
-    expect(LowLevel.areTwoVectorsEqual(vectors[4] as LowLevel.Vector, vectors[5] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as Vector, vectors[2] as Vector, 2)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[4] as Vector, vectors[5] as Vector)).toBe(true);
 
-    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector])).toBe(true);
-    expect(LowLevel.areVectorsEqual([vectors[6] as LowLevel.Vector, vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector])).toBe(true);
-    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector], 2)).toBe(true);
-    expect(LowLevel.areVectorsEqual([vectors[4] as LowLevel.Vector, vectors[5] as LowLevel.Vector])).toBe(true);
-    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector])).toBe(false);
+    expect(LowLevel.areVectorsEqual([vectors[0] as Vector, vectors[0] as Vector, vectors[1] as Vector, vectors[3] as Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[6] as Vector, vectors[0] as Vector, vectors[1] as Vector, vectors[3] as Vector, vectors[2] as Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[0] as Vector, vectors[1] as Vector, vectors[3] as Vector, vectors[2] as Vector], 2)).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[4] as Vector, vectors[5] as Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[0] as Vector, vectors[1] as Vector, vectors[3] as Vector, vectors[2] as Vector])).toBe(false);
 });
 
 test("In place vector addition", () => {
-    const vectors: LowLevel.Vector[] = [
+    const vectors: Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -68,21 +68,21 @@ test("In place vector addition", () => {
         [2, 2, 1],
     ];
 
-    LowLevel.addToUnchecked(vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[0] as Vector, vectors[1] as Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[3] as Vector)).toBe(true);
 
-    LowLevel.addToUnchecked(vectors[0] as LowLevel.Vector, vectors[2] as LowLevel.Vector);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[0] as Vector, vectors[2] as Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[4] as Vector)).toBe(true);
 
-    LowLevel.addToUnchecked(vectors[5] as LowLevel.Vector, vectors[2] as LowLevel.Vector);
-    expect(LowLevel.areTwoVectorsEqual(vectors[5] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[5] as Vector, vectors[2] as Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[5] as Vector, vectors[7] as Vector)).toBe(true);
 
-    LowLevel.addTo(vectors[1] as LowLevel.Vector, vectors[6] as LowLevel.Vector);
-    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[8] as LowLevel.Vector)).toBe(true);
+    LowLevel.addTo(vectors[1] as Vector, vectors[6] as Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as Vector, vectors[8] as Vector)).toBe(true);
 });
 
 test("In place vector addition many", () => {
-    const vectors: LowLevel.Vector[] = [
+    const vectors: Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -93,14 +93,14 @@ test("In place vector addition many", () => {
         [2, 2],
     ];
 
-    LowLevel.addToManyUnchecked(vectors[0] as LowLevel.Vector, [vectors[1] as LowLevel.Vector, vectors[2] as LowLevel.Vector]);
-    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToManyUnchecked(vectors[0] as Vector, [vectors[1] as Vector, vectors[2] as Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as Vector, vectors[4] as Vector)).toBe(true);
 
-    LowLevel.addToManyUnchecked(vectors[5] as LowLevel.Vector, [vectors[2] as LowLevel.Vector]);
-    expect(LowLevel.areTwoVectorsEqual(vectors[5] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToManyUnchecked(vectors[5] as Vector, [vectors[2] as Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[5] as Vector, vectors[7] as Vector)).toBe(true);
 
-    LowLevel.addToMany(vectors[1] as LowLevel.Vector, [vectors[6] as LowLevel.Vector, vectors[2] as LowLevel.Vector]);
-    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
+    LowLevel.addToMany(vectors[1] as Vector, [vectors[6] as Vector, vectors[2] as Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as Vector, vectors[3] as Vector)).toBe(true);
 });
 
 test("Vector addition", () => {
