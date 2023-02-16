@@ -2,8 +2,9 @@
 
 VectOps is a pure JavaScript library for performant vector operations. VectOps provides functions with minimal runtime overhead.  
 VectOps provides two APIs - A low level API and a high level API.  
-Both APIs should be able to provide the same functionality with the main difference being the high level API uses runtime type checks and function overloads as well as TypeScript definitions, while the low level API relies only on compile time type checks (using TypeScript).
-
+Both APIs should be able to provide the same functionality with the main difference being the high level API uses runtime type checks and function overloads as well as TypeScript definitions, while the low level API relies only on compile time type checks (using TypeScript).  
+Both APIs are provided as classes, that have all methods as both static methods and instance methods.  
+The advantage of the instance methods is, that you can set the length of the vectors in the constructor and use the methods without providing the length as a type parameter. This is all TypeScript only, so it will not affect the runtime performance.
 
 ## Installation
 
@@ -11,35 +12,73 @@ Both APIs should be able to provide the same functionality with the main differe
 npm i vect-ops
 ```
 
-## Types
+## Shared API
 
-### Vectors
+The shared API is shared between the low level API and the high level API and provided in the default export of the library.  
+It consists mostly of types.
 
-VectOps provides a few types to represent vectors.  
-Providing a type parameter to the vector types, you can specify the length of the vector and achieve additional type safety.  
-If you use strongly typed vector lengths, you will be forced by TypeScript to manage the length of the vectors.
+### Shared types
+
+#### Utility types
 
 ```typescript
-import VectOps from 'vect-ops';
 
-const a: VectOps.Vector = []; // A generic mutable vector
-const b: VectOps.ReadonlyVector = []; // A generic readonly vector
-
-const c: VectOps.Vector<2> = [1, 2]; // A fixed length mutable vectors
-const d: VectOps.ReadonlyVector<2> = [1, 2]; // A fixed length readonly vector
-
-// VectOps also provides a few predefined types for vectors with 2 and 3 elements.
-const e: VectOps.Vector2D = [1, 2]; // A 2D mutable vector
-const f: VectOps.ReadonlyVector2D = [1, 2]; // A 2D readonly vector
-
-const g: VectOps.Vector3D = [1, 2, 3]; // A 3D mutable vector
-const h: VectOps.ReadonlyVector3D = [1, 2, 3]; // A 3D readonly vector
+// A type that represents an array of type T with fixed length L
+// This type is used at almost every place where length represented by a number is needed.
+// The T parameter can be any type.
+// The L parameter can only be a number strictly greater than 0 and lower than 1000.
+// The L parameter can also be a generic number type, or a type union
+// If you use a number literal larger than 1000, you will get a TypeScript recursion limit error.
+type FixedLengthArray<T, L extends number>; 
 ```
 
-## Functions
+#### Scalar type
 
-Many functions in VectOps are generics with a type parameter, that specifies the length of the vector.  
-Typescript can infer some information from your calls, but if you want all the type safety, you should provide the type parameter.
+```typescript
+// A Scalar is a number
+type Scalar;
+```
+
+#### Vector types
+
+```typescript
+// A Vector is a mutable array of Scalars of length L
+type Vector<L extends number = number>;
+
+// A ReadonlyVector is a readonly array of Scalars of length L
+type ReadonlyVector<L extends number = number>;
+
+// A Vector2D is a mutable array of Scalars of length 2
+type Vector2D;
+
+// A ReadonlyVector2D is a readonly array of Scalars of length 2
+type ReadonlyVector2D;
+
+// A Vector3D is a mutable array of Scalars of length 3
+type Vector3D;
+
+// A ReadonlyVector3D is a readonly array of Scalars of length 3
+type ReadonlyVector3D;
+
+// Note that the Vector2D and Vector3D types are just aliases for Vector<2> and Vector<3>
+```
+
+#### Matrix types
+
+```typescript
+// A Matrix is a mutable array of Vectors of length M
+// The matrix is represented as on the wiki page: https://en.wikipedia.org/wiki/Matrix_(mathematics)
+// Elements of the matrix can be accessed using the matrix[row][column] syntax starting from 0.
+type Matrix<M extends number = number, N extends number>;
+
+// A readonly version of the Matrix type
+type ReadonlyMatrix<M extends number = number, N extends number>;
+```
+
+### Low level API
+
+The low level API is provided in the `LowLevel` export of the library. All functions, that depend on vector length are generic functions. If you use only one vector length, you can instantiate the class with the length as a type parameter.  
+For additional type safety, you can provide the legth as a generic type parameter to the functions.
 
 ### Equality
 
@@ -72,7 +111,7 @@ console.log(VectOps.copyVectorMany(a), 3); // [[1, 2, 3], [1, 2, 3], [1, 2, 3]]
 ### In place addition
 
 VectOps provides functions to add vectors to another without creating a new vector.  
-An *uncheck* variant is provided, that does not check the size of the vectors. It is not recommended to use the *uncheck* variant, because it can lead to ***NaN*** values in the vector. You can use the unchecked variant, if you are sure that the vectors have the same size.
+An *unchecked* variant is provided, that does not check the size of the vectors. It is not recommended to use the *uncheck* variant, because it can lead to ***NaN*** values in the vector. You can use the unchecked variant, if you are sure that the vectors have the same size.
 ```typescript
 import VectOps from 'vect-ops';
 
