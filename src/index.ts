@@ -30,6 +30,20 @@ export type ReadonlyVector2D = Readonly<Vector2D>;
  */
 export type ReadonlyVector3D = Readonly<Vector3D>;
 /**
+ * A matrix type 
+ * @param M The number of rows.
+ * @param N The number of columns.
+ */
+export type Matrix<M extends number = number, N extends number = number> = FixedLengthArray<Vector<N>, M>;
+
+/**
+ * Readonly version of `Matrix`.
+ * @param M The number of rows.
+ * @param N The number of columns.
+ */
+export type ReadonlyMatrix<M extends number = number, N extends number = number> = Readonly<FixedLengthArray<ReadonlyVector<N>, M>>;
+
+/**
  * Compare modes, used to compare Scalars.
  * Necessary because of floating point errors.
  */
