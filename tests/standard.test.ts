@@ -1,26 +1,26 @@
-import { Raw } from "../src/index";
+import { LowLevel } from "../src/index";
 
 test("Scalar comparison", () => {
-    expect(Raw.areTwoScalarsEqual(0, 0)).toBe(true);
-    expect(Raw.areTwoScalarsEqual(1, 1)).toBe(true);
-    expect(Raw.areTwoScalarsEqual(1, 2)).toBe(false);
-    expect(Raw.areTwoScalarsEqual(1, 1.00000000000000001)).toBe(true);
-    expect(Raw.areTwoScalarsEqual(0.1 + 0.2, 0.3)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(0, 0)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(1, 1)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(1, 2)).toBe(false);
+    expect(LowLevel.areTwoScalarsEqual(1, 1.00000000000000001)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(0.1 + 0.2, 0.3)).toBe(true);
 
-    expect(Raw.areScalarsEqual(1, 1)).toBe(true);
-    expect(Raw.areScalarsEqual(1, 2)).toBe(false);
-    expect(Raw.areScalarsEqual(1, 1.00000000000000001)).toBe(true);
-    expect(Raw.areScalarsEqual(0.1 + 0.2, 0.3)).toBe(true);
-    expect(Raw.areScalarsEqual(1, 1, 1)).toBe(true);
-    expect(Raw.areScalarsEqual(1, 1, 2)).toBe(false);
-    expect(Raw.areScalarsEqual(1, 1, 1.00000000000000001)).toBe(true);
-    expect(Raw.areScalarsEqual(0.1 + 0.2, 0.3, 0.3)).toBe(true);
-    expect(Raw.areScalarsEqual(1, 1, 1, 1)).toBe(true);
-    expect(Raw.areScalarsEqual(1, 1, 1, 2)).toBe(false);
-    expect(Raw.areScalarsEqual(1, 1, 1, 1.00000000000000001)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 1)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 2)).toBe(false);
+    expect(LowLevel.areScalarsEqual(1, 1.00000000000000001)).toBe(true);
+    expect(LowLevel.areScalarsEqual(0.1 + 0.2, 0.3)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 1, 1)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 1, 2)).toBe(false);
+    expect(LowLevel.areScalarsEqual(1, 1, 1.00000000000000001)).toBe(true);
+    expect(LowLevel.areScalarsEqual(0.1 + 0.2, 0.3, 0.3)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 1, 1, 1)).toBe(true);
+    expect(LowLevel.areScalarsEqual(1, 1, 1, 2)).toBe(false);
+    expect(LowLevel.areScalarsEqual(1, 1, 1, 1.00000000000000001)).toBe(true);
 });
 test("Vector comparison", () => {
-    const vectors: Raw.Vector[] = [
+    const vectors: LowLevel.Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -31,32 +31,32 @@ test("Vector comparison", () => {
         [2, 1],
     ];
 
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[0] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[1] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[2] as Raw.Vector)).toBe(false);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[3] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[4] as Raw.Vector)).toBe(false);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[5] as Raw.Vector)).toBe(false);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[6] as Raw.Vector)).toBe(false);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[7] as Raw.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[0] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[2] as LowLevel.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[5] as LowLevel.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[6] as LowLevel.Vector)).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(false);
 
-    expect(Raw.areTwoVectorsEqual(vectors[6] as Raw.Vector, vectors[0] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[6] as Raw.Vector, vectors[1] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[6] as Raw.Vector, vectors[2] as Raw.Vector)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[6] as Raw.Vector, vectors[3] as Raw.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[0] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[1] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[2] as LowLevel.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[6] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
 
-    expect(Raw.areTwoVectorsEqual(vectors[1] as Raw.Vector, vectors[2] as Raw.Vector, 2)).toBe(true);
-    expect(Raw.areTwoVectorsEqual(vectors[4] as Raw.Vector, vectors[5] as Raw.Vector)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[2] as LowLevel.Vector, 2)).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(vectors[4] as LowLevel.Vector, vectors[5] as LowLevel.Vector)).toBe(true);
 
-    expect(Raw.areVectorsEqual([vectors[0] as Raw.Vector, vectors[0] as Raw.Vector, vectors[1] as Raw.Vector, vectors[3] as Raw.Vector])).toBe(true);
-    expect(Raw.areVectorsEqual([vectors[6] as Raw.Vector, vectors[0] as Raw.Vector, vectors[1] as Raw.Vector, vectors[3] as Raw.Vector, vectors[2] as Raw.Vector])).toBe(true);
-    expect(Raw.areVectorsEqual([vectors[0] as Raw.Vector, vectors[1] as Raw.Vector, vectors[3] as Raw.Vector, vectors[2] as Raw.Vector], 2)).toBe(true);
-    expect(Raw.areVectorsEqual([vectors[4] as Raw.Vector, vectors[5] as Raw.Vector])).toBe(true);
-    expect(Raw.areVectorsEqual([vectors[0] as Raw.Vector, vectors[1] as Raw.Vector, vectors[3] as Raw.Vector, vectors[2] as Raw.Vector])).toBe(false);
+    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[6] as LowLevel.Vector, vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector], 2)).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[4] as LowLevel.Vector, vectors[5] as LowLevel.Vector])).toBe(true);
+    expect(LowLevel.areVectorsEqual([vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector, vectors[2] as LowLevel.Vector])).toBe(false);
 });
 
 test("In place vector addition", () => {
-    const vectors: Raw.Vector[] = [
+    const vectors: LowLevel.Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -68,21 +68,21 @@ test("In place vector addition", () => {
         [2, 2, 1],
     ];
 
-    Raw.addToUnchecked(vectors[0] as Raw.Vector, vectors[1] as Raw.Vector);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[3] as Raw.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[0] as LowLevel.Vector, vectors[1] as LowLevel.Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
 
-    Raw.addToUnchecked(vectors[0] as Raw.Vector, vectors[2] as Raw.Vector);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[4] as Raw.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[0] as LowLevel.Vector, vectors[2] as LowLevel.Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(true);
 
-    Raw.addToUnchecked(vectors[5] as Raw.Vector, vectors[2] as Raw.Vector);
-    expect(Raw.areTwoVectorsEqual(vectors[5] as Raw.Vector, vectors[7] as Raw.Vector)).toBe(true);
+    LowLevel.addToUnchecked(vectors[5] as LowLevel.Vector, vectors[2] as LowLevel.Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[5] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(true);
 
-    Raw.addTo(vectors[1] as Raw.Vector, vectors[6] as Raw.Vector);
-    expect(Raw.areTwoVectorsEqual(vectors[1] as Raw.Vector, vectors[8] as Raw.Vector)).toBe(true);
+    LowLevel.addTo(vectors[1] as LowLevel.Vector, vectors[6] as LowLevel.Vector);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[8] as LowLevel.Vector)).toBe(true);
 });
 
 test("In place vector addition many", () => {
-    const vectors: Raw.Vector[] = [
+    const vectors: LowLevel.Vector[] = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 3],
@@ -93,14 +93,14 @@ test("In place vector addition many", () => {
         [2, 2],
     ];
 
-    Raw.addToManyUnchecked(vectors[0] as Raw.Vector, [vectors[1] as Raw.Vector, vectors[2] as Raw.Vector]);
-    expect(Raw.areTwoVectorsEqual(vectors[0] as Raw.Vector, vectors[4] as Raw.Vector)).toBe(true);
+    LowLevel.addToManyUnchecked(vectors[0] as LowLevel.Vector, [vectors[1] as LowLevel.Vector, vectors[2] as LowLevel.Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[0] as LowLevel.Vector, vectors[4] as LowLevel.Vector)).toBe(true);
 
-    Raw.addToManyUnchecked(vectors[5] as Raw.Vector, [vectors[2] as Raw.Vector]);
-    expect(Raw.areTwoVectorsEqual(vectors[5] as Raw.Vector, vectors[7] as Raw.Vector)).toBe(true);
+    LowLevel.addToManyUnchecked(vectors[5] as LowLevel.Vector, [vectors[2] as LowLevel.Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[5] as LowLevel.Vector, vectors[7] as LowLevel.Vector)).toBe(true);
 
-    Raw.addToMany(vectors[1] as Raw.Vector, [vectors[6] as Raw.Vector, vectors[2] as Raw.Vector]);
-    expect(Raw.areTwoVectorsEqual(vectors[1] as Raw.Vector, vectors[3] as Raw.Vector)).toBe(true);
+    LowLevel.addToMany(vectors[1] as LowLevel.Vector, [vectors[6] as LowLevel.Vector, vectors[2] as LowLevel.Vector]);
+    expect(LowLevel.areTwoVectorsEqual(vectors[1] as LowLevel.Vector, vectors[3] as LowLevel.Vector)).toBe(true);
 });
 
 test("Vector addition", () => {
@@ -116,15 +116,15 @@ test("Vector addition", () => {
         [4, 4, 3],
     ] as const;
 
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[0], vectors[0]), vectors[2])).toBe(true);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[0], vectors[1]), vectors[7])).toBe(true);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[4], vectors[1]), vectors[6])).toBe(true);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[4], vectors[1]), vectors[5])).toBe(false);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[0], vectors[1]), vectors[3])).toBe(false);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[0], vectors[1]), vectors[4])).toBe(false);
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[4], vectors[4]), vectors[5])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[0], vectors[0]), vectors[2])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[0], vectors[1]), vectors[7])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[4], vectors[1]), vectors[6])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[4], vectors[1]), vectors[5])).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[0], vectors[1]), vectors[3])).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[0], vectors[1]), vectors[4])).toBe(false);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[4], vectors[4]), vectors[5])).toBe(true);
 
-    expect(Raw.areTwoVectorsEqual(Raw.add(vectors[0], vectors[0], vectors[1]), vectors[8])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.add(vectors[0], vectors[0], vectors[1]), vectors[8])).toBe(true);
 });
 
 test("magnitude", () => {
@@ -137,12 +137,12 @@ test("magnitude", () => {
         [3, 3],
     ] as const;
 
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[0]), Math.sqrt(3))).toBe(true);
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[1]), Math.sqrt(12))).toBe(true);
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[2]), Math.sqrt(27))).toBe(true);
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[3]), Math.sqrt(2))).toBe(true);
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[4]), Math.sqrt(8))).toBe(true);
-    expect(Raw.areTwoScalarsEqual(Raw.magnitude(vectors[5]), Math.sqrt(18))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[0]), Math.sqrt(3))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[1]), Math.sqrt(12))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[2]), Math.sqrt(27))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[3]), Math.sqrt(2))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[4]), Math.sqrt(8))).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(vectors[5]), Math.sqrt(18))).toBe(true);
 });
 
 test("copy", () => {
@@ -156,14 +156,14 @@ test("copy", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const copy = Raw.copyVector(vector);
-        expect(Raw.areTwoVectorsEqual(vector, copy)).toBe(true);
+        const copy = LowLevel.copyVector(vector);
+        expect(LowLevel.areTwoVectorsEqual(vector, copy)).toBe(true);
     }
 
     for (const vector of vectors) {
-        const copy = Raw.copyVectorMany(vector, 4);
+        const copy = LowLevel.copyVectorMany(vector, 4);
         for (const copyVector of copy) {
-            expect(Raw.areTwoVectorsEqual(vector, copyVector)).toBe(true);
+            expect(LowLevel.areTwoVectorsEqual(vector, copyVector)).toBe(true);
         }
     }
 });
@@ -179,9 +179,9 @@ test("scalar multiplication in place", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const copy = Raw.copyVector(vector);
-        Raw.multiplyByScalarInPlace(copy, 2);
-        expect(Raw.areTwoVectorsEqual(copy, vector.map(v => 2 * v))).toBe(true);
+        const copy = LowLevel.copyVector(vector);
+        LowLevel.multiplyByScalarInPlace(copy, 2);
+        expect(LowLevel.areTwoVectorsEqual(copy, vector.map(v => 2 * v))).toBe(true);
     }
 });
 
@@ -196,8 +196,8 @@ test("scalar multiplication", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const multiplied = Raw.multiplyByScalar(vector, 2);
-        expect(Raw.areTwoVectorsEqual(multiplied, vector.map(v => 2 * v))).toBe(true);
+        const multiplied = LowLevel.multiplyByScalar(vector, 2);
+        expect(LowLevel.areTwoVectorsEqual(multiplied, vector.map(v => 2 * v))).toBe(true);
     }
 });
 
@@ -212,9 +212,9 @@ test("normalization in place", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const copy = Raw.copyVector(vector);
-        Raw.normalizeInPlace(copy);
-        expect(Raw.areTwoScalarsEqual(Raw.magnitude(copy), 1)).toBe(true);
+        const copy = LowLevel.copyVector(vector);
+        LowLevel.normalizeInPlace(copy);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitude(copy), 1)).toBe(true);
     }
 });
 
@@ -229,9 +229,9 @@ test("hadamard product in place", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const copy = Raw.copyVector(vector);
-        Raw.hadamardProductInPlace(copy, vector);
-        expect(Raw.areTwoVectorsEqual(copy, vector.map(v => v * v))).toBe(true);
+        const copy = LowLevel.copyVector(vector);
+        LowLevel.hadamardProductInPlace(copy, vector);
+        expect(LowLevel.areTwoVectorsEqual(copy, vector.map(v => v * v))).toBe(true);
     }
 });
 
@@ -246,8 +246,8 @@ test("hadamard product", () => {
     ] as const;
 
     for (const vector of vectors) {
-        const hadamardProduct = Raw.hadamardProduct(vector, vector);
-        expect(Raw.areTwoVectorsEqual(hadamardProduct, vector.map(v => v * v))).toBe(true);
+        const hadamardProduct = LowLevel.hadamardProduct(vector, vector);
+        expect(LowLevel.areTwoVectorsEqual(hadamardProduct, vector.map(v => v * v))).toBe(true);
     }
 });
 
@@ -280,11 +280,11 @@ test("vector equvalence", () => {
     ] as const;
 
     for (const [v1, v2] of equivalentVectors) {
-        expect(Raw.areTwoVectorsEquivalent(v1, v2)).toBe(true);
+        expect(LowLevel.areTwoVectorsEquivalent(v1, v2)).toBe(true);
     }
 
     for (const [v1, v2] of nonEquivalentVectors) {
-        expect(Raw.areTwoVectorsEquivalent(v1, v2)).toBe(false);
+        expect(LowLevel.areTwoVectorsEquivalent(v1, v2)).toBe(false);
     }
 });
 
@@ -299,10 +299,10 @@ test("scalar product (dot product)", () => {
     ] as const;
 
     for (const [v1, v2, expected] of vectors) {
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(v1, v2), expected)).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(v1, v2), expected)).toBe(true);
     };
 
-    expect(() => Raw.dotProduct([1, 2], [1, 2, 3])).toThrow();
+    expect(() => LowLevel.dotProduct([1, 2], [1, 2, 3])).toThrow();
 });
 
 test("magnitude squared", () => {
@@ -316,7 +316,7 @@ test("magnitude squared", () => {
     ] as const;
 
     for (const [v, expected] of vectors) {
-        expect(Raw.areTwoScalarsEqual(Raw.magnitudeSquared(v), expected)).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.magnitudeSquared(v), expected)).toBe(true);
     }
 });
 
@@ -331,21 +331,21 @@ test("cross product", () => {
     ] as const;
 
     for (const [v1, v2, expected] of vectors) {
-        expect(Raw.areTwoVectorsEqual(Raw.crossProduct(v1, v2), expected)).toBe(true);
+        expect(LowLevel.areTwoVectorsEqual(LowLevel.crossProduct(v1, v2), expected)).toBe(true);
     };
 
     for (const [v1, v2, v3] of vectors) {
-        const vp = Raw.crossProduct(v1, v2);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp, v1), 0)).toBe(true);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp, v2), 0)).toBe(true);
+        const vp = LowLevel.crossProduct(v1, v2);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp, v1), 0)).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp, v2), 0)).toBe(true);
 
-        const vp2 = Raw.crossProduct(v2, v3);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp2, v2), 0)).toBe(true);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp2, v3), 0)).toBe(true);
+        const vp2 = LowLevel.crossProduct(v2, v3);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp2, v2), 0)).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp2, v3), 0)).toBe(true);
 
-        const vp3 = Raw.crossProduct(v3, v1);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp3, v3), 0)).toBe(true);
-        expect(Raw.areTwoScalarsEqual(Raw.dotProduct(vp3, v1), 0)).toBe(true);
+        const vp3 = LowLevel.crossProduct(v3, v1);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp3, v3), 0)).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.dotProduct(vp3, v1), 0)).toBe(true);
     }
 });
 
@@ -360,9 +360,9 @@ test("vector triple product", () => {
     ] as const;
 
     for (const [v1, v2, v3] of vectors) {
-        expect(Raw.areTwoScalarsEqual(Raw.scalarTripleProduct(v1, v2, v3), Raw.dotProduct(v1, Raw.crossProduct(v2, v3)))).toBe(true);
-        expect(Raw.areTwoScalarsEqual(Raw.scalarTripleProduct(v2, v3, v1), Raw.dotProduct(v2, Raw.crossProduct(v3, v1)))).toBe(true);
-        expect(Raw.areTwoScalarsEqual(Raw.scalarTripleProduct(v3, v1, v2), Raw.dotProduct(v3, Raw.crossProduct(v1, v2)))).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.scalarTripleProduct(v1, v2, v3), LowLevel.dotProduct(v1, LowLevel.crossProduct(v2, v3)))).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.scalarTripleProduct(v2, v3, v1), LowLevel.dotProduct(v2, LowLevel.crossProduct(v3, v1)))).toBe(true);
+        expect(LowLevel.areTwoScalarsEqual(LowLevel.scalarTripleProduct(v3, v1, v2), LowLevel.dotProduct(v3, LowLevel.crossProduct(v1, v2)))).toBe(true);
     }
 });
 
@@ -377,9 +377,9 @@ test("scalar triple product", () => {
     ] as const;
 
     for (const [v1, v2, v3] of vectors) {
-        expect(Raw.areTwoVectorsEqual(Raw.vectorTripleProduct(v1, v2, v3), Raw.crossProduct(v1, Raw.crossProduct(v2, v3)))).toBe(true);
-        expect(Raw.areTwoVectorsEqual(Raw.vectorTripleProduct(v2, v3, v1), Raw.crossProduct(v2, Raw.crossProduct(v3, v1)))).toBe(true);
-        expect(Raw.areTwoVectorsEqual(Raw.vectorTripleProduct(v3, v1, v2), Raw.crossProduct(v3, Raw.crossProduct(v1, v2)))).toBe(true);
+        expect(LowLevel.areTwoVectorsEqual(LowLevel.vectorTripleProduct(v1, v2, v3), LowLevel.crossProduct(v1, LowLevel.crossProduct(v2, v3)))).toBe(true);
+        expect(LowLevel.areTwoVectorsEqual(LowLevel.vectorTripleProduct(v2, v3, v1), LowLevel.crossProduct(v2, LowLevel.crossProduct(v3, v1)))).toBe(true);
+        expect(LowLevel.areTwoVectorsEqual(LowLevel.vectorTripleProduct(v3, v1, v2), LowLevel.crossProduct(v3, LowLevel.crossProduct(v1, v2)))).toBe(true);
     }
 });
 
@@ -395,7 +395,7 @@ test("vector average", () => {
 
 
     for (const [vects, average] of vectors) {
-        expect(Raw.areTwoVectorsEqual(Raw.vectorAverage(vects), average)).toBe(true);
+        expect(LowLevel.areTwoVectorsEqual(LowLevel.vectorAverage(vects), average)).toBe(true);
     }
 
 });
@@ -412,7 +412,7 @@ test("subtraction in place", () => {
 
     for (const [v1, v2, expected] of vectors) {
         const v1Copy = [...v1];
-        Raw.subtractFrom(v1Copy, v2);
-        expect(Raw.areTwoVectorsEqual(v1Copy, expected)).toBe(true);
+        LowLevel.subtractFrom(v1Copy, v2);
+        expect(LowLevel.areTwoVectorsEqual(v1Copy, expected)).toBe(true);
     }
 })

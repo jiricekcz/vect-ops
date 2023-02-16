@@ -1,7 +1,7 @@
 import { FixedLengthArray } from "./types";
 
 
-export namespace Raw {
+export namespace LowLevel {
     /**
      * Scalar type, used instead of `number`.
      */
