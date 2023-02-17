@@ -86,7 +86,7 @@ VectOps provides functions to check mathematical equality of vectors.
 Two vectors are equal, if they have the same size and the same elements.  
 Two elements are compared using a float compare function, that you can customize.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
 // 14 significant digits is the default.
 // This line is necessary only if you want to change the compare mode 
 // or be extra explicit about the compare mode.
@@ -95,12 +95,15 @@ VectOps.compareMode = VectOps.COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS
 console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
 
 console.log(VectOps.areVectorsEqual([1, 2, 3], [1, 2, 3], [1, 2, 3])); // true
+
+console.log(VectOps.areTwoMatricesEqual([[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]])); // true
 ```
 
 ### Copy
 VectOps provides functions to copy vectors.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 
@@ -113,7 +116,8 @@ console.log(VectOps.copyVectorMany(a), 3); // [[1, 2, 3], [1, 2, 3], [1, 2, 3]]
 VectOps provides functions to add vectors to another without creating a new vector.  
 An *unchecked* variant is provided, that does not check the size of the vectors. It is not recommended to use the *uncheck* variant, because it can lead to ***NaN*** values in the vector. You can use the unchecked variant, if you are sure that the vectors have the same size.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
@@ -132,7 +136,8 @@ console.log(b); // [6, 7, 9]
 
 VectOps provides functions to add vectors creating another vector.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 console.log(VectOps.add([1, 2, 3], [4, 5, 6])); // [5, 7, 9]
 console.log(VectOps.add([1, 2, 3], [-4, -5, -6], [3, 3, 3])); // [0, 0, 0]
@@ -142,7 +147,8 @@ console.log(VectOps.add([1, 2, 3], [-4, -5, -6], [3, 3, 3])); // [0, 0, 0]
 
 VectOps provides functions to compute the magnitude of a vector.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 console.log(VectOps.magnitude([3, 4])); // 5
 ```
@@ -151,7 +157,8 @@ console.log(VectOps.magnitude([3, 4])); // 5
 
 VectOps provides functions to multiply a vector by a scalar in place.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = -1;
@@ -162,7 +169,8 @@ console.log(a); // [-1, -2, -3]
 
 ### Multiplication by scalar
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 
@@ -173,7 +181,8 @@ console.log(VectOps.multiplyByScalar(a, -1)); // [-1, -2, -3]
 
 VectOps provides functions to normalize a vector in place.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [3, 4];
 
@@ -185,7 +194,8 @@ console.log(a); // [0.6, 0.8]
 
 VectOps provides functions to normalize a vector.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [3, 4];
 
@@ -196,7 +206,8 @@ console.log(VectOps.normalize(a)); // [0.6, 0.8]
 
 VectOps provides functions to compute the Hadamard product of two vectors in place. Hadamard product is also known as the element-wise product.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
@@ -209,7 +220,8 @@ console.log(a); // [4, 10, 18]
 
 VectOps provides functions to compute the Hadamard product of two vectors. Hadamard product is also known as the element-wise product.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 console.log(VectOps.hadamardProduct([1, 2, 3], [4, 5, 6])); // [4, 10, 18]
 ```
@@ -218,7 +230,8 @@ console.log(VectOps.hadamardProduct([1, 2, 3], [4, 5, 6])); // [4, 10, 18]
 
 VectOps provides functions to check if two vectors are equivalent. Two vectors are equivalent, if they have the same dimension and the same direciton.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [1, 2, 3])); // true
 console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [-1, -2, -3])); // true
@@ -231,7 +244,8 @@ console.log(VectOps.areTwoVectorsEquivalent([1, 2, 3], [2, 4, 6])); // true
 
 VectOps provides functions to compute the dot product of two vectors.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 console.log(VectOps.dotProduct([1, 2, 3], [4, 5, 6])); // 32
 console.log(VectOps.dotProduct([1, 2, 3], [-4, -5, -6])); // -32
@@ -244,7 +258,8 @@ VectOps provides functions to compute the magnitude squared of a vector.
 This method is faster than computing the magnitude, because it does not need to compute the square root.  
 It can be used to compare the magnitude of two vectors, without the need to compute the square root of the magnitude of both vectors.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [3, 4];
 const b = [1, 2];
@@ -260,7 +275,8 @@ VectOps provides functions to compute the cross product of two three dimensional
 This function only works on three dimensional vectors, as the cross product is only defined for three dimensional vectors.  
 Providing a vector with a different dimension will result in undefined behavior.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
@@ -274,7 +290,8 @@ console.log(VectOps.crossProduct(b, a)); // [3, -6, 3]
 VectOps provides functions to compute the triple product of three three dimensional vectors.  
 This function only works on three dimensional vectors, as the triple product is only defined for three dimensional vectors.  
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
@@ -288,7 +305,8 @@ console.log(VectOps.vectorTripleProduct(a, b, c));
 
 VectOps provides functions to compute the average of a list of vectors.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
@@ -301,7 +319,8 @@ console.log(VectOps.vectorAverage([a, b, c])); // [4, 5, 6]
 
 VectOps provides functions to subtract one vector from another vector in place.
 ```typescript
-import VectOps from 'vect-ops';
+import { LowLevel as VectOps } from 'vect-ops';
+
 
 const a = [1, 2, 3];
 const b = [4, 5, 6];
