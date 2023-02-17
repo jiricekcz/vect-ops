@@ -75,7 +75,7 @@ type Matrix<M extends number = number, N extends number>;
 type ReadonlyMatrix<M extends number = number, N extends number>;
 ```
 
-### Low level API
+## Low level API
 
 The low level API is provided in the `LowLevel` export of the library. All functions, that depend on vector length are generic functions. If you use only one vector length, you can instantiate the class with the length as a type parameter.  
 For additional type safety, you can provide the legth as a generic type parameter to the functions.
