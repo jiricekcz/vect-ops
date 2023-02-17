@@ -1135,4 +1135,38 @@ export class LowLevel<S extends number> {
         }
         return true;
     }
+
+    /**
+     * Creates a new matrix with the same values as the input matrix
+     * @param matrix The matrix to copy
+     * @returns A copy of the matrix
+     * @time O(LM)
+     */
+    static copyMatrix<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>): Matrix<L, M> {
+        const rv: Matrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return rv as Matrix<L, M>;  
+    }
+
+    /**
+     * Creates a new matrix with the same values as the input matrix
+     * @param matrix The matrix to copy
+     * @returns A copy of the matrix
+     * @time O(LM)
+     */
+    public copyMatrix<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>): Matrix<L, M> {
+        const rv: Matrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return rv as Matrix<L, M>;  
+    }
 }
