@@ -495,3 +495,14 @@ test("matrix multiplication", () => {
     expect(LowLevel.areTwoMatricesEqual(LowLevel.matrixMultiplication(M3, M4), M3M4)).toBe(true);
 
 })
+
+test("copy matrix", () => {
+    const M1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+
+    const M1Copy = LowLevel.copyMatrix(M1);
+    expect(LowLevel.areTwoMatricesEqual(M1, M1Copy)).toBe(true);
+});
