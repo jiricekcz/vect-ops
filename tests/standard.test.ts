@@ -415,4 +415,83 @@ test("subtraction in place", () => {
         LowLevel.subtractFrom(v1Copy, v2);
         expect(LowLevel.areTwoVectorsEqual(v1Copy, expected)).toBe(true);
     }
+});
+
+test("matrix equality", () => {
+    const m1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+    const m2 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+    const m3 = [
+        [1, 2, 3],
+        [4, 5, 6],
+    ] as const;
+    const m4 = [
+        [1, 2, 3],
+        [3, 5, 6],
+        [7, 8, 9],
+    ] as const;
+    const m5 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 10],
+    ] as const;
+
+    expect(LowLevel.areTwoMatricesEqual(m1, m2)).toBe(true);
+    expect(LowLevel.areTwoMatricesEqual(m1, m3)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m1, m4)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m1, m5)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m2, m5)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m3, m4)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m3, m5)).toBe(false);
+    expect(LowLevel.areTwoMatricesEqual(m4, m5)).toBe(false);
+});
+
+test("matrix multiplication", () => {
+    const M1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+    const M2 = [
+        [1, 2, 3],
+        [4, 3, 6],
+        [5, 8, 9],
+    ] as const;
+    const M3 = [
+        [1, 2, 3],
+        [4, 5, 6],
+    ] as const;
+    const M4 = [
+        [1, 2],
+        [4, 3],
+        [5, 8],
+    ] as const;
+
+    const M1M2 = [
+        [24, 32, 42],
+        [54, 71, 96],
+        [84, 110, 150],
+    ] as const;
+    const M2M1 = [
+        [30, 36, 42],
+        [58, 71, 84],
+        [100, 122, 144]
+    ] as const;
+    const M3M4 = [
+        [24, 32],
+        [54, 71]
+    ]
+
+
+    expect(LowLevel.areTwoMatricesEqual(LowLevel.matrixMultiplication(M1, M2), M1M2)).toBe(true);
+    expect(LowLevel.areTwoMatricesEqual(LowLevel.matrixMultiplication(M2, M1), M2M1)).toBe(true);
+    expect(LowLevel.areTwoMatricesEqual(LowLevel.matrixMultiplication(M3, M4), M3M4)).toBe(true);
+
 })
