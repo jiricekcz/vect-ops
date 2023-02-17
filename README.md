@@ -82,8 +82,9 @@ For additional type safety, you can provide the legth as a generic type paramete
 
 ### Equality
 
-VectOps provides functions to check mathematical equality of vectors.  
-Two vectors are equal, if they have the same size and the same elements.  
+VectOps provides functions to check mathematical equality of vectors and matricies.  
+Two vectors are equal, if they have the same size and the same elements.
+TWo matricies are equal, if they have the same size in both dimensions and the same elements.  
 Two elements are compared using a float compare function, that you can customize.
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
@@ -100,7 +101,7 @@ console.log(VectOps.areTwoMatricesEqual([[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 
 ```
 
 ### Copy
-VectOps provides functions to copy vectors.
+VectOps provides functions to copy vectors and matrices.
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
 
@@ -109,6 +110,8 @@ const a = [1, 2, 3];
 
 console.log(VectOps.copyVector(a)); // [1, 2, 3]
 console.log(VectOps.copyVectorMany(a), 3); // [[1, 2, 3], [1, 2, 3], [1, 2, 3]]
+
+console.log(VectOps.copyMatrix([[1, 2, 3], [4, 5, 6]])); // [[1, 2, 3], [4, 5, 6]]
 ```
 
 ### In place addition
