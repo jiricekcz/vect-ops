@@ -1088,14 +1088,50 @@ export class LowLevel<S extends number> {
         const rv: Matrix = [];
         for (let i = 0; i < m1.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (m2[0] as number[]).length ; j++) {
+            for (let j = 0; j < (m2[0] as Scalar[]).length ; j++) {
                 let sum = 0;
                 for (let k = 0; k < m1[0].length; k++) {
-                    sum += ((m1[i] as number[])[k] as number) * ((m2[k] as number[])[j] as number); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
+                    sum += ((m1[i] as Scalar[])[k] as Scalar) * ((m2[k] as Scalar[])[j] as Scalar); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
                 }
-                (rv[i] as number[])[j] = sum; // i-th element must exist as it is created in the first loop
+                (rv[i] as Scalar[])[j] = sum; // i-th element must exist as it is created in the first loop
             }
         }
         return rv as Matrix<L, N>;
+    }
+
+    /**
+     * Checks the equality of two matrices
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @returns Whether the two matrices are equal
+     * @time O(LM)
+     */
+    static areTwoMatricesEqual<L extends number = number, M extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<L, M>): boolean {
+        if (m1.length !== m2.length) return false;
+        for (let i = 0; i < m1.length; i++) {
+            if ((m1[i] as Scalar[]).length !== (m2[i] as Scalar[]).length) return false; // It is expected that the matrix is valid
+            for (let j = 0; j < (m1[i] as Scalar[]).length; j++) {
+                if ((m1[i] as Scalar[])[j] as Scalar !== (m2[i] as Scalar[])[j] as Scalar) return false; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks the equality of two matrices
+     * @param m1 Matrix 1
+     * @param m2 Matrix 2
+     * @returns Whether the two matrices are equal
+     * @time O(LM)
+     */
+    public areTwoMatricesEqual<L extends number = number, M extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<L, M>): boolean {
+        if (m1.length !== m2.length) return false;
+        for (let i = 0; i < m1.length; i++) {
+            if ((m1[i] as Scalar[]).length !== (m2[i] as Scalar[]).length) return false; // It is expected that the matrix is valid
+            for (let j = 0; j < (m1[i] as Scalar[]).length; j++) {
+                if ((m1[i] as Scalar[])[j] as Scalar !== (m2[i] as Scalar[])[j] as Scalar) return false; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return true;
     }
 }
