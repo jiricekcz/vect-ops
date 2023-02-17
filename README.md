@@ -328,6 +328,25 @@ const b = [4, 5, 6];
 VectOps.subtractInPlace(a, b);
 console.log(a); // [-3, -3, -3]
 ```
+
+### Matrix multiplication
+
+VectOps provides functions to multiply two matrices.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+] as const;
+const B = [
+    [1, 2],
+    [4, 3],
+    [5, 8],
+] as const;
+
+console.log(VectOps.matrixMultiplication(A, B)); // [[24, 32], [54, 71]]
+```
 ## Requirements
 
 - ES6 compatible environment
