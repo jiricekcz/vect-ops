@@ -1,7 +1,5 @@
 # TODO
 
-- Redo documentation
-
 ## General function
 
 - Two vectors angle
