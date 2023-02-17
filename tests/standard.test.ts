@@ -506,3 +506,34 @@ test("copy matrix", () => {
     const M1Copy = LowLevel.copyMatrix(M1);
     expect(LowLevel.areTwoMatricesEqual(M1, M1Copy)).toBe(true);
 });
+
+test("multiply matrix by scalar in place", () => {
+    const M1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+
+    const M1Copy = LowLevel.copyMatrix(M1);
+    LowLevel.multiplyMatrixByScalarInPlace(M1Copy, 2);
+    expect(LowLevel.areTwoMatricesEqual(M1Copy, [
+        [2, 4, 6],
+        [8, 10, 12],
+        [14, 16, 18],
+    ])).toBe(true);
+});
+
+test("multiply matrix by scalar", () => {
+    const M1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+
+    const M1Copy2 = LowLevel.multiplyMatrixByScalar(M1, 2);
+    expect(LowLevel.areTwoMatricesEqual(M1Copy2, [
+        [2, 4, 6],
+        [8, 10, 12],
+        [14, 16, 18],
+    ])).toBe(true);
+});
