@@ -1237,4 +1237,26 @@ export class LowLevel<S extends number> {
         }
         return matrix as Matrix<L, M>;
     }
+
+    /**
+     * Calculates the cosine of the angle between two vectors
+     * @param v1 Vector 1
+     * @param v2 Vector 2
+     * @returns Cosine of the angle between the two vectors
+     * @time O(L)
+     */
+    static cosineOfAngleBetweenVectors<L extends number = number>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar { 
+        return LowLevel.dotProduct(v1, v2) / (LowLevel.magnitude(v1) * LowLevel.magnitude(v2));
+    }
+
+    /**
+     * Calculates the cosine of the angle between two vectors
+     * @param v1 Vector 1
+     * @param v2 Vector 2
+     * @returns Cosine of the angle between the two vectors
+     * @time O(L)
+     */
+    public cosineOfAngleBetweenVectors<L extends S = S>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar { 
+        return this.dotProduct(v1, v2) / (this.magnitude(v1) * this.magnitude(v2));
+    }
 }
