@@ -884,7 +884,7 @@ export class LowLevel<S extends number> {
      * @param vector2 Second vector
      * @returns The dot product of the two vectors
      * @time O(n) - n is the length of the vectors
-     * @throws If the vectors are not of the same length
+     * @throws {Error} If the vectors are not of the same length
      */
     static dotProduct<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>): Scalar {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
@@ -901,7 +901,7 @@ export class LowLevel<S extends number> {
      * @param vector2 Second vector
      * @returns The dot product of the two vectors
      * @time O(n) - n is the length of the vectors
-     * @throws If the vectors are not of the same length
+     * @throws {Error} If the vectors are not of the same length
      */
     public dotProduct<L extends S = S>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>): Scalar {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
@@ -1047,5 +1047,55 @@ export class LowLevel<S extends number> {
             rv[i] = sum / vectors.length;
         }
         return rv as Vector<L>;
+    }
+
+    /**
+     * Performs a matrix multiplication of two matrices.
+     * @param m1 First matrix (L x M)
+     * @param m2 Second matrix (M x N)
+     * @see https://en.wikipedia.org/wiki/Matrix_multiplication
+     * @returns A new matrix with the result of the multiplication (L x N)
+     * @time O(LMN)
+     * @throws {Error} If the matrices cannot be multiplied
+     */
+    static matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
+        if (m1[0]?.length !== m2.length) throw new Error('Cannot multiply matrices');
+        const rv: Matrix = [];
+        for (let i = 0; i < m1.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (m2[0] as number[]).length ; j++) {
+                let sum = 0;
+                for (let k = 0; k < m1[0].length; k++) {
+                    sum += ((m1[i] as number[])[k] as number) * ((m2[k] as number[])[j] as number); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
+                }
+                (rv[i] as number[])[j] = sum; // i-th element must exist as it is created in the first loop
+            }
+        }
+        return rv as Matrix<L, N>;
+    }
+
+    /**
+     * Performs a matrix multiplication of two matrices.
+     * @param m1 First matrix (L x M)
+     * @param m2 Second matrix (M x N)
+     * @see https://en.wikipedia.org/wiki/Matrix_multiplication
+     * @returns A new matrix with the result of the multiplication (L x N)
+     * @time O(LMN)
+     * @throws {Error} If the matrices cannot be multiplied
+     */
+    public matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
+        if (m1[0]?.length !== m2.length) throw new Error('Cannot multiply matrices');
+        const rv: Matrix = [];
+        for (let i = 0; i < m1.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (m2[0] as number[]).length ; j++) {
+                let sum = 0;
+                for (let k = 0; k < m1[0].length; k++) {
+                    sum += ((m1[i] as number[])[k] as number) * ((m2[k] as number[])[j] as number); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
+                }
+                (rv[i] as number[])[j] = sum; // i-th element must exist as it is created in the first loop
+            }
+        }
+        return rv as Matrix<L, N>;
     }
 }
