@@ -1169,4 +1169,72 @@ export class LowLevel<S extends number> {
         }
         return rv as Matrix<L, M>;  
     }
+
+    /**
+     * Creates a new matrix with the same values as the input matrix multiplied by the scalar
+     * @param matrix The matrix to multiply
+     * @param scalar The scalar to multiply the matrix by
+     * @returns A new matrix with the result of the multiplication
+     * @time O(LM)
+     */
+    static multiplyMatrixByScalar<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
+        const rv: Matrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return rv as Matrix<L, M>;
+    }
+
+    /**
+     * Creates a new matrix with the same values as the input matrix multiplied by the scalar
+     * @param matrix The matrix to multiply
+     * @param scalar The scalar to multiply the matrix by
+     * @returns A new matrix with the result of the multiplication
+     * @time O(LM)
+     */
+    public multiplyMatrixByScalar<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
+        const rv: Matrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = [];
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return rv as Matrix<L, M>;
+    }
+
+    /**
+     * Multiplies the input matrix by the scalar
+     * @param matrix The matrix to multiply
+     * @param scalar The scalar to multiply the matrix by
+     * @returns The original matrix with the result of the multiplication
+     * @time O(LM)
+     */
+    static multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (matrix[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return matrix as Matrix<L, M>;
+    }
+
+    /**
+     * Multiplies the input matrix by the scalar
+     * @param matrix The matrix to multiply
+     * @param scalar The scalar to multiply the matrix by
+     * @returns The original matrix with the result of the multiplication
+     * @time O(LM)
+     */
+    public multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                (matrix[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+            }
+        }
+        return matrix as Matrix<L, M>;
+    }
 }
