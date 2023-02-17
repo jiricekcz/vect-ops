@@ -2,7 +2,7 @@
 
 ## General function
 
-- Two vectors angle
+- Two vectors angle - docs and tests
 
 ## Additions
 
