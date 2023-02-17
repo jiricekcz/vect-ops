@@ -158,16 +158,19 @@ console.log(VectOps.magnitude([3, 4])); // 5
 
 ### Multiplication by scalar in place
 
-VectOps provides functions to multiply a vector by a scalar in place.
+VectOps provides functions to multiply a vectors and matricies by a scalar in place.
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
 
 
 const a = [1, 2, 3];
+const A = [[1, 2, 3], [4, 5, 6]];
 const b = -1;
 
 VectOps.multiplyByScalarInPlace(a, b);
+VectOps.multiplyMatrixByScalarInPlace(A, b);
 console.log(a); // [-1, -2, -3]
+console.log(A); // [[-1, -2, -3], [-4, -5, -6]]
 ```
 
 ### Multiplication by scalar
@@ -176,8 +179,10 @@ import { LowLevel as VectOps } from 'vect-ops';
 
 
 const a = [1, 2, 3];
+const A = [[1, 2, 3], [4, 5, 6]];
 
 console.log(VectOps.multiplyByScalar(a, -1)); // [-1, -2, -3]
+console.log(VectOps.multiplyMatrixByScalar(A, -1)); // [[-1, -2, -3], [-4, -5, -6]]
 ```
 
 ### Normalize in place
