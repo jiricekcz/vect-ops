@@ -1111,7 +1111,8 @@ export class LowLevel<S extends number> {
         for (let i = 0; i < m1.length; i++) {
             if ((m1[i] as Scalar[]).length !== (m2[i] as Scalar[]).length) return false; // It is expected that the matrix is valid
             for (let j = 0; j < (m1[i] as Scalar[]).length; j++) {
-                if ((m1[i] as Scalar[])[j] as Scalar !== (m2[i] as Scalar[])[j] as Scalar) return false; // Can be casted as existence of these elements is checked above
+                if (!LowLevel.areScalarsEqual((m1[i] as Scalar[])[j] as Scalar, (m2[i] as Scalar[])[j] as Scalar)) return false; // Can be casted as existence of these elements is checked above
+            
             }
         }
         return true;
@@ -1129,7 +1130,7 @@ export class LowLevel<S extends number> {
         for (let i = 0; i < m1.length; i++) {
             if ((m1[i] as Scalar[]).length !== (m2[i] as Scalar[]).length) return false; // It is expected that the matrix is valid
             for (let j = 0; j < (m1[i] as Scalar[]).length; j++) {
-                if ((m1[i] as Scalar[])[j] as Scalar !== (m2[i] as Scalar[])[j] as Scalar) return false; // Can be casted as existence of these elements is checked above
+                if (!this.areScalarsEqual((m1[i] as Scalar[])[j] as Scalar, (m2[i] as Scalar[])[j] as Scalar)) return false; // Can be casted as existence of these elements is checked above
             }
         }
         return true;
