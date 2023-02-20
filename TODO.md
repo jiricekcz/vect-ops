@@ -4,7 +4,6 @@
 
 ## Additions
 
-- Linear combinations 
 
 ## Multiplications
 
