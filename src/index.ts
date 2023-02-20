@@ -1268,7 +1268,7 @@ export class LowLevel<S extends number> {
      * @returns Transformed vector (size L)
      * @time O(L^2)
      */
-    static multiplyMatrixAndVector<L extends number>(matrix: Matrix<L, L>, vector: Vector<L>): Vector<L> {
+    static multiplyMatrixAndVector<L extends number>(matrix: ReadonlyMatrix<L, L>, vector: ReadonlyVector<L>): Vector<L> {
         const rv: Vector = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = 0;
@@ -1287,7 +1287,7 @@ export class LowLevel<S extends number> {
      * @returns Transformed vector (size L)
      * @time O(L^2)
      */
-    public multiplyMatrixAndVector<L extends S = S>(matrix: Matrix<L, L>, vector: Vector<L>): Vector<L> {
+    public multiplyMatrixAndVector<L extends S = S>(matrix: ReadonlyMatrix<L, L>, vector: ReadonlyVector<L>): Vector<L> {
         const rv: Vector = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = 0;
