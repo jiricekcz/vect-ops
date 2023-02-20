@@ -547,4 +547,19 @@ test("vector angle", () => {
     expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [0, 0, -1]), 0)).toBe(true);
     expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [1, 1, 0]), 1 / Math.sqrt(2))).toBe(true);
     expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [1, 1, 1]), 1 / Math.sqrt(3))).toBe(true);
-})
+});
+
+test("vector and matrix multiplication", () => {
+    const M1 = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+    const V1 = [1, 2, 3] as const;
+    const V2 = [4, 5, 6] as const;
+    const V3 = [7, 8, 9] as const;
+
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.multiplyMatrixAndVector(M1, V1), [14, 32, 50])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.multiplyMatrixAndVector(M1, V2), [32, 77, 122])).toBe(true);
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.multiplyMatrixAndVector(M1, V3), [50, 122, 194])).toBe(true);
+});
