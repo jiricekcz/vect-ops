@@ -54,7 +54,7 @@
 		"./package-lock.json",
 		"./tsconfig.json",
 		"./*.*",
-		"!./*.temp.*",
-		"!./.github/"
+		"!/**/*.temp.*",
+		"!/.github/"
 	]
 }
