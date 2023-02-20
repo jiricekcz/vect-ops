@@ -355,6 +355,18 @@ const B = [
 
 console.log(VectOps.matrixMultiplication(A, B)); // [[24, 32], [54, 71]]
 ```
+
+### Angle between two vectors
+
+VectOps provides functions to compute the angle between two vectors.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const a = [1, 0, 0];
+const b = [0, 5, 0];
+
+console.log(VectOps.cosineOfAngleBetweenTwoVectors(a, b)); // 0
+```
 ## Requirements
 
 - ES6 compatible environment
