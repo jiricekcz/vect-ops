@@ -383,6 +383,19 @@ const b = [1, 2, 3];
 
 console.log(VectOps.multiplyMatrixAndVector(A, b)); // [14, 32, 50]
 ```
+
+### Linear combination
+
+VectOps provides a function to compute the linear combination of a list of vectors.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const a = [1, 2, 3];
+const b = [4, 5, 6];
+const c = [7, 8, 9];
+
+console.log(VectOps.linearCombination([a, b, c], [1, 2, 3])); // [30, 36, 42]
+```
 ## Requirements
 
 - ES6 compatible environment
