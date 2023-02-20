@@ -1297,4 +1297,40 @@ export class LowLevel<S extends number> {
         }
         return rv as Vector<L>;
     }
+
+    /**
+     * Performs a linear combination of the input vectors
+     * @param vectors Vectors to use for linear combination
+     * @param coefficients Coefficients for each vector
+     * @returns A new vector with the result of the linear combination
+     * @time O(L*N) where N is the number of vectors
+     */
+    static linearCombination<L extends number = number>(vectors: ReadonlyVector<L>[], coefficients: Scalar[]): Vector<L> {
+        const rv: Vector = [];
+        for (let i = 0; i < (vectors[0] as ReadonlyVector<L>).length; i++) {
+            rv[i] = 0;
+            for (let j = 0; j < vectors.length; j++) {
+                rv[i] += ((vectors[j] as ReadonlyVector<L>)[i] as Scalar) * (coefficients[j] as Scalar);
+            }
+        }
+        return rv as Vector<L>;
+    }
+
+    /**
+     * Performs a linear combination of the input vectors
+     * @param vectors Vectors to use for linear combination
+     * @param coefficients Coefficients for each vector
+     * @returns A new vector with the result of the linear combination
+     * @time O(L*N) where N is the number of vectors
+     */
+    public linearCombination<L extends S = S>(vectors: ReadonlyVector<L>[], coefficients: Scalar[]): Vector<L> {
+        const rv: Vector = [];
+        for (let i = 0; i < (vectors[0] as ReadonlyVector<L>).length; i++) {
+            rv[i] = 0;
+            for (let j = 0; j < vectors.length; j++) {
+                rv[i] += ((vectors[j] as ReadonlyVector<L>)[i] as Scalar) * (coefficients[j] as Scalar);
+            }
+        }
+        return rv as Vector<L>;
+    }
 }
