@@ -1259,4 +1259,42 @@ export class LowLevel<S extends number> {
     public cosineOfAngleBetweenVectors<L extends S = S>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar { 
         return this.dotProduct(v1, v2) / (this.magnitude(v1) * this.magnitude(v2));
     }
+
+    /**
+     * Transforms a vector by a transformation matrix (matrix multiplication)  
+     * This function multiplies only by square matrices
+     * @param matrix Transformation matrix (shape LxL)
+     * @param vector Vector to transform (size L)
+     * @returns Transformed vector (size L)
+     * @time O(L^2)
+     */
+    static multiplyMatrixAndVector<L extends number>(matrix: Matrix<L, L>, vector: Vector<L>): Vector<L> {
+        const rv: Vector = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = 0;
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                rv[i] += ((matrix[i] as Scalar[])[j] as Scalar) * (vector[j] as Scalar);
+            }
+        }
+        return rv as Vector<L>;
+    }
+
+    /**
+     * Transforms a vector by a transformation matrix (matrix multiplication)  
+     * This function multiplies only by square matrices
+     * @param matrix Transformation matrix (shape LxL)
+     * @param vector Vector to transform (size L)
+     * @returns Transformed vector (size L)
+     * @time O(L^2)
+     */
+    public multiplyMatrixAndVector<L extends S = S>(matrix: Matrix<L, L>, vector: Vector<L>): Vector<L> {
+        const rv: Vector = [];
+        for (let i = 0; i < matrix.length; i++) {
+            rv[i] = 0;
+            for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
+                rv[i] += ((matrix[i] as Scalar[])[j] as Scalar) * (vector[j] as Scalar);
+            }
+        }
+        return rv as Vector<L>;
+    }
 }
