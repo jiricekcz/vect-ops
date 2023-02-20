@@ -563,3 +563,14 @@ test("vector and matrix multiplication", () => {
     expect(LowLevel.areTwoVectorsEqual(LowLevel.multiplyMatrixAndVector(M1, V2), [32, 77, 122])).toBe(true);
     expect(LowLevel.areTwoVectorsEqual(LowLevel.multiplyMatrixAndVector(M1, V3), [50, 122, 194])).toBe(true);
 });
+
+test("linear combination of vectors", () => {
+    const vectors = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ]
+    const coefficients = [1, 2, 3];
+
+    expect(LowLevel.areTwoVectorsEqual(LowLevel.linearCombination(vectors, coefficients), [30, 36, 42])).toBe(true);
+});
