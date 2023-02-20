@@ -537,3 +537,14 @@ test("multiply matrix by scalar", () => {
         [14, 16, 18],
     ])).toBe(true);
 });
+
+test("vector angle", () => {
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [1, 0, 0]), 1)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [0, 1, 0]), 0)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [0, 0, 1]), 0)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [-1, 0, 0]), -1)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [0, -1, 0]), 0)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [0, 0, -1]), 0)).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [1, 1, 0]), 1 / Math.sqrt(2))).toBe(true);
+    expect(LowLevel.areScalarsEqual(LowLevel.cosineOfAngleBetweenVectors([1, 0, 0], [1, 1, 1]), 1 / Math.sqrt(3))).toBe(true);
+})
