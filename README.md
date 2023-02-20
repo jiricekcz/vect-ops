@@ -367,6 +367,22 @@ const b = [0, 5, 0];
 
 console.log(VectOps.cosineOfAngleBetweenTwoVectors(a, b)); // 0
 ```
+
+### Matrix and vector multiplication
+
+VectOps provides a function for linear transformation of a vector.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+] as const;
+const b = [1, 2, 3];
+
+console.log(VectOps.multiplyMatrixAndVector(A, b)); // [14, 32, 50]
+```
 ## Requirements
 
 - ES6 compatible environment
