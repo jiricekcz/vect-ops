@@ -30,7 +30,7 @@ export type ReadonlyVector2D = Readonly<Vector2D>;
  */
 export type ReadonlyVector3D = Readonly<Vector3D>;
 /**
- * A matrix type 
+ * A matrix type
  * @param M The number of rows.
  * @param N The number of columns.
  */
@@ -104,7 +104,6 @@ export const COMPARE_MODES = {
 } as const;
 
 export class LowLevel<S extends number> {
-
     /**
      * Change this variable to change the compare mode.
      * Defaults to `COMPARE_MODES.FLOAT_EQUALITY_14_SIGNIFICANT_DIGITS`
@@ -360,15 +359,15 @@ export class LowLevel<S extends number> {
         return original;
     }
     /**
-         * Adds multiple vectors to one.
-         * This method ***modifies*** the *original* (first parameter) vector.
-         * If the second vectors are shorter, they will be padded with zeros.
-         * @param original The original vector
-         * @param adds The vectors to add to the original
-         * @param length The length of the vectors. Defaults to the length of the original vector.
-         * @returns The original vector
-         * @time O(n * m) - n is the length provided, m is the number of vectors
-         */
+     * Adds multiple vectors to one.
+     * This method ***modifies*** the *original* (first parameter) vector.
+     * If the second vectors are shorter, they will be padded with zeros.
+     * @param original The original vector
+     * @param adds The vectors to add to the original
+     * @param length The length of the vectors. Defaults to the length of the original vector.
+     * @returns The original vector
+     * @time O(n * m) - n is the length provided, m is the number of vectors
+     */
     public addToMany<L extends S = S>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
@@ -1011,7 +1010,6 @@ export class LowLevel<S extends number> {
         return this.crossProduct(vector1, this.crossProduct(vector2, vector3));
     }
 
-
     /**
      * Computes the average of a list of vectors.
      * @param vectors The vectors
@@ -1059,11 +1057,11 @@ export class LowLevel<S extends number> {
      * @throws {Error} If the matrices cannot be multiplied
      */
     static matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
-        if (m1[0]?.length !== m2.length) throw new Error('Cannot multiply matrices');
+        if (m1[0]?.length !== m2.length) throw new Error("Cannot multiply matrices");
         const rv: Matrix = [];
         for (let i = 0; i < m1.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (m2[0] as number[]).length ; j++) {
+            for (let j = 0; j < (m2[0] as number[]).length; j++) {
                 let sum = 0;
                 for (let k = 0; k < m1[0].length; k++) {
                     sum += ((m1[i] as number[])[k] as number) * ((m2[k] as number[])[j] as number); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
@@ -1084,11 +1082,11 @@ export class LowLevel<S extends number> {
      * @throws {Error} If the matrices cannot be multiplied
      */
     public matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
-        if (m1[0]?.length !== m2.length) throw new Error('Cannot multiply matrices');
+        if (m1[0]?.length !== m2.length) throw new Error("Cannot multiply matrices");
         const rv: Matrix = [];
         for (let i = 0; i < m1.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (m2[0] as Scalar[]).length ; j++) {
+            for (let j = 0; j < (m2[0] as Scalar[]).length; j++) {
                 let sum = 0;
                 for (let k = 0; k < m1[0].length; k++) {
                     sum += ((m1[i] as Scalar[])[k] as Scalar) * ((m2[k] as Scalar[])[j] as Scalar); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
@@ -1112,7 +1110,6 @@ export class LowLevel<S extends number> {
             if ((m1[i] as Scalar[]).length !== (m2[i] as Scalar[]).length) return false; // It is expected that the matrix is valid
             for (let j = 0; j < (m1[i] as Scalar[]).length; j++) {
                 if (!LowLevel.areScalarsEqual((m1[i] as Scalar[])[j] as Scalar, (m2[i] as Scalar[])[j] as Scalar)) return false; // Can be casted as existence of these elements is checked above
-            
             }
         }
         return true;
@@ -1150,7 +1147,7 @@ export class LowLevel<S extends number> {
                 (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar; // Can be casted as existence of these elements is checked above
             }
         }
-        return rv as Matrix<L, M>;  
+        return rv as Matrix<L, M>;
     }
 
     /**
@@ -1167,7 +1164,7 @@ export class LowLevel<S extends number> {
                 (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar; // Can be casted as existence of these elements is checked above
             }
         }
-        return rv as Matrix<L, M>;  
+        return rv as Matrix<L, M>;
     }
 
     /**
@@ -1182,7 +1179,7 @@ export class LowLevel<S extends number> {
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
             for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
-                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+                (rv[i] as Scalar[])[j] = ((matrix[i] as Scalar[])[j] as Scalar) * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1200,7 +1197,7 @@ export class LowLevel<S extends number> {
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
             for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
-                (rv[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+                (rv[i] as Scalar[])[j] = ((matrix[i] as Scalar[])[j] as Scalar) * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1216,7 +1213,7 @@ export class LowLevel<S extends number> {
     static multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
-                (matrix[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+                (matrix[i] as Scalar[])[j] = ((matrix[i] as Scalar[])[j] as Scalar) * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return matrix as Matrix<L, M>;
@@ -1232,7 +1229,7 @@ export class LowLevel<S extends number> {
     public multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: ReadonlyMatrix<L, M>, scalar: Scalar): Matrix<L, M> {
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < (matrix[i] as Scalar[]).length; j++) {
-                (matrix[i] as Scalar[])[j] = (matrix[i] as Scalar[])[j] as Scalar * scalar; // Can be casted as existence of these elements is checked above
+                (matrix[i] as Scalar[])[j] = ((matrix[i] as Scalar[])[j] as Scalar) * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return matrix as Matrix<L, M>;
@@ -1245,7 +1242,7 @@ export class LowLevel<S extends number> {
      * @returns Cosine of the angle between the two vectors
      * @time O(L)
      */
-    static cosineOfAngleBetweenVectors<L extends number = number>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar { 
+    static cosineOfAngleBetweenVectors<L extends number = number>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar {
         return LowLevel.dotProduct(v1, v2) / (LowLevel.magnitude(v1) * LowLevel.magnitude(v2));
     }
 
@@ -1256,12 +1253,12 @@ export class LowLevel<S extends number> {
      * @returns Cosine of the angle between the two vectors
      * @time O(L)
      */
-    public cosineOfAngleBetweenVectors<L extends S = S>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar { 
+    public cosineOfAngleBetweenVectors<L extends S = S>(v1: ReadonlyVector<L>, v2: ReadonlyVector<L>): Scalar {
         return this.dotProduct(v1, v2) / (this.magnitude(v1) * this.magnitude(v2));
     }
 
     /**
-     * Transforms a vector by a transformation matrix (matrix multiplication)  
+     * Transforms a vector by a transformation matrix (matrix multiplication)
      * This function multiplies only by square matrices
      * @param matrix Transformation matrix (shape LxL)
      * @param vector Vector to transform (size L)
@@ -1280,7 +1277,7 @@ export class LowLevel<S extends number> {
     }
 
     /**
-     * Transforms a vector by a transformation matrix (matrix multiplication)  
+     * Transforms a vector by a transformation matrix (matrix multiplication)
      * This function multiplies only by square matrices
      * @param matrix Transformation matrix (shape LxL)
      * @param vector Vector to transform (size L)
