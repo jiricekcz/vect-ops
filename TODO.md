@@ -2,8 +2,6 @@
 
 ## General function
 
-- Two vectors angle - docs and tests
-
 ## Additions
 
 - Linear combinations 
