@@ -295,7 +295,7 @@ console.log(VectOps.crossProduct(b, a)); // [3, -6, 3]
 
 ### Triple product 3D
 
-VectOps provides functions to compute the triple product of three three dimensional vectors.  
+VectOps provides functions to compute the (triple product)[https://en.wikipedia.org/wiki/Triple_product] of three three dimensional vectors.  
 This function only works on three dimensional vectors, as the triple product is only defined for three dimensional vectors.  
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
@@ -305,8 +305,8 @@ const a = [1, 2, 3];
 const b = [4, 5, 6];
 const c = [7, 8, 9];
 
-console.log(VectOps.scalarTripleProduct(a, b, c));
-console.log(VectOps.vectorTripleProduct(a, b, c));
+console.log(VectOps.scalarTripleProduct(a, b, c)); // 0
+console.log(VectOps.vectorTripleProduct(a, b, c)); // [0, 0, 0]
 ```
 
 ### Vector Average
