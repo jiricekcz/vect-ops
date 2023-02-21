@@ -212,7 +212,7 @@ console.log(VectOps.normalize(a)); // [0.6, 0.8]
 
 ### Hadamard product in place
 
-VectOps provides functions to compute the Hadamard product of two vectors in place. (Hadamard product)[https://en.wikipedia.org/wiki/Hadamard_product_(matrices)] is also known as the element-wise product.
+VectOps provides functions to compute the Hadamard product of two vectors in place. [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_(matrices)) is also known as the element-wise product.
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
 
@@ -295,7 +295,7 @@ console.log(VectOps.crossProduct(b, a)); // [3, -6, 3]
 
 ### Triple product 3D
 
-VectOps provides functions to compute the (triple product)[https://en.wikipedia.org/wiki/Triple_product] of three three dimensional vectors.  
+VectOps provides functions to compute the [triple product](https://en.wikipedia.org/wiki/Triple_product) of three three dimensional vectors.  
 This function only works on three dimensional vectors, as the triple product is only defined for three dimensional vectors.  
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
