@@ -365,7 +365,7 @@ import { LowLevel as VectOps } from 'vect-ops';
 const a = [1, 0, 0];
 const b = [0, 5, 0];
 
-console.log(VectOps.cosineOfAngleBetweenTwoVectors(a, b)); // 0
+console.log(Math.acos(VectOps.cosineOfAngleBetweenTwoVectors(a, b))); // Math.PI / 2
 ```
 
 ### Matrix and vector multiplication
