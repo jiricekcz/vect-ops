@@ -212,7 +212,7 @@ console.log(VectOps.normalize(a)); // [0.6, 0.8]
 
 ### Hadamard product in place
 
-VectOps provides functions to compute the Hadamard product of two vectors in place. Hadamard product is also known as the element-wise product.
+VectOps provides functions to compute the Hadamard product of two vectors in place. (Hadamard product)[https://en.wikipedia.org/wiki/Hadamard_product_(matrices)] is also known as the element-wise product.
 ```typescript
 import { LowLevel as VectOps } from 'vect-ops';
 
