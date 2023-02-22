@@ -1,6 +1,6 @@
 # Vect-ops
 
-VectOps is a pure JavaScript library for performant vector operations. VectOps provides functions with minimal runtime overhead.  
+VectOps is a pure JavaScript, no dependancy library for performant vector operations. VectOps provides functions with minimal runtime overhead.  
 VectOps provides two APIs - A low level API and a high level API.  
 Both APIs should be able to provide the same functionality with the main difference being the high level API uses runtime type checks and function overloads as well as TypeScript definitions, while the low level API relies only on compile time type checks (using TypeScript).  
 Both APIs are provided as classes, that have all methods as both static methods and instance methods.  
