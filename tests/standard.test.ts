@@ -574,3 +574,17 @@ test("linear combination of vectors", () => {
 
     expect(LowLevel.areTwoVectorsEqual(LowLevel.linearCombination(vectors, coefficients), [30, 36, 42])).toBe(true);
 });
+
+test("determinant 2D", () => {
+    const A = [
+        [1, 2],
+        [3, 4],
+    ] as const;
+
+    const B = [
+        [1, 2, 3],
+        [4, 5, 6],
+    ] as const;
+    expect(LowLevel.determinant2D(A)).toBe(-2);
+    expect(LowLevel.determinant2D(B)).toBe(0);
+});
