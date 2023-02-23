@@ -588,3 +588,26 @@ test("determinant 2D", () => {
     expect(LowLevel.determinant2D(A)).toBe(-2);
     expect(LowLevel.determinant2D(B)).toBe(-3);
 });
+
+test("determinant 3D", () => {
+    const A = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+
+    const B = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+    ] as const;
+
+    const C = [
+        [1, 5, 3],
+        [4, 5, 2],
+        [7, 3, 2],
+    ] as const;
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(A), 0)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(B), 0)).toBe(true);
+    expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(C), -35)).toBe(true);
+}); 
