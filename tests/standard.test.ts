@@ -586,5 +586,5 @@ test("determinant 2D", () => {
         [4, 5, 6],
     ] as const;
     expect(LowLevel.determinant2D(A)).toBe(-2);
-    expect(LowLevel.determinant2D(B)).toBe(0);
+    expect(LowLevel.determinant2D(B)).toBe(-3);
 });
