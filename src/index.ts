@@ -1330,4 +1330,25 @@ export class LowLevel<S extends number> {
         }
         return rv as Vector<L>;
     }
+    /**
+     * Calculates the determinant of a 2 by 2 matrix
+     * Larger matricies can be passed in, but only the first 2 rows and columns will be used
+     * @param matrix The 2 by 2 matrix to calculate the determinant of
+     * @returns The determinant of the matrix
+     * @time O(1)
+     */
+    static determinant2D(matrix: ReadonlyMatrix<2, 2>): Scalar {
+        return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+    }
+
+    /**
+     * Calculates the determinant of a 2 by 2 matrix
+     * Larger matricies can be passed in, but only the first 2 rows and columns will be used
+     * @param matrix The 2 by 2 matrix to calculate the determinant of
+     * @returns The determinant of the matrix
+     * @time O(1)
+     */
+    public determinant2D(matrix: ReadonlyMatrix<2, 2>): Scalar {
+        return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
+    }
 }
