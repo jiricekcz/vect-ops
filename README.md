@@ -475,6 +475,22 @@ const A = [
 
 console.log(VectOps.determinant2D(A)); // -2
 ```
+
+### Determinant 3D
+
+VectOps provides a function to compute the determinant of a 3x3 matrix. A larger matrix will be accepted, but only the first three rows and columns will be used.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+] as const;
+
+console.log(VectOps.determinant3D(A)); // 0
+```
+
 ## Requirements
 
 - ES6 compatible environment
