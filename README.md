@@ -41,38 +41,103 @@ type Scalar;
 
 #### Vector types
 
+Vector types also have an *atLeast* alternative. This type is used in places, where a larger vector will not cause problems, but the later values will be ignored.
 ```typescript
 // A Vector is a mutable array of Scalars of length L
 type Vector<L extends number = number>;
 
+// Vector with the length of at least L
+type VectorWithMinLength<L extends number = number>;
+
 // A ReadonlyVector is a readonly array of Scalars of length L
 type ReadonlyVector<L extends number = number>;
+
+// ReadonlyVector with the length of at least L
+type ReadonlyVectorWithMinLength<L extends number = number>;
 
 // A Vector2D is a mutable array of Scalars of length 2
 type Vector2D;
 
+// A vector of at least 2 elements
+type VectorAtLeast2D;
+
 // A ReadonlyVector2D is a readonly array of Scalars of length 2
 type ReadonlyVector2D;
+
+// A readonly vector of at least 2 elements
+type ReadonlyVectorAtLeast2D;
 
 // A Vector3D is a mutable array of Scalars of length 3
 type Vector3D;
 
+// A vector of at least 3 elements
+type VectorAtLeast3D;
+
 // A ReadonlyVector3D is a readonly array of Scalars of length 3
 type ReadonlyVector3D;
+
+// A readonly vector of at least 3 elements
+type ReadonlyVectorAtLeast3D;
 
 // Note that the Vector2D and Vector3D types are just aliases for Vector<2> and Vector<3>
 ```
 
 #### Matrix types
 
+Matrix types also have an *atLeast* alternative. This type is used in places, where a larger matrix will not cause problems, but the later values will be ignored.
 ```typescript
 // A Matrix is a mutable array of Vectors of length M
 // The matrix is represented as on the wiki page: https://en.wikipedia.org/wiki/Matrix_(mathematics)
 // Elements of the matrix can be accessed using the matrix[row][column] syntax starting from 0.
 type Matrix<M extends number = number, N extends number>;
 
+// Matrix with the number of rows of at least M
+// In other ways the same as Matrix
+type MatrixWithMinRows<M extends number = number, N extends number>;
+
+// Matrix with the number of columns of at least N
+// In other ways the same as Matrix
+type MatrixWithMinColumns<M extends number = number, N extends number>;
+
+// Matrix with the number of rows and columns of at least M and N
+// In other ways the same as Matrix
+type MatrixWithMinRowsAndColumns<M extends number = number, N extends number>;
+
 // A readonly version of the Matrix type
 type ReadonlyMatrix<M extends number = number, N extends number>;
+
+// A readonly version of the MatrixWithMinRows type
+type ReadonlyMatrixWithMinRows<M extends number = number, N extends number>;
+
+// A readonly version of the MatrixWithMinColumns type
+type ReadonlyMatrixWithMinColumns<M extends number = number, N extends number>;
+
+// A readonly version of the MatrixWithMinRowsAndColumns type
+type ReadonlyMatrixWithMinRowsAndColumns<M extends number = number, N extends number>;
+
+// A Matrix2D is a mutable array of length 2 of Vectors of length 2
+type Matrix2D;
+
+// A matrix of at least 2 rows and 2 columns
+type MatrixAtLeast2D;
+
+// Readonly version of the Matrix2D type
+type ReadonlyMatrix2D;
+
+// Readonly version of the MatrixAtLeast2D type
+type ReadonlyMatrixAtLeast2D;
+
+// A Matrix3D is a mutable array of length 3 of Vectors of length 3
+type Matrix3D;  
+
+// A matrix of at least 3 rows and 3 columns
+type MatrixAtLeast3D;
+
+// Readonly version of the Matrix3D type
+type ReadonlyMatrix3D;
+
+// Readonly version of the MatrixAtLeast3D type
+type ReadonlyMatrixAtLeast3D;
 ```
 
 ## Low level API
