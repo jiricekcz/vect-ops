@@ -1,5 +1,5 @@
 export { FixedLengthArray } from "./types";
-import { FixedLengthArray } from "./types";
+import { ArrayWithAtLeastLength, FixedLengthArray } from "./types";
 
 /**
  * Scalar type, used instead of `number`.
@@ -10,39 +10,118 @@ export type Scalar = number;
  */
 export type Vector<L extends number = number> = FixedLengthArray<Scalar, L>;
 /**
+ * Vector type, used instead of `Array<Scalar>`.  
+ * Any vector larger than `L` will be truncated accepted, but expect it to be threated as if it were `L` elements long.
+ */
+export type VectorWithMinLength<L extends number> = ArrayWithAtLeastLength<Scalar, L>;
+/**
  * Readonly version of `Vector`.
  */
 export type ReadonlyVector<L extends number = number> = Readonly<Vector<L>>;
+/**
+ * Readonly version of `VectorWithMinLength`.
+*/
+export type ReadonlyVectorWithMinLength<L extends number> = Readonly<VectorWithMinLength<L>>;
 /**
  * Vector with two elements.
  */
 export type Vector2D = Vector<2>;
 /**
+ * Vector with at least two elements.
+ */
+export type VectorAtLeast2D = VectorWithMinLength<2>;
+/**
  * Vector with three elements.
  */
 export type Vector3D = Vector<3>;
+/**
+ * Vector with at least three elements.
+ */
+export type VectorAtLeast3D = VectorWithMinLength<3>;   
 /**
  * Readonly version of `Vector2D`.
  */
 export type ReadonlyVector2D = Readonly<Vector2D>;
 /**
+ * Readonly version of `VectorAtLeast2D`.
+ */
+export type ReadonlyVectorAtLeast2D = Readonly<VectorAtLeast2D>;
+/**
  * Readonly version of `Vector3D`.
  */
 export type ReadonlyVector3D = Readonly<Vector3D>;
+/**
+ * Readonly version of `VectorAtLeast3D`.
+ */
+export type ReadonlyVectorAtLeast3D = Readonly<VectorAtLeast3D>;
 /**
  * A matrix type
  * @param M The number of rows.
  * @param N The number of columns.
  */
 export type Matrix<M extends number = number, N extends number = number> = FixedLengthArray<Vector<N>, M>;
-
+/**
+ * A matrix type with at least `M` rows.
+ */
+export type MatrixWithMinRows<M extends number, N extends number> = ArrayWithAtLeastLength<Vector<N>, M>;
+/**
+ * A matrix type with at least `N` columns.
+ */
+export type MatrixWithMinColumns<M extends number, N extends number> = FixedLengthArray<VectorWithMinLength<N>, M>;
+/**
+ * A matrix type with at least `M` rows and `N` columns.
+ */
+export type MatrixWithMinRowsAndColumns<M extends number, N extends number> = ArrayWithAtLeastLength<VectorWithMinLength<N>, M>;
 /**
  * Readonly version of `Matrix`.
  * @param M The number of rows.
  * @param N The number of columns.
  */
 export type ReadonlyMatrix<M extends number = number, N extends number = number> = Readonly<FixedLengthArray<ReadonlyVector<N>, M>>;
-
+/**
+ * Readonly version of `MatrixWithMinRows`.
+ */
+export type ReadonlyMatrixWithMinRows<M extends number, N extends number> = Readonly<ArrayWithAtLeastLength<ReadonlyVector<N>, M>>;
+/**
+ * Readonly version of `MatrixWithMinColumns`.
+ */
+export type ReadonlyMatrixWithMinColumns<M extends number, N extends number> = Readonly<FixedLengthArray<ReadonlyVectorWithMinLength<N>, M>>;
+/**
+ * Readonly version of `MatrixWithMinRowsAndColumns`.
+ */
+export type ReadonlyMatrixWithMinRowsAndColumns<M extends number, N extends number> = Readonly<ArrayWithAtLeastLength<ReadonlyVectorWithMinLength<N>, M>>;
+/**
+ * A matrix with two rows and two columns.
+ */
+export type Matrix2D = Matrix<2, 2>;
+/**
+ * A matrix with at least two rows and two columns.
+ */
+export type MatrixAtLeast2D = MatrixWithMinRowsAndColumns<2, 2>;
+/**
+ * Readonly version of `Matrix2D`.
+ */
+export type ReadonlyMatrix2D = ReadonlyMatrix<2, 2>;
+/**
+ * Readonly version of `MatrixAtLeast2D`.
+ */
+export type ReadonlyMatrixAtLeast2D = ReadonlyMatrixWithMinRowsAndColumns<2, 2>;
+/**
+ * A matrix with three rows and three columns.
+ */
+export type Matrix3D = Matrix<3, 3>;
+/**
+ * A matrix with at least three rows and three columns.
+ */
+export type MatrixAtLeast3D = MatrixWithMinRowsAndColumns<3, 3>;
+/**
+ * Readonly version of `Matrix3D`. 
+ */
+export type ReadonlyMatrix3D = ReadonlyMatrix<3, 3>;
+/**
+ * Readonly version of `MatrixAtLeast3D`.
+ */
+export type ReadonlyMatrixAtLeast3D = ReadonlyMatrixWithMinRowsAndColumns<3, 3>;
 /**
  * Compare modes, used to compare Scalars.
  * Necessary because of floating point errors.
@@ -1337,7 +1416,7 @@ export class LowLevel<S extends number> {
      * @returns The determinant of the matrix
      * @time O(1)
      */
-    static determinant2D(matrix: ReadonlyMatrix<2, 2>): Scalar {
+    static determinant2D(matrix: ReadonlyMatrixAtLeast2D): Scalar {
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
     }
 
@@ -1348,7 +1427,7 @@ export class LowLevel<S extends number> {
      * @returns The determinant of the matrix
      * @time O(1)
      */
-    public determinant2D(matrix: ReadonlyMatrix<2, 2>): Scalar {
+    public determinant2D(matrix: ReadonlyMatrixAtLeast2D): Scalar {
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
     }
 }
