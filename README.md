@@ -396,6 +396,20 @@ const c = [7, 8, 9];
 
 console.log(VectOps.linearCombination([a, b, c], [1, 2, 3])); // [30, 36, 42]
 ```
+
+### Determinant 2D
+
+VectOps provides a function to compute the determinant of a 2x2 matrix. A larger matrix will be accepted, but only the first two rows and columns will be used.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2],
+    [3, 4],
+] as const;
+
+console.log(VectOps.determinant2D(A)); // -2
+```
 ## Requirements
 
 - ES6 compatible environment
