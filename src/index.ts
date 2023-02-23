@@ -1430,4 +1430,36 @@ export class LowLevel<S extends number> {
     public determinant2D(matrix: ReadonlyMatrixAtLeast2D): Scalar {
         return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]);
     }
+
+    /**
+     * Calculates the determinant of a 3 by 3 matrix
+     * Larger matricies can be passed in, but only the first 3 rows and columns will be used
+     * @param matrix The 3 by 3 matrix to calculate the determinant of
+     * @returns The determinant of the matrix
+     * @time O(1)
+     */
+    static determinant3D(matrix: ReadonlyMatrixAtLeast3D): Scalar {
+        return (matrix[0][0] * matrix[1][1] * matrix[2][2]) +
+            (matrix[0][1] * matrix[1][2] * matrix[2][0]) +
+            (matrix[0][2] * matrix[1][0] * matrix[2][1]) -
+            (matrix[0][2] * matrix[1][1] * matrix[2][0]) -
+            (matrix[0][1] * matrix[1][0] * matrix[2][2]) -
+            (matrix[0][0] * matrix[1][2] * matrix[2][1]);
+    }
+
+    /**
+     * Calculates the determinant of a 3 by 3 matrix
+     * Larger matricies can be passed in, but only the first 3 rows and columns will be used
+     * @param matrix The 3 by 3 matrix to calculate the determinant of
+     * @returns The determinant of the matrix
+     * @time O(1)
+     */
+    public determinant3D(matrix: ReadonlyMatrixAtLeast3D): Scalar {
+        return (matrix[0][0] * matrix[1][1] * matrix[2][2]) +
+            (matrix[0][1] * matrix[1][2] * matrix[2][0]) +
+            (matrix[0][2] * matrix[1][0] * matrix[2][1]) -
+            (matrix[0][2] * matrix[1][1] * matrix[2][0]) -
+            (matrix[0][1] * matrix[1][0] * matrix[2][2]) -
+            (matrix[0][0] * matrix[1][2] * matrix[2][1]);
+    }
 }
