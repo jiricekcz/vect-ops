@@ -611,3 +611,19 @@ test("determinant 3D", () => {
     expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(B), 0)).toBe(true);
     expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(C), -35)).toBe(true);
 }); 
+test("is zero", () => {
+    expect(LowLevel.isZero(1, [1e90])).toBe(true);  
+    expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-8])).toBe(true);
+    expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-100])).toBe(false);
+})
+test("Gauss-Jordan elimination", () => {
+    const equationMatrix = [
+        [1, 2, 3, 4],
+        [4, 5, 6, 8],
+        [9, 12, 15, 20],
+    ];
+
+    LowLevel.gaussJordanEliminationWithPartialPivotingInPlace(equationMatrix);
+
+    console.log(equationMatrix);
+});

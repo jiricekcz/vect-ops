@@ -1,5 +1,5 @@
 # TODO
-
+- Gaussian elimination to use isZero function
 ## General function
 
 - Gaussian elimination and prepivotting

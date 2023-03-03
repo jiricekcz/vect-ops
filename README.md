@@ -163,6 +163,8 @@ console.log(VectOps.areTwoVectorsEqual([1, 2, 3], [1, 2, 3])); // true
 console.log(VectOps.areVectorsEqual([1, 2, 3], [1, 2, 3], [1, 2, 3])); // true
 
 console.log(VectOps.areTwoMatricesEqual([[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]])); // true
+
+console.lg(VectOps.isZero(1e-16, [1, 100, 2, 5])) // true
 ```
 
 ### Copy
