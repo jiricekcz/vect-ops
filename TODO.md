@@ -2,6 +2,7 @@
 - Gaussian elimination to use isZero function
 ## General function
 
+- isZero in context of a matrix
 - Gaussian elimination and prepivotting
 - 2D and 3D specific matrix calculations
 
