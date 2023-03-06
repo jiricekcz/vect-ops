@@ -6,6 +6,53 @@ Both APIs should be able to provide the same functionality with the main differe
 Both APIs are provided as classes, that have all methods as both static methods and instance methods.  
 The advantage of the instance methods is, that you can set the length of the vectors in the constructor and use the methods without providing the length as a type parameter. This is all TypeScript only, so it will not affect the runtime performance.
 
+## Table of Contents
+- [Vect-ops](#vect-ops)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Shared API](#shared-api)
+    - [Shared types](#shared-types)
+      - [Utility types](#utility-types)
+      - [Scalar type](#scalar-type)
+      - [Vector types](#vector-types)
+      - [Matrix types](#matrix-types)
+  - [Low level API](#low-level-api)
+    - [Equality](#equality)
+    - [Copy](#copy)
+    - [In place addition](#in-place-addition)
+    - [Addition](#addition)
+    - [Magnitude](#magnitude)
+    - [Multiplication by scalar in place](#multiplication-by-scalar-in-place)
+    - [Multiplication by scalar](#multiplication-by-scalar)
+    - [Normalize in place](#normalize-in-place)
+    - [Normalize](#normalize)
+    - [Hadamard product in place](#hadamard-product-in-place)
+    - [Hadamard product](#hadamard-product)
+    - [Vector equivalency](#vector-equivalency)
+    - [Dot product](#dot-product)
+    - [Magnitude squared](#magnitude-squared)
+    - [Cross product 3D](#cross-product-3d)
+    - [Triple product 3D](#triple-product-3d)
+    - [Vector Average](#vector-average)
+    - [Subtraction in place](#subtraction-in-place)
+    - [Matrix multiplication](#matrix-multiplication)
+    - [Angle between two vectors](#angle-between-two-vectors)
+    - [Matrix and vector multiplication](#matrix-and-vector-multiplication)
+    - [Linear combination](#linear-combination)
+    - [Determinant 2D](#determinant-2d)
+    - [Determinant 3D](#determinant-3d)
+  - [Requirements](#requirements)
+  - [When to use a JavaScript implementation?](#when-to-use-a-javascript-implementation)
+    - [Pros](#pros)
+    - [Cons](#cons)
+    - [JavaScript vs WebAssembly](#javascript-vs-webassembly)
+      - [JavaScript](#javascript)
+      - [WebAssembly](#webassembly)
+    - [JavaScript vs FFI](#javascript-vs-ffi)
+    - [JavaScript vs Native](#javascript-vs-native)
+      - [JavaScript](#javascript-1)
+      - [Native](#native)
+
 ## Installation
 
 ```bash
@@ -114,7 +161,7 @@ type ReadonlyMatrixWithMinColumns<M extends number = number, N extends number>;
 
 // A readonly version of the MatrixWithMinRowsAndColumns type
 type ReadonlyMatrixWithMinRowsAndColumns<M extends number = number, N extends number>;
-
+  
 // A Matrix2D is a mutable array of length 2 of Vectors of length 2
 type Matrix2D;
 
