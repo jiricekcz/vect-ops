@@ -248,7 +248,34 @@ export class LowLevel<S extends number> {
         }
         return true;
     }
-
+    
+    /**
+     * Creates a function that checks if a number is zero in the context of the matrix.  
+     * Does not use the compare mode, but uses the lowest possible number that can be created by dividing the smallest number in the matrix by the largest number in the matrix.
+     * @param contextualMatrix Matrix with the context
+     * @returns A function that checks if a number is zero in the context of the matrix
+     * @time Function creation - O(N*M) - N is the number of rows in the matrix and M is the number of columns in the matrix
+     * @time Returned function - O(1)
+     */
+    static isZeroInContextOfAMatrix(contextualMatrix: ReadonlyMatrix): (a: Scalar) => boolean {
+        let max = Number.NEGATIVE_INFINITY; // Number with the largest absolute value
+        let min = Number.POSITIVE_INFINITY; // Number with the smallest absolute value
+        for (let i = 0; i < contextualMatrix.length; i++) { // Looking for the largest and smallest number in the matrix
+            const row = contextualMatrix[i] as Vector;
+            for (let j = 0; j < row.length; j++) {
+                const element = Math.abs(row[j] as Scalar);
+                if (element > max) max = element;
+                if (element < min) min = element;
+            }
+        }
+        const lowestPossibleWithSingleDivision = min / max; // Number with the smallest absolute value that can be created by dividing two number of the matrix
+        const lowestPossibleLog = Math.log10(lowestPossibleWithSingleDivision); // Logarithm of the lowest possible number
+        const logDifference = Math.log10(max) - lowestPossibleLog; // Difference between the logarithms of the largest number and the smallest possible number
+        const digits = Math.floor(15 - logDifference); // Max digits of precision that can be used on every number
+        return (a: Scalar) => {
+            return (lowestPossibleLog - Math.log(Math.abs(a))) >= digits;
+        }
+    }
 
     /**
      * Compares scalars using the compare mode.
