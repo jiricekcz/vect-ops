@@ -1572,7 +1572,6 @@ export class LowLevel<S extends number> {
                     }
                 }
             }
-            console.log(matrix)
         }
 
         for (let p = squareSize - 1; p >= 0; p--) { // Jordan part of Gauss-Jordan
@@ -1584,9 +1583,7 @@ export class LowLevel<S extends number> {
                     }
                 }
             }
-            console.log(matrix)
         }
-
         return matrix;
     }
 }
