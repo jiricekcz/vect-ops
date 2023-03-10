@@ -610,9 +610,9 @@ test("determinant 3D", () => {
     expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(A), 0)).toBe(true);
     expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(B), 0)).toBe(true);
     expect(LowLevel.areTwoScalarsEqual(LowLevel.determinant3D(C), -35)).toBe(true);
-}); 
+});
 test("is zero", () => {
-    expect(LowLevel.isZero(1, [1e90])).toBe(true);  
+    expect(LowLevel.isZero(1, [1e90])).toBe(true);
     expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-8])).toBe(true);
     expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-100])).toBe(false);
 })
@@ -624,6 +624,29 @@ test("Gauss-Jordan elimination", () => {
     ];
 
     LowLevel.gaussJordanEliminationWithPartialPivotingInPlace(equationMatrix);
-
-    console.log(equationMatrix);
 });
+
+test("Is zero in context of a matrix", () => {
+    const A = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ] as const;
+
+    const B = [
+        [1, 2, 3],
+        [4e9, 5, 6],
+        [7, 8e-18, 0],
+    ] as const;
+
+    const zeroA = LowLevel.isZeroInContextOfAMatrix(A);
+    const zeroB = LowLevel.isZeroInContextOfAMatrix(B);
+
+    expect(zeroA(1e-10)).toBe(false);
+    expect(zeroA(1e-8)).toBe(false);
+    expect(zeroA(1e-20)).toBe(true);
+    expect(zeroB(1e-18)).toBe(false);
+    expect(zeroB(1e-20)).toBe(false);
+    expect(zeroB(1e-21)).toBe(false);
+    expect(zeroB(1e-40)).toBe(true);
+})

@@ -1,6 +1,7 @@
 # TODO
 - Gaussian elimination to use isZero function
 - Checks and validators
+- Fix is zero in context of a matrix
 ## General function
 
 - isZero in context of a matrix
