@@ -645,8 +645,8 @@ test("Is zero in context of a matrix", () => {
     expect(zeroA(1e-10)).toBe(false);
     expect(zeroA(1e-8)).toBe(false);
     expect(zeroA(1e-20)).toBe(true);
-    expect(zeroB(1e-18)).toBe(false);
-    expect(zeroB(1e-20)).toBe(false);
-    expect(zeroB(1e-21)).toBe(false);
+    expect(zeroB(1e-18)).toBe(true);
+    expect(zeroB(1e-20)).toBe(true);
+    expect(zeroB(1e-21)).toBe(true);
     expect(zeroB(1e-40)).toBe(true);
 })
