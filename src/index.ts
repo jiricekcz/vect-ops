@@ -258,22 +258,20 @@ export class LowLevel<S extends number> {
      * @time Returned function - O(1)
      */
     static isZeroInContextOfAMatrix(contextualMatrix: ReadonlyMatrix): (a: Scalar) => boolean {
-        let max = Number.NEGATIVE_INFINITY; // Number with the largest absolute value
-        let min = Number.POSITIVE_INFINITY; // Number with the smallest absolute value
-        for (let i = 0; i < contextualMatrix.length; i++) { // Looking for the largest and smallest number in the matrix
+        let logSquareSum = 0;
+        let count = 0;
+        for (let i = 0; i < contextualMatrix.length; i++) { // Looping through the matrix to calculate the RMS of logarithms of the numbers in the matrix
             const row = contextualMatrix[i] as Vector;
             for (let j = 0; j < row.length; j++) {
                 const element = Math.abs(row[j] as Scalar);
-                if (element > max) max = element;
-                if (element < min) min = element;
+                logSquareSum += Math.log10(element) ** 2;
+                count++;
             }
         }
-        const lowestPossibleWithSingleDivision = min / max; // Number with the smallest absolute value that can be created by dividing two number of the matrix
-        const lowestPossibleLog = Math.log10(lowestPossibleWithSingleDivision); // Logarithm of the lowest possible number
-        const logDifference = Math.log10(max) - lowestPossibleLog; // Difference between the logarithms of the largest number and the smallest possible number
-        const digits = Math.floor(15 - logDifference); // Max digits of precision that can be used on every number
+        const logarithmsRMS = Math.sqrt(logSquareSum / count);
+        const lowestNonZeroLogarithm = logarithmsRMS - 12;
         return (a: Scalar) => {
-            return (lowestPossibleLog - Math.log(Math.abs(a))) >= digits;
+            return Math.log10(Math.abs(a)) < lowestNonZeroLogarithm;
         }
     }
 
