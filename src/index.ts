@@ -1526,6 +1526,7 @@ export class LowLevel<S extends number> {
      */
     static gaussJordanEliminationWithPartialPivotingInPlace<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
         const squareSize = Math.min(matrix.length, (matrix[0] as Vector<M>).length);
+        const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
         for (let p = 0; p < squareSize; p++) { // Gauss part of Gauss-Jordan
 
             // Finding the largest absolute value
@@ -1543,9 +1544,9 @@ export class LowLevel<S extends number> {
 
             // Gaussian elimination
             const coefficient = (matrix[p] as Vector<M>)[p] as Scalar;
-            if (coefficient === 0) { // If the coefficient is 0, we attempt to find a row above with 0 main diagonal coefficientand add it to this row
+            if (isZero(coefficient)) { // If the coefficient is 0, we attempt to find a row above with 0 main diagonal coefficientand add it to this row
                 for (let i = p - 1; i >= 0; i--) { // Lookup of the rows above
-                    if ((matrix[i] as Vector<M>)[i] === 0 && (matrix[i] as Vector<M>)[p] !== 0) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
+                    if (isZero((matrix[i] as Vector<M>)[i] as Scalar) && !isZero((matrix[i] as Vector<M>)[p] as Scalar)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
                         for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) { // We add this row to the current row
                             (matrix[p] as Vector<M>)[j] = ((matrix[i] as Vector<M>)[j] as Scalar) + ((matrix[p] as Vector<M>)[j] as Scalar);
                         }
@@ -1559,7 +1560,7 @@ export class LowLevel<S extends number> {
                     }
                 }
             }
-            if (coefficient !== 0) { // If the coefficient is still 0, this row doesn't have a valid coefficient and we leave it in this form for now
+            if (!isZero(coefficient)) { // If the coefficient is still 0, this row doesn't have a valid coefficient and we leave it in this form for now
                 for (let i = p; i < (matrix[p] as Vector<M>).length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
                     (matrix[p] as Vector<M>)[i] = ((matrix[p] as Vector<M>)[i] as Scalar) / coefficient;
                 }
