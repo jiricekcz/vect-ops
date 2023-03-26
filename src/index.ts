@@ -1601,4 +1601,74 @@ export class LowLevel<S extends number> {
         }
         return matrix;
     }
+    
+    /**
+     * Performs Gauss-Jordan elimination on the input matrix.  
+     * The input matrix will be modified in place.
+     * Input can be a singular or regular matrix.
+     * @param matrix Matrix to eliminate
+     * @returns The input matrix
+     * @time O(N*M*min(N, M)) where N is the number of rows and M is the number of columns
+     */
+    public gaussJordanEliminationWithPartialPivotingInPlace<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
+        const squareSize = Math.min(matrix.length, (matrix[0] as Vector<M>).length);
+        const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
+        for (let p = 0; p < squareSize; p++) { // Gauss part of Gauss-Jordan
+
+            // Finding the largest absolute value
+            let largestIndex: number = p;
+            for (let i = p + 1; i < matrix.length; i++) {
+                if (Math.abs((matrix[i] as Vector<M>)[p] as Scalar) > Math.abs((matrix[largestIndex] as Vector<M>)[p] as Scalar)) {
+                    largestIndex = i;
+                }
+            }
+
+            // Swapping the rows
+            let tmp: Vector<M> = matrix[p] as Vector<M>;
+            matrix[p] = matrix[largestIndex] as Vector<M>;
+            matrix[largestIndex] = tmp;
+
+            // Gaussian elimination
+            const coefficient = (matrix[p] as Vector<M>)[p] as Scalar;
+            if (isZero(coefficient)) { // If the coefficient is 0, we attempt to find a row above with 0 main diagonal coefficientand add it to this row
+                for (let i = p - 1; i >= 0; i--) { // Lookup of the rows above
+                    if (isZero((matrix[i] as Vector<M>)[i] as Scalar) && !isZero((matrix[i] as Vector<M>)[p] as Scalar)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
+                        for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) { // We add this row to the current row
+                            (matrix[p] as Vector<M>)[j] = ((matrix[i] as Vector<M>)[j] as Scalar) + ((matrix[p] as Vector<M>)[j] as Scalar);
+                        }
+                        for (let j = i + 1; i < p; i++) { // Becaue we added a row from higher up, we need to re-eliminte it for the current row
+                            const coefficient = (matrix[p] as Vector<M>)[j] as Scalar;
+                            for (let k = 0; k < (matrix[p] as Vector<M>).length; k++) { // We add this row to the current row multiplied by -coefficient
+                                (matrix[p] as Vector<M>)[k] = ((matrix[p] as Vector<M>)[k] as Scalar) - ((matrix[j] as Vector<M>)[k] as Scalar) * coefficient;
+                            }
+                        }
+                        break; // If we found such line, we can stop looking and continue with the elimination
+                    }
+                }
+            }
+            if (!isZero(coefficient)) { // If the coefficient is still 0, this row doesn't have a valid coefficient and we leave it in this form for now
+                for (let i = p; i < (matrix[p] as Vector<M>).length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
+                    (matrix[p] as Vector<M>)[i] = ((matrix[p] as Vector<M>)[i] as Scalar) / coefficient;
+                }
+                for (let i = p + 1; i < matrix.length; i++) { // We can now eliminated all lower rows
+                    const coefficient = (matrix[i] as Vector<M>)[p] as Scalar;
+                    for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) {
+                        (matrix[i] as Vector<M>)[j] = ((matrix[i] as Vector<M>)[j] as Scalar) - ((matrix[p] as Vector<M>)[j] as Scalar) * coefficient;
+                    }
+                }
+            }
+        }
+
+        for (let p = squareSize - 1; p >= 0; p--) { // Jordan part of Gauss-Jordan
+            if ((matrix[p] as Vector<M>)[p] !== 0) { // If the coefficient is 0, this row cannot be used to eliminate any other rows
+                for (let i = p - 1; i >= 0; i--) {
+                    const coefficient = (matrix[i] as Vector<M>)[p] as Scalar;
+                    for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) {
+                        (matrix[i] as Vector<M>)[j] = ((matrix[i] as Vector<M>)[j] as Scalar) - ((matrix[p] as Vector<M>)[j] as Scalar) * coefficient;
+                    }
+                }
+            }
+        }
+        return matrix;
+    }
 }
