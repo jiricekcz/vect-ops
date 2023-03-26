@@ -230,7 +230,7 @@ export class LowLevel<S extends number> {
      */
     static isZero(a: Scalar, context: Scalar[]): boolean {
         for (let i = 0; i < context.length; i++) {
-            if (LowLevel.areTwoScalarsEqual((context[i]!), a + (context[i]!))) return true;
+            if (LowLevel.areTwoScalarsEqual(context[i]!, a + context[i]!)) return true;
         }
         return false;
     }
@@ -244,7 +244,7 @@ export class LowLevel<S extends number> {
      */
     public isZero(a: Scalar, context: Scalar[]): boolean {
         for (let i = 0; i < context.length; i++) {
-            if (LowLevel.areTwoScalarsEqual((context[i]!), a + (context[i]!))) return true;
+            if (LowLevel.areTwoScalarsEqual(context[i]!, a + context[i]!)) return true;
         }
         return false;
     }
@@ -355,7 +355,7 @@ export class LowLevel<S extends number> {
     static areVectorsEqual<L extends number>(vectors: Array<ReadonlyVector<L>>, onLength: number = vectors[0]?.length ?? 0): boolean {
         for (let i = 1; i < vectors.length; i++) {
             for (let j = 0; j < onLength; j++) {
-                if (!LowLevel.areTwoScalarsEqual((vectors[i]!)[j]!, (vectors[i - 1]!)[j]!)) return false;
+                if (!LowLevel.areTwoScalarsEqual(vectors[i]![j]!, vectors[i - 1]![j]!)) return false;
             }
         }
         return true;
@@ -371,7 +371,7 @@ export class LowLevel<S extends number> {
     public areVectorsEqual<L extends S = S>(vectors: Array<ReadonlyVector<L>>, onLength: number = vectors[0]?.length ?? 0): boolean {
         for (let i = 1; i < vectors.length; i++) {
             for (let j = 0; j < onLength; j++) {
-                if (!this.areTwoScalarsEqual((vectors[i]!)[j]!, (vectors[i - 1]!)[j]!)) return false;
+                if (!this.areTwoScalarsEqual(vectors[i]![j]!, vectors[i - 1]![j]!)) return false;
             }
         }
         return true;
@@ -463,7 +463,7 @@ export class LowLevel<S extends number> {
     static addToManyUnchecked<L extends number>(original: Vector<L>, adds: Array<ReadonlyVectorWithMinLength<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
-                original[i] += (adds[j]!)[i]!;
+                original[i] += adds[j]![i]!;
             }
         }
         return original;
@@ -483,7 +483,7 @@ export class LowLevel<S extends number> {
     public addToManyUnchecked<L extends S = S>(original: Vector<L>, adds: Array<ReadonlyVectorWithMinLength<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
-                original[i] += (adds[j]!)[i]!;
+                original[i] += adds[j]![i]!;
             }
         }
         return original;
@@ -502,7 +502,7 @@ export class LowLevel<S extends number> {
     static addToMany<L extends number>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
-                original[i] += (adds[j]!)[i] ?? 0;
+                original[i] += adds[j]![i] ?? 0;
             }
         }
         return original;
@@ -520,7 +520,7 @@ export class LowLevel<S extends number> {
     public addToMany<L extends S = S>(original: Vector<L>, adds: Array<ReadonlyVector<L>>, length: number = original.length): Vector<L> {
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < adds.length; j++) {
-                original[i] += (adds[j]!)[i] ?? 0;
+                original[i] += adds[j]![i] ?? 0;
             }
         }
         return original;
@@ -535,12 +535,12 @@ export class LowLevel<S extends number> {
      */
     static addUnchecked<L extends number>(...vectors: [ReadonlyVector<L>, ...Array<ReadonlyVectorWithMinLength<L>>]): Vector<L> {
         if (vectors.length === 0) return [] as Vector<L>;
-        const vectLength = (vectors[0]!).length;
+        const vectLength = vectors[0]!.length;
         const result = [];
         for (let i = 0; i < vectLength; i++) {
             result[i] = 0;
             for (let j = 0; j < vectors.length; j++) {
-                result[i] += (vectors[j]!)[i]!;
+                result[i] += vectors[j]![i]!;
             }
         }
         return result as Vector<L>;
@@ -554,12 +554,12 @@ export class LowLevel<S extends number> {
      */
     public addUnchecked<L extends S = S>(...vectors: [ReadonlyVector<L>, ...Array<ReadonlyVectorWithMinLength<L>>]): Vector<L> {
         if (vectors.length === 0) return [] as Vector<L>;
-        const vectLength = (vectors[0]!).length;
+        const vectLength = vectors[0]!.length;
         const result = [];
         for (let i = 0; i < vectLength; i++) {
             result[i] = 0;
             for (let j = 0; j < vectors.length; j++) {
-                result[i] += (vectors[j]!)[i]!;
+                result[i] += vectors[j]![i]!;
             }
         }
         return result as Vector<L>;
@@ -574,8 +574,8 @@ export class LowLevel<S extends number> {
     static add<L extends number>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
         const result: Vector = [];
         for (let i = 0; i < vectors.length; i++) {
-            for (let j = 0; j < (vectors[i]!).length; j++) {
-                result[j] = (result[j] ?? 0) + ((vectors[i]!)[j] ?? 0);
+            for (let j = 0; j < vectors[i]!.length; j++) {
+                result[j] = (result[j] ?? 0) + (vectors[i]![j] ?? 0);
             }
         }
         return result as Vector<L>;
@@ -590,8 +590,8 @@ export class LowLevel<S extends number> {
     public add<L extends S = S>(...vectors: Array<ReadonlyVector<L>>): Vector<L> {
         const result: Vector = [];
         for (let i = 0; i < vectors.length; i++) {
-            for (let j = 0; j < (vectors[i]!).length; j++) {
-                result[j] = (result[j] ?? 0) + ((vectors[i]!)[j] ?? 0);
+            for (let j = 0; j < vectors[i]!.length; j++) {
+                result[j] = (result[j] ?? 0) + (vectors[i]![j] ?? 0);
             }
         }
         return result as Vector<L>;
@@ -677,7 +677,7 @@ export class LowLevel<S extends number> {
     static magnitude(vector: ReadonlyVector): Scalar {
         let sum = 0;
         for (let i = 0; i < vector.length; i++) {
-            sum += (vector[i]!) ** 2;
+            sum += vector[i]! ** 2;
         }
         return Math.sqrt(sum);
     }
@@ -691,7 +691,7 @@ export class LowLevel<S extends number> {
     public magnitude(vector: ReadonlyVector): Scalar {
         let sum = 0;
         for (let i = 0; i < vector.length; i++) {
-            sum += (vector[i]!) ** 2;
+            sum += vector[i]! ** 2;
         }
         return Math.sqrt(sum);
     }
@@ -791,7 +791,7 @@ export class LowLevel<S extends number> {
     static multiplyByScalar<L extends number>(vector: ReadonlyVector<L>, scalar: Scalar): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
-            result[i] = (vector[i]!) * scalar;
+            result[i] = vector[i]! * scalar;
         }
         return result as Vector<L>;
     }
@@ -806,7 +806,7 @@ export class LowLevel<S extends number> {
     public multiplyByScalar<L extends S = S>(vector: ReadonlyVector<L>, scalar: Scalar): Vector<L> {
         const result = [];
         for (let i = 0; i < vector.length; i++) {
-            result[i] = (vector[i]!) * scalar;
+            result[i] = vector[i]! * scalar;
         }
         return result as Vector<L>;
     }
@@ -893,7 +893,7 @@ export class LowLevel<S extends number> {
     static hadamardProductUnchecked<L extends number>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
-            result[i] = (vector1[i]!) * (vector2[i]!);
+            result[i] = vector1[i]! * vector2[i]!;
         }
         return result as Vector<L>;
     }
@@ -910,7 +910,7 @@ export class LowLevel<S extends number> {
     public hadamardProductUnchecked<L extends S = S>(vector1: ReadonlyVector<L>, vector2: ReadonlyVector<L>, length: number = vector1.length): Vector<L> {
         const result = [];
         for (let i = 0; i < length; i++) {
-            result[i] = (vector1[i]!) * (vector2[i]!);
+            result[i] = vector1[i]! * vector2[i]!;
         }
         return result as Vector<L>;
     }
@@ -993,12 +993,12 @@ export class LowLevel<S extends number> {
         for (var i = 0; i < vector1.length; i++) {
             if (vector1[i] === 0 && vector2[i] === 0) continue; // If both values are 0, they cannot yield a coefficient
             if (vector1[i] === 0 || vector2[i] === 0) return false; // If one value is 0 and the other is not, vectors are not equivalent
-            coefficient = (vector1[i]!) / (vector2[i]!); // If both values are not 0, they can yield a coefficient
+            coefficient = vector1[i]! / vector2[i]!; // If both values are not 0, they can yield a coefficient
             break; // When a coefficient is found, stop looking
         }
         if (coefficient === undefined) return true; // If no coefficient was found and the function didn't return earlier, the vectors are both zero vectors and are equivalent
         for (; i < vector1.length; i++) {
-            if (!LowLevel.areTwoScalarsEqual(coefficient * (vector2[i]!), vector1[i]!)) return false; // If the coefficient is not correct, the vectors are not equivalent
+            if (!LowLevel.areTwoScalarsEqual(coefficient * vector2[i]!, vector1[i]!)) return false; // If the coefficient is not correct, the vectors are not equivalent
         }
         return true; // If all values are correct, the vectors are equivalent
     }
@@ -1017,12 +1017,12 @@ export class LowLevel<S extends number> {
         for (var i = 0; i < vector1.length; i++) {
             if (vector1[i] === 0 && vector2[i] === 0) continue; // If both values are 0, they cannot yield a coefficient
             if (vector1[i] === 0 || vector2[i] === 0) return false; // If one value is 0 and the other is not, vectors are not equivalent
-            coefficient = (vector1[i]!) / (vector2[i]!); // If both values are not 0, they can yield a coefficient
+            coefficient = vector1[i]! / vector2[i]!; // If both values are not 0, they can yield a coefficient
             break; // When a coefficient is found, stop looking
         }
         if (coefficient === undefined) return true; // If no coefficient was found and the function didn't return earlier, the vectors are both zero vectors and are equivalent
         for (; i < vector1.length; i++) {
-            if (!this.areTwoScalarsEqual(coefficient * (vector2[i]!), vector1[i]!)) return false; // If the coefficient is not correct, the vectors are not equivalent
+            if (!this.areTwoScalarsEqual(coefficient * vector2[i]!, vector1[i]!)) return false; // If the coefficient is not correct, the vectors are not equivalent
         }
         return true; // If all values are correct, the vectors are equivalent
     }
@@ -1038,7 +1038,7 @@ export class LowLevel<S extends number> {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
         let result = 0;
         for (let i = 0; i < vector1.length; i++) {
-            result += (vector1[i]!) * (vector2[i]!);
+            result += vector1[i]! * vector2[i]!;
         }
         return result;
     }
@@ -1055,7 +1055,7 @@ export class LowLevel<S extends number> {
         if (vector1.length !== vector2.length) throw new Error("Vectors must be of the same length");
         let result = 0;
         for (let i = 0; i < vector1.length; i++) {
-            result += (vector1[i]!) * (vector2[i]!);
+            result += vector1[i]! * vector2[i]!;
         }
         return result;
     }
@@ -1070,7 +1070,7 @@ export class LowLevel<S extends number> {
     static magnitudeSquared(vector: ReadonlyVector): Scalar {
         let result = 0;
         for (let i = 0; i < vector.length; i++) {
-            result += (vector[i]!) ** 2;
+            result += vector[i]! ** 2;
         }
         return result;
     }
@@ -1085,7 +1085,7 @@ export class LowLevel<S extends number> {
     public magnitudeSquared(vector: ReadonlyVector): Scalar {
         let result = 0;
         for (let i = 0; i < vector.length; i++) {
-            result += (vector[i]!) ** 2;
+            result += vector[i]! ** 2;
         }
         return result;
     }
@@ -1198,24 +1198,24 @@ export class LowLevel<S extends number> {
 
     /**
      * Performs a matrix multiplication of two matrices.
-     * @param m1 First matrix (L x M)
-     * @param m2 Second matrix (M x N)
+     * @param matrix1 First matrix (L x M)
+     * @param matrix2 Second matrix (M x N)
      * @see https://en.wikipedia.org/wiki/Matrix_multiplication
      * @returns A new matrix with the result of the multiplication (L x N)
      * @time O(LMN)
      * @throws {Error} If the matrices cannot be multiplied
      */
-    static matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
-        if (m1[0]?.length !== m2.length) throw new Error("Cannot multiply matrices");
+    static matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(matrix1: ReadonlyMatrix<L, M>, matrix2: ReadonlyMatrix<M, N>): Matrix<L, N> {
+        if (matrix1[0]?.length !== matrix2.length) throw new Error("Cannot multiply matrices");
         const rv: Matrix = [];
-        for (let i = 0; i < m1.length; i++) {
+        for (let i = 0; i < matrix1.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (m2[0]!).length; j++) {
+            for (let j = 0; j < matrix2[0]!.length; j++) {
                 let sum = 0;
-                for (let k = 0; k < m1[0].length; k++) {
-                    sum += ((m1[i]!)[k]!) * ((m2[k]!)[j]!); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
+                for (let k = 0; k < matrix1[0].length; k++) {
+                    sum += matrix1[i]![k]! * matrix2[k]![j]!; // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
                 }
-                (rv[i]!)[j] = sum; // i-th element must exist as it is created in the first loop
+                rv[i]![j] = sum; // i-th element must exist as it is created in the first loop
             }
         }
         return rv as Matrix<L, N>;
@@ -1223,24 +1223,24 @@ export class LowLevel<S extends number> {
 
     /**
      * Performs a matrix multiplication of two matrices.
-     * @param m1 First matrix (L x M)
-     * @param m2 Second matrix (M x N)
+     * @param matrix1 First matrix (L x M)
+     * @param matrix2 Second matrix (M x N)
      * @see https://en.wikipedia.org/wiki/Matrix_multiplication
      * @returns A new matrix with the result of the multiplication (L x N)
      * @time O(LMN)
      * @throws {Error} If the matrices cannot be multiplied
      */
-    public matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<M, N>): Matrix<L, N> {
-        if (m1[0]?.length !== m2.length) throw new Error("Cannot multiply matrices");
+    public matrixMultiplication<L extends number = number, M extends number = number, N extends number = number>(matrix1: ReadonlyMatrix<L, M>, matrix2: ReadonlyMatrix<M, N>): Matrix<L, N> {
+        if (matrix1[0]?.length !== matrix2.length) throw new Error("Cannot multiply matrices");
         const rv: Matrix = [];
-        for (let i = 0; i < m1.length; i++) {
+        for (let i = 0; i < matrix1.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (m2[0]!).length; j++) {
+            for (let j = 0; j < matrix2[0]!.length; j++) {
                 let sum = 0;
-                for (let k = 0; k < m1[0].length; k++) {
-                    sum += ((m1[i]!)[k]!) * ((m2[k]!)[j]!); // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
+                for (let k = 0; k < matrix1[0].length; k++) {
+                    sum += matrix1[i]![k]! * matrix2[k]![j]!; // Casting can be done, as it only prevents accessing properties that are not defined, this function expects the input to be a valid matrix and just checks the length of the first rows
                 }
-                (rv[i]!)[j] = sum; // i-th element must exist as it is created in the first loop
+                rv[i]![j] = sum; // i-th element must exist as it is created in the first loop
             }
         }
         return rv as Matrix<L, N>;
@@ -1248,17 +1248,17 @@ export class LowLevel<S extends number> {
 
     /**
      * Checks the equality of two matrices
-     * @param m1 Matrix 1
-     * @param m2 Matrix 2
+     * @param matrix1 Matrix 1
+     * @param matrix2 Matrix 2
      * @returns Whether the two matrices are equal
      * @time O(LM)
      */
-    static areTwoMatricesEqual<L extends number = number, M extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<L, M>): boolean {
-        if (m1.length !== m2.length) return false;
-        for (let i = 0; i < m1.length; i++) {
-            if ((m1[i]!).length !== (m2[i]!).length) return false; // It is expected that the matrix is valid
-            for (let j = 0; j < (m1[i]!).length; j++) {
-                if (!LowLevel.areScalarsEqual((m1[i]!)[j]!, (m2[i]!)[j]!)) return false; // Can be casted as existence of these elements is checked above
+    static areTwoMatricesEqual<L extends number = number, M extends number = number>(matrix1: ReadonlyMatrix<L, M>, matrix2: ReadonlyMatrix<L, M>): boolean {
+        if (matrix1.length !== matrix2.length) return false;
+        for (let i = 0; i < matrix1.length; i++) {
+            if (matrix1[i]!.length !== matrix2[i]!.length) return false; // It is expected that the matrix is valid
+            for (let j = 0; j < matrix1[i]!.length; j++) {
+                if (!LowLevel.areScalarsEqual(matrix1[i]![j]!, matrix2[i]![j]!)) return false; // Can be casted as existence of these elements is checked above
             }
         }
         return true;
@@ -1266,17 +1266,17 @@ export class LowLevel<S extends number> {
 
     /**
      * Checks the equality of two matrices
-     * @param m1 Matrix 1
-     * @param m2 Matrix 2
+     * @param matrix1 Matrix 1
+     * @param matrix2 Matrix 2
      * @returns Whether the two matrices are equal
      * @time O(LM)
      */
-    public areTwoMatricesEqual<L extends number = number, M extends number = number>(m1: ReadonlyMatrix<L, M>, m2: ReadonlyMatrix<L, M>): boolean {
-        if (m1.length !== m2.length) return false;
-        for (let i = 0; i < m1.length; i++) {
-            if ((m1[i]!).length !== (m2[i]!).length) return false; // It is expected that the matrix is valid
-            for (let j = 0; j < (m1[i]!).length; j++) {
-                if (!this.areScalarsEqual((m1[i]!)[j]!, (m2[i]!)[j]!)) return false; // Can be casted as existence of these elements is checked above
+    public areTwoMatricesEqual<L extends number = number, M extends number = number>(matrix1: ReadonlyMatrix<L, M>, matrix2: ReadonlyMatrix<L, M>): boolean {
+        if (matrix1.length !== matrix2.length) return false;
+        for (let i = 0; i < matrix1.length; i++) {
+            if (matrix1[i]!.length !== matrix2[i]!.length) return false; // It is expected that the matrix is valid
+            for (let j = 0; j < matrix1[i]!.length; j++) {
+                if (!this.areScalarsEqual(matrix1[i]![j]!, matrix2[i]![j]!)) return false; // Can be casted as existence of these elements is checked above
             }
         }
         return true;
@@ -1292,8 +1292,8 @@ export class LowLevel<S extends number> {
         const rv: Matrix = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (rv[i]!)[j] = (matrix[i]!)[j]!; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j <matrix[i]!.length; j++) {
+                rv[i]![j] = matrix[i]![j]!; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1309,8 +1309,8 @@ export class LowLevel<S extends number> {
         const rv: Matrix = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (rv[i]!)[j] = (matrix[i]!)[j]!; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                rv[i]![j] = matrix[i]![j]!; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1327,8 +1327,8 @@ export class LowLevel<S extends number> {
         const rv: Matrix = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (rv[i]!)[j] = ((matrix[i]!)[j]!) * scalar; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                rv[i]![j] = matrix[i]![j]! * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1345,8 +1345,8 @@ export class LowLevel<S extends number> {
         const rv: Matrix = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = [];
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (rv[i]!)[j] = ((matrix[i]!)[j]!) * scalar; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                rv[i]![j] = matrix[i]![j]! * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return rv as Matrix<L, M>;
@@ -1361,8 +1361,8 @@ export class LowLevel<S extends number> {
      */
     static multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: Matrix<L, M>, scalar: Scalar): Matrix<L, M> {
         for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (matrix[i]!)[j] = ((matrix[i]!)[j]!) * scalar; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                matrix[i]![j] = matrix[i]![j]! * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return matrix as Matrix<L, M>;
@@ -1377,8 +1377,8 @@ export class LowLevel<S extends number> {
      */
     public multiplyMatrixByScalarInPlace<L extends number = number, M extends number = number>(matrix: Matrix<L, M>, scalar: Scalar): Matrix<L, M> {
         for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                (matrix[i]!)[j] = ((matrix[i]!)[j]!) * scalar; // Can be casted as existence of these elements is checked above
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                matrix[i]![j] = matrix[i]![j]! * scalar; // Can be casted as existence of these elements is checked above
             }
         }
         return matrix as Matrix<L, M>;
@@ -1418,8 +1418,8 @@ export class LowLevel<S extends number> {
         const rv: Vector = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = 0;
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                rv[i] += ((matrix[i]!)[j]!) * (vector[j]!);
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                rv[i] += matrix[i]![j]! * vector[j]!;
             }
         }
         return rv as Vector<L>;
@@ -1437,8 +1437,8 @@ export class LowLevel<S extends number> {
         const rv: Vector = [];
         for (let i = 0; i < matrix.length; i++) {
             rv[i] = 0;
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                rv[i] += ((matrix[i]!)[j]!) * (vector[j]!);
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                rv[i] += matrix[i]![j]! * vector[j]!;
             }
         }
         return rv as Vector<L>;
@@ -1453,10 +1453,10 @@ export class LowLevel<S extends number> {
      */
     static linearCombination<L extends number = number>(vectors: ReadonlyVector<L>[], coefficients: Scalar[]): Vector<L> {
         const rv: Vector = [];
-        for (let i = 0; i < (vectors[0]!).length; i++) {
+        for (let i = 0; i < vectors[0]!.length; i++) {
             rv[i] = 0;
             for (let j = 0; j < vectors.length; j++) {
-                rv[i] += ((vectors[j]!)[i]!) * (coefficients[j]!);
+                rv[i] += vectors[j]![i]! * coefficients[j]!;
             }
         }
         return rv as Vector<L>;
@@ -1471,10 +1471,10 @@ export class LowLevel<S extends number> {
      */
     public linearCombination<L extends S = S>(vectors: ReadonlyVector<L>[], coefficients: Scalar[]): Vector<L> {
         const rv: Vector = [];
-        for (let i = 0; i < (vectors[0]!).length; i++) {
+        for (let i = 0; i < vectors[0]!.length; i++) {
             rv[i] = 0;
             for (let j = 0; j < vectors.length; j++) {
-                rv[i] += ((vectors[j]!)[i]!) * (coefficients[j]!);
+                rv[i] += vectors[j]![i]! * coefficients[j]!;
             }
         }
         return rv as Vector<L>;
@@ -1541,14 +1541,14 @@ export class LowLevel<S extends number> {
      * @time O(N*M*min(N, M)) where N is the number of rows and M is the number of columns
      */
     static gaussJordanEliminationWithPartialPivotingInPlace<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
-        const squareSize = Math.min(matrix.length, (matrix[0]!).length);
+        const squareSize = Math.min(matrix.length, matrix[0]!.length);
         const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
         for (let p = 0; p < squareSize; p++) { // Gauss part of Gauss-Jordan
 
             // Finding the largest absolute value
             let largestIndex: number = p;
             for (let i = p + 1; i < matrix.length; i++) {
-                if (Math.abs((matrix[i]!)[p]!) > Math.abs((matrix[largestIndex]!)[p]!)) {
+                if (Math.abs(matrix[i]![p]!) > Math.abs(matrix[largestIndex]![p]!)) {
                     largestIndex = i;
                 }
             }
@@ -1559,17 +1559,17 @@ export class LowLevel<S extends number> {
             matrix[largestIndex] = tmp;
 
             // Gaussian elimination
-            const coefficient = (matrix[p]!)[p]!;
+            const coefficient = matrix[p]![p]!;
             if (isZero(coefficient)) { // If the coefficient is 0, we attempt to find a row above with 0 main diagonal coefficientand add it to this row
                 for (let i = p - 1; i >= 0; i--) { // Lookup of the rows above
-                    if (isZero((matrix[i]!)[i]!) && !isZero((matrix[i]!)[p]!)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
-                        for (let j = 0; j < (matrix[i]!).length; j++) { // We add this row to the current row
-                            (matrix[p]!)[j] = ((matrix[i]!)[j]!) + ((matrix[p]!)[j]!);
+                    if (isZero(matrix[i]![i]!) && !isZero(matrix[i]![p]!)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
+                        for (let j = 0; j < matrix[i]!.length; j++) { // We add this row to the current row
+                            matrix[p]![j] = matrix[i]![j]! + matrix[p]![j]!;
                         }
                         for (let j = i + 1; i < p; i++) { // Becaue we added a row from higher up, we need to re-eliminte it for the current row
-                            const coefficient = (matrix[p]!)[j]!;
-                            for (let k = 0; k < (matrix[p]!).length; k++) { // We add this row to the current row multiplied by -coefficient
-                                (matrix[p]!)[k] = ((matrix[p]!)[k]!) - ((matrix[j]!)[k]!) * coefficient;
+                            const coefficient = matrix[p]![j]!;
+                            for (let k = 0; k < matrix[p]!.length; k++) { // We add this row to the current row multiplied by -coefficient
+                                matrix[p]![k] = matrix[p]![k]! - matrix[j]![k]! * coefficient;
                             }
                         }
                         break; // If we found such line, we can stop looking and continue with the elimination
@@ -1577,24 +1577,24 @@ export class LowLevel<S extends number> {
                 }
             }
             if (!isZero(coefficient)) { // If the coefficient is still 0, this row doesn't have a valid coefficient and we leave it in this form for now
-                for (let i = p; i < (matrix[p]!).length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
-                    (matrix[p]!)[i] = ((matrix[p]!)[i]!) / coefficient;
+                for (let i = p; i < matrix[p]!.length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
+                    matrix[p]![i] = matrix[p]![i]! / coefficient;
                 }
                 for (let i = p + 1; i < matrix.length; i++) { // We can now eliminated all lower rows
-                    const coefficient = (matrix[i]!)[p]!;
-                    for (let j = 0; j < (matrix[i]!).length; j++) {
-                        (matrix[i]!)[j] = ((matrix[i]!)[j]!) - ((matrix[p]!)[j]!) * coefficient;
+                    const coefficient = matrix[i]![p]!;
+                    for (let j = 0; j < matrix[i]!.length; j++) {
+                        matrix[i]![j] = matrix[i]![j]! - matrix[p]![j]! * coefficient;
                     }
                 }
             }
         }
 
         for (let p = squareSize - 1; p >= 0; p--) { // Jordan part of Gauss-Jordan
-            if ((matrix[p]!)[p] !== 0) { // If the coefficient is 0, this row cannot be used to eliminate any other rows
+            if (!isZero(matrix[p]![p]!)) { // If the coefficient is 0, this row cannot be used to eliminate any other rows
                 for (let i = p - 1; i >= 0; i--) {
-                    const coefficient = (matrix[i]!)[p]!;
-                    for (let j = 0; j < (matrix[i]!).length; j++) {
-                        (matrix[i]!)[j] = ((matrix[i]!)[j]!) - ((matrix[p]!)[j]!) * coefficient;
+                    const coefficient = matrix[i]![p]!;
+                    for (let j = 0; j < matrix[i]!.length; j++) {
+                        matrix[i]![j] = matrix[i]![j]! - matrix[p]![j]! * coefficient;
                     }
                 }
             }
@@ -1611,14 +1611,14 @@ export class LowLevel<S extends number> {
      * @time O(N*M*min(N, M)) where N is the number of rows and M is the number of columns
      */
     public gaussJordanEliminationWithPartialPivotingInPlace<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
-        const squareSize = Math.min(matrix.length, (matrix[0]!).length);
+        const squareSize = Math.min(matrix.length, matrix[0]!.length);
         const isZero = this.isZeroInContextOfAMatrix(matrix);
         for (let p = 0; p < squareSize; p++) { // Gauss part of Gauss-Jordan
 
             // Finding the largest absolute value
             let largestIndex: number = p;
             for (let i = p + 1; i < matrix.length; i++) {
-                if (Math.abs((matrix[i]!)[p]!) > Math.abs((matrix[largestIndex]!)[p]!)) {
+                if (Math.abs(matrix[i]![p]!) > Math.abs(matrix[largestIndex]![p]!)) {
                     largestIndex = i;
                 }
             }
@@ -1629,17 +1629,17 @@ export class LowLevel<S extends number> {
             matrix[largestIndex] = tmp;
 
             // Gaussian elimination
-            const coefficient = (matrix[p]!)[p]!;
+            const coefficient = matrix[p]![p]!;
             if (isZero(coefficient)) { // If the coefficient is 0, we attempt to find a row above with 0 main diagonal coefficientand add it to this row
                 for (let i = p - 1; i >= 0; i--) { // Lookup of the rows above
-                    if (isZero((matrix[i]!)[i]!) && !isZero((matrix[i]!)[p]!)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
-                        for (let j = 0; j < (matrix[i]!).length; j++) { // We add this row to the current row
-                            (matrix[p]!)[j] = ((matrix[i]!)[j]!) + ((matrix[p]!)[j]!);
+                    if (isZero(matrix[i]![i]!) && !isZero(matrix[i]![p]!)) { // If we find a row with 0 main diagonal coefficient, but that has a non-zero coefficient in the current column
+                        for (let j = 0; j < matrix[i]!.length; j++) { // We add this row to the current row
+                            matrix[p]![j] = matrix[i]![j]! + matrix[p]![j]!;
                         }
                         for (let j = i + 1; i < p; i++) { // Becaue we added a row from higher up, we need to re-eliminte it for the current row
-                            const coefficient = (matrix[p]!)[j]!;
-                            for (let k = 0; k < (matrix[p]!).length; k++) { // We add this row to the current row multiplied by -coefficient
-                                (matrix[p]!)[k] = ((matrix[p]!)[k]!) - ((matrix[j]!)[k]!) * coefficient;
+                            const coefficient = matrix[p]![j]!;
+                            for (let k = 0; k < matrix[p]!.length; k++) { // We add this row to the current row multiplied by -coefficient
+                                matrix[p]![k] = matrix[p]![k]! - matrix[j]![k]! * coefficient;
                             }
                         }
                         break; // If we found such line, we can stop looking and continue with the elimination
@@ -1647,24 +1647,24 @@ export class LowLevel<S extends number> {
                 }
             }
             if (!isZero(coefficient)) { // If the coefficient is still 0, this row doesn't have a valid coefficient and we leave it in this form for now
-                for (let i = p; i < (matrix[p]!).length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
-                    (matrix[p]!)[i] = ((matrix[p]!)[i]!) / coefficient;
+                for (let i = p; i < matrix[p]!.length; i++) { // We divide the whole row to have a 1 main diagonal coefficient
+                    matrix[p]![i] = matrix[p]![i]! / coefficient;
                 }
                 for (let i = p + 1; i < matrix.length; i++) { // We can now eliminated all lower rows
-                    const coefficient = (matrix[i]!)[p]!;
-                    for (let j = 0; j < (matrix[i]!).length; j++) {
-                        (matrix[i]!)[j] = ((matrix[i]!)[j]!) - ((matrix[p]!)[j]!) * coefficient;
+                    const coefficient = matrix[i]![p]!;
+                    for (let j = 0; j < matrix[i]!.length; j++) {
+                        matrix[i]![j] = matrix[i]![j]! - matrix[p]![j]! * coefficient;
                     }
                 }
             }
         }
 
         for (let p = squareSize - 1; p >= 0; p--) { // Jordan part of Gauss-Jordan
-            if ((matrix[p]!)[p] !== 0) { // If the coefficient is 0, this row cannot be used to eliminate any other rows
+            if (!isZero(matrix[p]![p]!)) { // If the coefficient is 0, this row cannot be used to eliminate any other rows
                 for (let i = p - 1; i >= 0; i--) {
-                    const coefficient = (matrix[i]!)[p]!;
-                    for (let j = 0; j < (matrix[i]!).length; j++) {
-                        (matrix[i]!)[j] = ((matrix[i]!)[j]!) - ((matrix[p]!)[j]!) * coefficient;
+                    const coefficient = matrix[i]![p]!;
+                    for (let j = 0; j < matrix[i]!.length; j++) {
+                        matrix[i]![j] = matrix[i]![j]! - matrix[p]![j]! * coefficient;
                     }
                 }
             }
@@ -1682,9 +1682,9 @@ export class LowLevel<S extends number> {
     static setZerosToZeroInMatrix<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
         const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
         for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                if (isZero((matrix[i]!)[j]!)) {
-                    (matrix[i]!)[j] = 0!;
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                if (isZero(matrix[i]![j]!)) {
+                    matrix[i]![j] = 0!;
                 }
             }
         }
@@ -1701,9 +1701,9 @@ export class LowLevel<S extends number> {
     public setZerosToZeroInMatrix<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
         const isZero = this.isZeroInContextOfAMatrix(matrix);
         for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < (matrix[i]!).length; j++) {
-                if (isZero((matrix[i]!)[j]!)) {
-                    (matrix[i]!)[j] = 0!;
+            for (let j = 0; j < matrix[i]!.length; j++) {
+                if (isZero(matrix[i]![j]!)) {
+                    matrix[i]![j] = 0!;
                 }
             }
         }
