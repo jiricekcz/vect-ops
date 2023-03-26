@@ -1612,7 +1612,7 @@ export class LowLevel<S extends number> {
      */
     public gaussJordanEliminationWithPartialPivotingInPlace<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
         const squareSize = Math.min(matrix.length, (matrix[0] as Vector<M>).length);
-        const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
+        const isZero = this.isZeroInContextOfAMatrix(matrix);
         for (let p = 0; p < squareSize; p++) { // Gauss part of Gauss-Jordan
 
             // Finding the largest absolute value
