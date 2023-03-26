@@ -248,7 +248,7 @@ export class LowLevel<S extends number> {
         }
         return false;
     }
-    
+
     /**
      * Creates a function that checks if a number is zero in the context of the matrix.  
      * Checks, if the number is zero in the context of the largest absolute value in the matrix.
@@ -267,6 +267,27 @@ export class LowLevel<S extends number> {
         }
         return (a: Scalar) => {
             return LowLevel.isZero(a, [largestAbsoluteValue]);
+        }
+    }
+
+    /**
+         * Creates a function that checks if a number is zero in the context of the matrix.  
+         * Checks, if the number is zero in the context of the largest absolute value in the matrix.
+         * @param contextualMatrix Matrix with the context
+         * @returns A function that checks if a number is zero in the context of the matrix
+         * @time Function creation - O(N*M) - N is the number of rows in the matrix and M is the number of columns in the matrix
+         * @time Returned function - O(1)
+         */
+    public isZeroInContextOfAMatrix(contextualMatrix: ReadonlyMatrix): (a: Scalar) => boolean {
+        let largestAbsoluteValue = 0;
+        for (let i = 0; i < contextualMatrix.length; i++) { // Finds the largest absolute value in the matrix
+            for (let j = 0; j < contextualMatrix[i]!.length; j++) {
+                const absoluteValue = Math.abs(contextualMatrix[i]![j]!);
+                if (absoluteValue > largestAbsoluteValue) largestAbsoluteValue = absoluteValue;
+            }
+        }
+        return (a: Scalar) => {
+            return this.isZero(a, [largestAbsoluteValue]);
         }
     }
 
