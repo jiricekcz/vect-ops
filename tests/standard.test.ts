@@ -624,6 +624,9 @@ test("Gauss-Jordan elimination", () => {
     ];
 
     LowLevel.gaussJordanEliminationWithPartialPivotingInPlace(equationMatrix);
+    LowLevel.setZerosToZeroInMatrix(equationMatrix);
+    
+    expect(LowLevel.areTwoMatricesEqual(equationMatrix, [])).toBe(true);
 });
 
 test("Is zero in context of a matrix", () => {
