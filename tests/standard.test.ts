@@ -614,7 +614,7 @@ test("determinant 3D", () => {
 test("is zero", () => {
     expect(LowLevel.isZero(1, [1e90])).toBe(true);
     expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-8])).toBe(true);
-    expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-100])).toBe(false);
+    expect(LowLevel.isZero(1e-90, [1e90, 1, 1e-100])).toBe(true);
 })
 test("Gauss-Jordan elimination", () => {
     const equationMatrix = [

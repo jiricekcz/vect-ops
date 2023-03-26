@@ -230,9 +230,9 @@ export class LowLevel<S extends number> {
      */
     static isZero(a: Scalar, context: Scalar[]): boolean {
         for (let i = 0; i < context.length; i++) {
-            if (!LowLevel.areTwoScalarsEqual((context[i] as Scalar), a + (context[i] as Scalar))) return false;
+            if (LowLevel.areTwoScalarsEqual((context[i] as Scalar), a + (context[i] as Scalar))) return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -244,9 +244,9 @@ export class LowLevel<S extends number> {
      */
     public isZero(a: Scalar, context: Scalar[]): boolean {
         for (let i = 0; i < context.length; i++) {
-            if (!LowLevel.areTwoScalarsEqual((context[i] as Scalar), a + (context[i] as Scalar))) return false;
+            if (LowLevel.areTwoScalarsEqual((context[i] as Scalar), a + (context[i] as Scalar))) return true;
         }
-        return true;
+        return false;
     }
     
     /**
