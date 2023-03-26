@@ -41,6 +41,8 @@ The advantage of the instance methods is, that you can set the length of the vec
     - [Linear combination](#linear-combination)
     - [Determinant 2D](#determinant-2d)
     - [Determinant 3D](#determinant-3d)
+    - [Gauss-Jordan elimination](#gauss-jordan-elimination)
+    - [Setting zero-like values to zero in a matrix](#setting-zero-like-values-to-zero-in-a-matrix)
   - [Requirements](#requirements)
   - [When to use a JavaScript implementation?](#when-to-use-a-javascript-implementation)
     - [Pros](#pros)
@@ -539,6 +541,39 @@ const A = [
 
 console.log(VectOps.determinant3D(A)); // 0
 ```
+
+### Gauss-Jordan elimination
+
+VectOps provides a function to compute the Gauss-Jordan elimination of a matrix.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+] as const;
+
+VectOps.gaussJordanEliminationWithPartialPivotingInPlace(A);
+```
+
+### Setting zero-like values to zero in a matrix
+
+VectOps provides a function to set all values in a matrix, that are considered zero-like to zero.
+```typescript
+import { LowLevel as VectOps } from 'vect-ops';
+
+const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9e-15],
+] as const;
+
+VectOps.setZerosToZeroInMatrix(A);
+
+console.log(A); // [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+```
+
 
 ## Requirements
 
