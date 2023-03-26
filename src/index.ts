@@ -258,20 +258,15 @@ export class LowLevel<S extends number> {
      * @time Returned function - O(1)
      */
     static isZeroInContextOfAMatrix(contextualMatrix: ReadonlyMatrix): (a: Scalar) => boolean {
-        let logSquareSum = 0;
-        let count = 0;
-        for (let i = 0; i < contextualMatrix.length; i++) { // Looping through the matrix to calculate the RMS of logarithms of the numbers in the matrix
-            const row = contextualMatrix[i] as Vector;
-            for (let j = 0; j < row.length; j++) {
-                const element = Math.abs(row[j] as Scalar);
-                logSquareSum += Math.log10(element) ** 2;
-                count++;
+        let largestAbsoluteValue = 0;
+        for (let i = 0; i < contextualMatrix.length; i++) { // Finds the largest absolute value in the matrix
+            for (let j = 0; j < contextualMatrix[i]!.length; j++) {
+                const absoluteValue = Math.abs(contextualMatrix[i]![j]!);
+                if (absoluteValue > largestAbsoluteValue) largestAbsoluteValue = absoluteValue;
             }
         }
-        const logarithmsRMS = Math.sqrt(logSquareSum / count);
-        const lowestNonZeroLogarithm = logarithmsRMS - 12;
         return (a: Scalar) => {
-            return Math.log10(Math.abs(a)) < lowestNonZeroLogarithm;
+            return LowLevel.isZero(a, [largestAbsoluteValue]);
         }
     }
 
