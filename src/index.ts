@@ -251,7 +251,7 @@ export class LowLevel<S extends number> {
     
     /**
      * Creates a function that checks if a number is zero in the context of the matrix.  
-     * Does not use the compare mode, but uses the lowest possible number that can be created by dividing the smallest number in the matrix by the largest number in the matrix.
+     * Checks, if the number is zero in the context of the largest absolute value in the matrix.
      * @param contextualMatrix Matrix with the context
      * @returns A function that checks if a number is zero in the context of the matrix
      * @time Function creation - O(N*M) - N is the number of rows in the matrix and M is the number of columns in the matrix
