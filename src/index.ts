@@ -1601,7 +1601,7 @@ export class LowLevel<S extends number> {
         }
         return matrix;
     }
-    
+
     /**
      * Performs Gauss-Jordan elimination on the input matrix.  
      * The input matrix will be modified in place.
@@ -1671,4 +1671,42 @@ export class LowLevel<S extends number> {
         }
         return matrix;
     }
+
+    /**
+     * Sets all zeros in the matrix to 0.  
+     * This is useful when the matrix is a result of a calculation and the result is a zero, but the zero is not exactly 0.  
+     * This is because of floating point precision.
+     * @param matrix The matrix
+     * @returns The matrix itself
+     */
+    static setZerosToZeroInMatrix<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
+        const isZero = LowLevel.isZeroInContextOfAMatrix(matrix);
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) {
+                if (isZero((matrix[i] as Vector<M>)[j] as Scalar)) {
+                    (matrix[i] as Vector<M>)[j] = 0 as Scalar;
+                }
+            }
+        }
+        return matrix;
+    }
+
+    /**
+     * Sets all zeros in the matrix to 0.  
+     * This is useful when the matrix is a result of a calculation and the result is a zero, but the zero is not exactly 0.  
+     * This is because of floating point precision.
+     * @param matrix The matrix
+     * @returns The matrix itself
+     */
+    public setZerosToZeroInMatrix<M extends number = number, N extends number = number>(matrix: Matrix<N, M>): Matrix<N, M> {
+        const isZero = this.isZeroInContextOfAMatrix(matrix);
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < (matrix[i] as Vector<M>).length; j++) {
+                if (isZero((matrix[i] as Vector<M>)[j] as Scalar)) {
+                    (matrix[i] as Vector<M>)[j] = 0 as Scalar;
+                }
+            }
+        }
+        return matrix;
+    } 
 }
